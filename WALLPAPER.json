@@ -1,0 +1,10 @@
+{
+  "file": "frame/hv/desktop/assets/default-wallpaper.png",
+  "source": "Maintainer-selected quiet dunes scene currently displayed on the Pro8",
+  "selection_date": "2026-11-22",
+  "sha256": "0f9bc4561ee98e65a0f4f55ab3fd8a3ae3fc8844e1595e270b68a38df403571a",
+  "width": 1280,
+  "height": 800,
+  "wallpaper_count": 1,
+  "derivative": "default-wallpaper-soft.webp is a runtime surface texture of the same image"
+}

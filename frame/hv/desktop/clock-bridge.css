@@ -1,0 +1,13 @@
+/* Fixed Pro 8 surfaces: a shared upward gesture and a gentle dissolve. */
+html,body.pro8-scene,body.sb{width:1280px;height:800px;min-width:1280px;min-height:800px;margin:0;position:relative;touch-action:none;overflow:hidden}
+.scene-frame{position:absolute;left:0;top:0;width:1280px;height:800px;border:0;background:#244e7e}
+body.pro8-scene .scene-clock,body.pro8-scene .scene-desktop,body.sb #stage{position:absolute;left:0;top:0;right:auto;bottom:auto;width:1280px;height:800px;transform:none}
+.scene-desktop{z-index:1}
+.scene-clock{z-index:2}
+html[data-scene="dissolving"] .scene-clock{will-change:opacity}
+.clock-face-picker{position:absolute;z-index:4;top:27px;right:32px;padding:11px 20px;border-radius:25px;font-size:16px;color:rgba(255,255,255,.95);background:rgba(9,40,75,.15);text-decoration:none}
+.clock-face-picker:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.clock-face-picker[hidden]{display:none}
+
+body.pro8-scene{background:#244e7e url(/frame/hv/desktop/assets/default-wallpaper.png) left top/1280px 800px no-repeat!important}
+.pro8-scene .desktop-content{will-change:transform}

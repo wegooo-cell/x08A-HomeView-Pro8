@@ -1,0 +1,115 @@
+@import url('/frame/hv/standby/island/assets/fonts/nunito.css');
+
+/* Scenery is fixed; only clock and information follow the HomeView gesture. */
+.f-island{width:1280px!important;height:800px!important;overflow:hidden;background:#0c2453;--island-cream:#fff4d6;--island-ink:#fff4df;--island-muted:rgba(255,244,223,.67);--island-card:rgba(13,29,58,.62);--island-border:rgba(255,244,223,.16);color:var(--island-ink)}
+.island-world{position:absolute;left:0;top:0;width:1280px;height:800px;overflow:hidden;pointer-events:none}
+.f-island img{top:auto;right:auto;bottom:auto;left:auto;inset:auto}
+.f-island .island-backdrop{position:absolute;left:0;top:0;width:1280px;height:800px;object-fit:cover;pointer-events:none}
+.f-island .island-palm{position:absolute;right:28px;bottom:124px;width:355px;height:520px;object-fit:contain}
+.f-island .island-villager,.f-island .island-companion{position:absolute;width:295px;height:295px;object-fit:contain;left:620px;bottom:50px}
+.f-island .island-companion{width:250px;height:250px;left:832px;bottom:65px}
+.f-island .island-wave{position:absolute;left:-30px;bottom:0;width:850px;height:345px;object-fit:contain;opacity:.5}
+.f-island .island-fish{position:absolute;left:780px;top:240px;width:125px;height:125px;object-fit:contain}
+.f-island .island-fish.two{left:1005px;top:350px;width:92px;height:92px;transform:scaleX(-1)}
+.f-island .island-bubbles{position:absolute;left:1150px;top:350px;width:72px;height:160px;object-fit:contain;opacity:.65}
+.island-world[data-theme="aquarium"] .island-villager{left:750px;bottom:20px;filter:brightness(.85) saturate(.8)}
+.island-world[data-theme="aquarium"] .island-companion{left:962px;bottom:37px;filter:brightness(.85) saturate(.8)}
+.f-island[data-island-theme="beach"]{--island-ink:#655039;--island-muted:#88765d;--island-card:rgba(255,248,227,.91);--island-border:rgba(255,255,255,.6)}
+.island-clock{position:absolute;left:124px;top:76px;width:510px;color:var(--island-cream);font-family:Nunito,'HomeView Sans',sans-serif;text-align:left;pointer-events:none;z-index:3}
+.island-date{font-size:25px;font-weight:700;line-height:1.5;letter-spacing:.035em;text-shadow:0 2px 0 #986b45,0 3px 8px rgba(41,29,22,.16)}
+.island-time{display:flex;align-items:center;font-family:Nunito,sans-serif;font-size:136px;font-weight:900;line-height:1.04;letter-spacing:-.045em;font-variant-numeric:tabular-nums;text-shadow:0 4px 0 #986b45,0 7px 10px rgba(41,29,22,.16);-webkit-text-stroke:.5px var(--island-cream)}
+.island-colon{margin:0 1px 0 -2px}
+.f-island[data-island-style="light"] .island-time{font-family:-apple-system,BlinkMacSystemFont,Roboto,sans-serif;font-size:128px;font-weight:200;letter-spacing:-.05em;-webkit-text-stroke:0;text-shadow:0 2px 12px rgba(10,24,45,.25)}
+.f-island[data-island-style="light"] .island-date{font-family:-apple-system,BlinkMacSystemFont,'HomeView Sans',sans-serif;font-size:24px;font-weight:500;text-shadow:0 2px 10px rgba(10,24,45,.3)}
+.f-island[data-island-style="stacked"] .island-time{display:block;width:220px;font-size:108px;line-height:.92;letter-spacing:-.05em;margin-top:8px}
+.f-island[data-island-style="stacked"] .island-time>span{display:block}
+.f-island[data-island-style="stacked"] .island-colon{display:none!important}
+.island-info{position:absolute;left:124px;top:278px;width:346px;z-index:4;font-family:-apple-system,BlinkMacSystemFont,'HomeView Sans',sans-serif;font-weight:500;letter-spacing:0;color:var(--island-ink)}
+.island-info>*+*{margin-top:14px}
+.f-island[data-island-style="stacked"] .island-info{top:362px}
+.f-island .island-icon{position:static;display:block;flex:0 0 auto;width:26px;height:26px;object-fit:contain;filter:invert(1);opacity:.92;pointer-events:none}
+.f-island[data-island-theme="beach"] .island-icon{filter:none;opacity:.72}
+.island-weather{display:flex;align-items:center;height:64px;color:var(--island-cream);text-shadow:0 2px 8px rgba(10,24,45,.3);padding-left:3px}
+.f-island .island-weather>.island-icon{width:38px;height:38px;filter:invert(1);opacity:1;margin-right:12px}
+.island-temperature{font:800 43px/1 Nunito,sans-serif;letter-spacing:-.03em;margin-right:20px}
+.island-weather-detail{display:flex;flex-direction:column}
+.island-weather-detail strong{font-size:18px;line-height:28px;font-weight:600}
+.island-weather-detail span{font-size:15px;line-height:23px;opacity:.8}
+.island-card{width:346px;border:1px solid var(--island-border);border-radius:24px;background:var(--island-card);box-shadow:0 5px 20px rgba(7,22,44,.07)}
+.island-todos{padding:16px 19px 10px}
+.island-card-heading{display:flex;align-items:center;justify-content:space-between;font-size:15px;color:var(--island-muted);line-height:22px;margin-bottom:6px}
+.island-task-count{font-size:15px}
+.island-task{display:flex;align-items:center;width:100%;min-height:44px;text-align:left;font-size:17px;color:var(--island-ink)}
+.island-task-check{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:19px;height:19px;border:1.5px solid var(--island-muted);border-radius:50%;margin-right:11px}
+.f-island .island-task-check .island-icon{width:13px;height:13px;opacity:0}
+.island-task.is-done .island-task-check{background:var(--island-ink);border-color:var(--island-ink)}
+.f-island .island-task.is-done .island-task-check .island-icon{filter:none;opacity:1}
+.f-island[data-island-theme="beach"] .island-task.is-done .island-task-check .island-icon{filter:invert(1)}
+.island-task-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.island-task.is-done .island-task-text{text-decoration:line-through;opacity:.5}
+.island-task time{font-size:15px;color:var(--island-muted);margin-left:10px;font-variant-numeric:tabular-nums}
+.island-music{height:122px;position:relative;padding:13px 16px 11px 103px}
+.f-island .island-album{position:absolute;left:16px;top:25px;width:72px;height:72px;border-radius:13px;object-fit:cover}
+.island-music-meta{display:flex;flex-direction:column;overflow:hidden}
+.island-track-title{font-size:19px;line-height:26px;font-weight:600;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.island-track-artist{font-size:15px;line-height:21px;color:var(--island-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.island-music-controls{display:flex;align-items:center;margin:3px 0 0 -6px}
+.island-music-controls button{width:58px;height:44px;display:flex;align-items:center;justify-content:center}
+.f-island .island-music-controls .island-icon{width:22px;height:22px}
+.f-island .island-music-controls [data-island-music="play"] .island-icon{width:24px;height:24px}
+.island-info button:focus-visible{outline:2px solid var(--island-cream);outline-offset:4px;border-radius:9px}
+.island-info button:active{opacity:.65}
+/* Reuse exactly the selected blue clock editor's black shell, tabs, frame and actions. */
+.island-editor{z-index:100}
+.island-editor[hidden]{display:none!important}
+.island-editor .ne-preview-face{transform:scale(.7)!important;transform-origin:0 0}
+.island-editor .ne-choice{flex-direction:column;min-height:104px;padding:9px 5px}
+.island-editor .ne-tabs{gap:0}
+.island-editor .ne-tabs button+button{margin-left:36px}
+.island-editor .ne-options{top:145px;height:458px;min-height:0;gap:0}
+.island-editor .ne-choice+.ne-choice{margin-top:14px}
+.island-scene-thumb img{display:block;width:96px;height:60px;object-fit:cover}
+.island-choice-label{font-size:15px;font-weight:400;line-height:20px;margin-top:7px;color:#b0b0b5}
+.island-choice[aria-checked="true"] .island-choice-label{color:#f5f5f7}
+.island-style-sample{font:900 31px/1 Nunito,sans-serif;color:#eee;letter-spacing:-.05em;height:46px;display:flex;align-items:center;justify-content:center}
+.island-style-sample[data-style="light"]{font:200 30px/1 -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:-.05em}
+.island-style-sample[data-style="stacked"]{font-size:23px;line-height:.95;white-space:pre-line;text-align:center}
+.island-editor .island-widget-choice{width:136px;min-height:104px;font-size:17px}
+.island-widget-choice .island-icon{width:25px;height:25px;filter:invert(1);opacity:.55;margin-bottom:6px}
+.island-widget-choice[aria-checked="true"] .island-icon{opacity:1}
+.island-widget-choice small{font-size:15px;color:#8e8e93;line-height:21px}
+.island-widget-choice[aria-checked="true"] small{color:#a1a1a6}
+.island-save-status{position:absolute;left:110px;bottom:40px;color:#ff9f0a;font-size:15px}
+.island-editing .clock-face-picker,.island-editing .clock-swipe-hint{visibility:hidden!important}
+/* Grounded characters. Ambient motion belongs to the water, leaves and small lights. */
+.f-island .island-palm{transform-origin:52% 96%;animation:island-palm-sway 9s ease-in-out infinite alternate}
+.f-island .island-wave{animation:island-shore 9.5s ease-in-out infinite}
+.f-island .island-wave.two{left:70px;bottom:26px;opacity:.24;animation-duration:11.7s;animation-delay:-5.5s}
+.f-island .island-villager,.f-island .island-companion{animation:none}
+.f-island .island-fish{left:0;animation:island-swim 41s linear infinite}
+.f-island .island-fish.two{left:0;animation-duration:56s;animation-delay:-23s}
+.f-island .island-bubbles{animation:island-rise 9s ease-in-out infinite}
+.f-island .island-water{position:absolute;left:90px;top:480px;width:1000px;height:154px;pointer-events:none}
+.f-island .island-fireworks{position:absolute;left:540px;top:0;width:740px;height:710px;pointer-events:none}
+.f-island .island-firework-static{display:none;position:absolute;left:695px;top:34px;width:370px;height:370px;object-fit:contain;opacity:.8}
+.f-island .island-night-pair{position:absolute;left:540px;top:432px;width:320px;height:256px;filter:saturate(.92);animation:none}
+.f-island .island-beach-pair{position:absolute;left:650px;top:465px;width:340px;height:272px;animation:none}
+.f-island .island-aquarium-pair{position:absolute;left:720px;top:478px;width:340px;height:272px;animation:none}
+.f-island .island-tank-fish{position:absolute;left:0;top:60px;width:1280px;height:550px;pointer-events:none}
+.f-island .island-tank-floor{position:absolute;left:470px;top:650px;width:790px;height:140px;pointer-events:none}
+.island-paused *{animation-play-state:paused!important}
+.island-editor[hidden] *{animation-play-state:paused!important}
+@keyframes island-palm-sway{from{transform:rotate(-.35deg)}to{transform:rotate(.45deg)}}
+@keyframes island-shore{0%,100%{transform:translate3d(0,5px,0);opacity:.12}40%{opacity:.38}80%{transform:translate3d(0,-3px,0);opacity:.08}}
+@keyframes island-swim{0%{transform:translate3d(1350px,0,0)}30%{transform:translate3d(900px,-8px,0)}60%{transform:translate3d(450px,3px,0)}100%{transform:translate3d(-150px,0,0)}}
+@keyframes island-rise{0%{transform:translate3d(0,55px,0);opacity:0}20%,70%{opacity:.65}100%{transform:translate3d(-10px,-195px,0);opacity:0}}
+@media(prefers-reduced-motion:reduce){.island-editor,.island-editor *{transition:none!important}.f-island *{animation:none!important}.f-island .island-fireworks,.f-island .island-water{display:none}.f-island .island-firework-static{display:block}}
+
+.island-task-rows .island-task-text{white-space:normal;word-break:break-word;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.island-task{min-height:36px;height:auto}.island-task-check{flex-shrink:0}.island-empty{font:18px/1.5 var(--sf);margin:8px 0;color:var(--island-muted)}.island-music-meta{background:none;border:0;text-align:left;color:inherit;padding:0}.island-music-controls{flex-shrink:0}
+
+/* Give the three small motion surfaces their own compositor layers on WebView72. */
+.f-island canvas{transform:translateZ(0);will-change:transform}
+
+.island-editor{font-family:var(--sf)}
+
+.f-island .island-beach-motion{position:absolute;left:0;top:0;width:1280px;height:800px;pointer-events:none}

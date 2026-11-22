@@ -1,0 +1,21 @@
+/* Sand is a separate live face. Material bitmap stays fixed during gestures. */
+.f-sand{background:#d9c391;overflow:hidden}
+.f-sand>.sand-bg{position:absolute;left:0;top:0;width:1280px;height:800px;object-fit:cover;pointer-events:none}
+.sand-numbers{position:absolute;left:256px;top:16px;width:768px;height:768px;pointer-events:none}
+.sand-movement{position:absolute;left:0;top:0;width:1280px;height:800px;pointer-events:none}
+.sand-minute{position:absolute;left:592px;top:30px;width:96px;height:420px;transform-origin:48px 370px;will-change:transform}
+.sand-hour{position:absolute;left:592px;top:150px;width:96px;height:300px;transform-origin:48px 250px;will-change:transform}
+.sand-mechanics{position:absolute;left:256px;top:16px;width:768px;height:768px;overflow:visible}
+.sand-second{position:absolute;left:624px;top:44px;width:32px;height:414px;transform-origin:16px 356px;will-change:transform}
+html[data-current-clock="sand"] .clock-swipe-hint{color:rgba(94,70,31,.6);text-shadow:none;font-weight:400}
+html[data-current-clock="sand"] .clock-swipe-hint img{filter:invert(35%) sepia(45%) saturate(400%) hue-rotate(1deg);opacity:.7}
+html[data-current-clock="sand"] .clock-face-picker{background:rgba(117,85,35,.08);color:#72562e}
+html[data-current-clock="sand"] .clock-face-dots span{background:rgba(111,78,31,.22)}
+html[data-current-clock="sand"] .clock-face-dots span.active{background:rgba(111,78,31,.6)}
+@media(prefers-reduced-motion:reduce){.sand-minute,.sand-hour,.sand-second{will-change:auto}}
+
+/* Static glyph/mask textures: transform only during the sweep, no 768px canvas upload per frame. */
+.sand-rotation-mask,.sand-glyphs{position:absolute;left:0;top:0;width:768px;height:768px;transform-origin:384px 384px;pointer-events:none;will-change:transform}.sand-rotation-mask{-webkit-mask-size:768px 768px;-webkit-mask-repeat:no-repeat}.sand-glyphs{max-width:none}
+
+/* The needle is a static texture; only the separate small grain texture is redrawn. */
+.sand-needle,.sand-grains{position:absolute;left:0;top:0;width:32px;pointer-events:none}.sand-needle{height:414px}.sand-grains{height:208px}

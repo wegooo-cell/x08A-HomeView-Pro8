@@ -1,0 +1,28 @@
+/* Fixed Pro8 geometry. The dock uses one shared static wallpaper texture. */
+.desktop-dock{position:absolute;top:656px;height:104px;border-radius:34px;overflow:hidden;isolation:isolate;pointer-events:auto;z-index:1;border:1px solid rgba(245,252,255,.46);box-shadow:inset 0 1px 1px rgba(255,255,255,.83),inset 1px 0 1px rgba(255,255,255,.34),inset -1px 0 1px rgba(237,248,255,.22),inset 0 -1px 2px rgba(227,246,255,.5),0 12px 26px rgba(14,40,61,.13),0 2px 5px rgba(14,40,61,.05);background:rgba(228,243,251,.055)}
+.desktop-dock[hidden]{display:none}
+.desktop-dock:before,.desktop-dock:after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;border-radius:inherit;pointer-events:none}
+.desktop-dock:before{z-index:-2;background-image:var(--ha-soft);background-size:1312px 820px;background-position:calc(var(--dock-glass-x,-400px) - 16px) -666px;background-repeat:no-repeat;opacity:.52}
+.desktop-dock:after{z-index:-1;background:linear-gradient(112deg,rgba(255,255,255,.34),rgba(255,255,255,.035) 28%,rgba(255,255,255,.015) 60%,rgba(245,253,255,.18)),linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.025) 24%,rgba(255,255,255,0) 52%,rgba(156,214,244,.045) 80%,rgba(244,253,255,.14));box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.desktop-items .layout-item{z-index:2}
+.desktop-items .app{height:116px;gap:0;font-size:15px;line-height:20px}
+.desktop-items .app>span:last-child{margin-top:0!important}
+.desktop-items .app:not(.is-docked) .app-icon{width:96px;height:96px}
+.desktop-items .app:not(.is-docked) .folder-preview{width:80px;height:80px;margin:8px;padding:9px;border-radius:21px;flex:0 0 80px}
+.desktop-items .app:not(.is-docked) .folder-mini{width:18px!important;height:18px!important;flex:0 0 18px!important;margin:1px!important}
+.desktop-items .app.is-docked{width:100px!important;height:96px!important;justify-content:center}
+.desktop-items .app.is-docked>span:last-child{display:none}
+.desktop-items .app.is-docked .app-icon{width:96px;height:96px}
+.desktop-items .app.is-docked .folder-preview{width:80px!important;height:80px!important;margin:8px;flex:0 0 80px}
+.layout-editing .desktop-dock.is-target{border-color:rgba(255,255,255,.95)}
+.layout-editing .layout-drop-slot{z-index:1}
+.layout-editing .layout-toolbar{bottom:18px}
+
+/* Preserve the original widget design above the single, generously spaced icon row. */
+.desktop-items .widget-group>.widget{transform:scale(.9);transform-origin:0 0}
+.desktop-items .weather-group>.widget,.desktop-items .home-group>.widget,.desktop-items .photo-group>.widget{width:354px}
+.desktop-items .music-group>.widget,.desktop-items .bilibili-group>.widget{width:162px}
+.desktop-items .widget-group>.widget:active{transform:scale(.89)}
+
+.layout-editing .widget-group:not(.is-dragging) .widget{animation-name:layout-widget-wiggle-scaled;transform-origin:0 0}
+@keyframes layout-widget-wiggle-scaled{from{transform:scale(.9) rotate(-.22deg)}to{transform:scale(.9) rotate(.22deg)}}

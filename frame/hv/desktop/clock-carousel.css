@@ -1,0 +1,28 @@
+.clock-touch #stage .slide{transition:none}
+.clock-face-dots{position:absolute;z-index:4;right:50px;bottom:48px;display:flex;align-items:center;height:12px;pointer-events:none}
+.clock-face-dots span{display:block;width:6px;height:6px;border-radius:5px;background:rgba(255,255,255,.35);margin-left:7px}
+.clock-face-dots .active{width:18px;background:rgba(255,255,255,.9)}
+.clock-face-sheet[hidden]{display:none}
+.clock-face-sheet{position:absolute;left:0;top:0;width:1280px;height:800px;z-index:60;display:flex;align-items:center;justify-content:center;touch-action:none}
+.clock-face-scrim{position:absolute;left:0;top:0;width:1280px;height:800px;background:rgba(10,30,48,.48)}
+.clock-face-panel{position:relative;width:1048px;max-height:700px;overflow:auto;padding:28px 32px;border-radius:30px;background:rgba(246,249,250,.98);color:#263c4d;box-shadow:0 20px 70px rgba(0,25,50,.2)}
+.clock-face-panel header{display:flex;align-items:center;justify-content:space-between;height:44px}
+.clock-face-panel h2{font-size:29px;font-weight:600;line-height:38px;margin:0}
+.clock-face-panel header button{font-size:18px;font-weight:600;line-height:26px;color:#357daf;padding:9px 13px}
+.clock-face-panel p{font-size:16px;line-height:24px;color:#798996;margin:5px 0 19px}
+.clock-face-grid{display:grid;grid-template-columns:repeat(5,184px);gap:18px 16px}
+.clock-face-option{display:block;position:relative;cursor:pointer;min-width:0}
+.clock-face-option input{position:absolute;left:0;top:0;opacity:0;width:184px;height:164px;cursor:pointer;margin:0}
+.clock-face-thumb{display:block;width:184px;height:115px;object-fit:cover;border-radius:14px;border:2px solid transparent;opacity:.72}
+.clock-face-option.is-selected .clock-face-thumb{border-color:#5896c0;opacity:1}
+.clock-face-option b{display:block;font-size:19px;font-weight:600;line-height:28px;margin-top:3px}
+.clock-face-option small{display:block;font-size:15px;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#82929d}
+.clock-face-check{position:absolute;right:10px;top:10px;width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.clock-face-check img{height:20px;width:20px;filter:invert(1);opacity:0}
+.clock-face-option.is-selected .clock-face-check{background:#498ab6;border-color:#498ab6}
+.clock-face-option.is-selected .clock-face-check img{opacity:1}
+.clock-face-option:focus-within .clock-face-thumb{outline:3px solid rgba(73,138,182,.45);outline-offset:3px}
+.clock-face-summary{font-size:16px;color:#7a8e9d;line-height:24px;margin-top:20px}
+@media(prefers-reduced-motion:reduce){.clock-touch #stage .slide{transition:none}}
+
+.photo .lock-wall{position:absolute;left:0;top:0;width:1280px;height:800px;background-position:center;background-size:cover;background-repeat:no-repeat}.photo.is-light .ctime,.photo.is-light .foot{color:#303744;text-shadow:none}.photo.is-light .shade-b{background:linear-gradient(180deg,transparent,rgba(0,0,0,.025))}.clock-face-panel header>div{display:flex;align-items:center}.clock-face-panel #clock-face-wallpaper{color:#596d7b;margin-right:12px}

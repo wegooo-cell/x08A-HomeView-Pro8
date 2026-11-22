@@ -1,0 +1,33 @@
+/* Desktop only. Keep texture visible under a light wash of smoked glass. */
+#desktop-canvas{
+  --widget-ink:#f8fbff;--widget-secondary:#e6eef9;--widget-edge:rgba(231,242,255,.33);
+  --widget-glint:rgba(248,252,255,.47);--widget-tint:rgba(14,24,41,.34);
+  --widget-clear:rgba(14,24,41,.19);--widget-tint-end:rgba(11,19,35,.33);
+  --widget-icons:invert(1);
+  --widget-mini:rgba(205,225,255,.10);--widget-mini-on:rgba(198,223,255,.23);--widget-mini-edge:rgba(236,246,255,.22);
+}
+#desktop-canvas[data-widget-light="night"]{
+  --widget-edge:rgba(219,235,255,.27);--widget-glint:rgba(233,245,255,.37);
+  --widget-tint:rgba(9,17,34,.43);--widget-clear:rgba(10,18,36,.28);--widget-tint-end:rgba(8,16,31,.43);
+}
+#desktop-canvas .widget.weather-widget,#desktop-canvas .widget.home-widget{
+  color:var(--widget-ink);background:transparent;border:1px solid var(--widget-edge);
+  box-shadow:inset 0 1px 0 var(--widget-glint),inset 0 -1px 0 rgba(191,221,255,.14),0 7px 20px rgba(5,13,28,.20);
+  text-shadow:0 1px 3px rgba(4,10,22,.66);
+}
+#desktop-canvas .weather-widget:before,#desktop-canvas .home-widget:before{
+  z-index:-1;background:var(--ha-soft) var(--glass-x,0px) var(--glass-y,0px)/1280px 800px no-repeat;opacity:.56;
+}
+#desktop-canvas .weather-widget:after,#desktop-canvas .home-widget:after{
+  background:radial-gradient(ellipse at 14% 0%,rgba(241,249,255,.17),transparent 47%),linear-gradient(158deg,var(--widget-tint),var(--widget-clear) 49%,var(--widget-tint-end));
+}
+#desktop-canvas .weather-widget .weather-temp{
+  color:var(--widget-ink);background:none;-webkit-text-fill-color:currentColor;-webkit-text-stroke:0;text-shadow:0 2px 9px rgba(5,14,30,.34);
+}
+#desktop-canvas .weather-widget img,#desktop-canvas .home-widget .home-mini>img,#desktop-canvas .home-widget .home-mini-toggle img,#desktop-canvas .home-widget-footer img{filter:var(--widget-icons)}
+#desktop-canvas .weather-range,#desktop-canvas .weather-metrics small,#desktop-canvas .home-widget small,#desktop-canvas .home-widget-footer{color:var(--widget-secondary)}
+#desktop-canvas .home-widget .home-heading span,#desktop-canvas .home-widget .home-heading strong{color:var(--widget-ink)}
+#desktop-canvas .home-widget .home-mini{color:var(--widget-ink);background:var(--widget-mini);border-color:var(--widget-mini-edge);box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+#desktop-canvas .home-widget .home-mini.on{background:var(--widget-mini-on)}
+#desktop-canvas .home-widget .home-mini-toggle{background:var(--widget-mini);border-color:var(--widget-mini-edge)}
+#desktop-canvas .home-widget .home-mini-toggle[aria-checked="true"]{background:var(--widget-mini-on)}

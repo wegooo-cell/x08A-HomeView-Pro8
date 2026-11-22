@@ -1,0 +1,22 @@
+[
+  {
+    "file": "android-launcher/lib/armeabi-v7a/libcrypto.so",
+    "sha256": "2da3f6912b0f9ee7c14c5d36e5e896b570a2fb3a07859e155282d92e1f975fac",
+    "source": "Android AirPlay Server v0.0.36 release, unmodified library"
+  },
+  {
+    "file": "android-launcher/lib/armeabi-v7a/liboboe.so",
+    "sha256": "599f988dfbc3793d7c6bc2621c02f179eac3b091a9181f65ead1cf30bb570e11",
+    "source": "Android AirPlay Server v0.0.36 release, unmodified library"
+  },
+  {
+    "file": "android-launcher/lib/armeabi-v7a/libc++_shared.so",
+    "sha256": "37d4ffc8c166bd8e670971985bc888e89279c771fcbf90ec70a592ad9645c9d7",
+    "source": "Android AirPlay Server v0.0.36 release, unmodified library"
+  },
+  {
+    "file": "android-launcher/lib/armeabi-v7a/libairplay_native.so",
+    "sha256": "116138cf2cb275a7912b0e0bb43ba0ed4818e4491b0fe5ee9331d01dfa68ccdb",
+    "source": "Android AirPlay Server v0.0.36 release, unmodified library"
+  }
+]

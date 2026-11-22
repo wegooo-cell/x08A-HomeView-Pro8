@@ -1,0 +1,84 @@
+<!doctype html>
+<html data-wallpaper-pending="true" lang="zh-CN" class="launcher-fast" data-desktop-layout="pending" data-desktop-wallpaper="pending">
+<head><style id="wallpaper-first-paint">html{background:#000}html[data-wallpaper-pending] body.follow-wallpaper[data-wall],html[data-wallpaper-pending] .app-wall,html[data-wallpaper-pending] .desktop-wall{background-color:#000!important;background-image:none!important}html[data-wallpaper-pending] .app-wall:after,html[data-wallpaper-pending] body:before{opacity:0!important}html[data-wallpaper-pending] .weather-background{background:#000!important}html[data-wallpaper-pending] .photos-heading{color:#fff}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>主屏幕 · HomeView</title>
+<script>
+window.hvDesktopWallpaperRequest = new Promise(function(resolve) {
+  var timeout = setTimeout(function() { resolve(null); }, 4000);
+  function finish(value) { clearTimeout(timeout); resolve(value); }
+  fetch('/api/hv/desktop-wallpaper', {cache:'no-store',credentials:'same-origin'})
+    .then(function(response) { return response.ok ? response.json() : null; })
+    .then(finish, function() { finish(null); });
+});
+</script>
+<style>
+/* Never paint absolute items at their unset/static positions during a cold load. */
+html[data-desktop-layout="pending"] .desktop-items{visibility:hidden}
+html[data-desktop-layout="pending"] .layout-item{transition:none!important}
+html[data-desktop-wallpaper="pending"] .follow-wallpaper .desktop-wall{background-image:none;background-color:#000}
+</style>
+<link rel="stylesheet" href="/frame/hv/hv.css?v=95-perf">
+<link rel="stylesheet" href="/frame/hv/desktop/desktop.css?v=163"><link rel="stylesheet" href="/frame/hv/desktop/dock.css?v=153"><link rel="stylesheet" href="/frame/hv/desktop/pages.css?v=162"><link rel="stylesheet" href="/frame/hv/desktop/recent-apps.css?v=94">
+<link rel="stylesheet" href="/frame/hv/desktop/clock-bridge.css?v=76">
+<link rel="stylesheet" href="/frame/hv/home/glass.css?v=162"><link rel="stylesheet" href="/frame/hv/home/widget-controls.css?v=96"><link rel="stylesheet" href="/frame/hv/desktop/widget-glass.css?v=162">
+<link rel="stylesheet" href="/frame/hv/system/system.css?v=150"><link rel="stylesheet" href="/frame/hv/press-feedback.css?v=153"></head>
+<body class="follow-wallpaper" data-wallpaper-scope="desktop" data-wall="off" data-idle="off">
+<div id="desktop-canvas">
+  <div class="desktop-wall" aria-hidden="true"></div>
+  <header class="desktop-status"><div><time id="status-time">13:30</time><span id="status-date">10月20日 星期二</span></div><div class="status-right"><span>HomeView</span><img src="/frame/hv/desktop/assets/ion-wifi.svg" alt="无线网络"></div></header>
+  <main class="desktop-content" aria-label="主屏幕">
+    <section class="desktop-items" aria-label="应用与小组件" aria-busy="true">
+      <div class="widget-group weather-group layout-item" data-layout="weather">
+        <button class="widget weather-widget ha-frost" id="weather-open" aria-label="查看天气">
+          <span class="weather-top"><span><span class="weather-condition"><img src="/frame/hv/desktop/assets/ion-partly-sunny.svg" alt="">天气 · 暂无数据</span><span class="weather-range">正在读取天气</span></span><time id="weather-time">13:50</time></span>
+          <span class="weather-temp">--°</span>
+          <span class="weather-metrics"><span><img src="/frame/hv/desktop/assets/weather-sunset.svg" alt=""><b>--</b><small>日落</small></span><span><img src="/frame/hv/desktop/assets/weather-wind.svg" alt=""><b>--</b><small>风速</small></span><span><img src="/frame/hv/desktop/assets/weather-droplet-half.svg" alt=""><b>--</b><small>湿度</small></span><span><img src="/frame/hv/desktop/assets/weather-grid-3x3-gap.svg" alt=""><b>--</b><small>空气质量</small></span></span>
+        </button><span class="desktop-label">天气</span>
+      </div>
+      <div class="widget-group music-group layout-item" data-layout="music"><section class="widget music-widget" aria-label="音乐小组件"><button class="album-link" id="music-open" aria-label="打开音乐播放器"><img id="widget-cover" class="album-cover" src="/frame/hv/desktop/assets/public-music.svg" alt="当前歌曲封面"></button><div class="music-detail"><div class="music-blur-area" aria-hidden="true"><img class="music-blur-cover" id="widget-ambient" src="/frame/hv/desktop/assets/public-music.svg" alt=""></div><button id="music-title" aria-label="打开当前歌曲"><b id="track-title">你的音乐</b><span id="track-artist">正在连接播放器</span></button><div class="music-controls"><button id="music-prev" aria-label="上一首"><img src="/frame/hv/desktop/assets/ion-play-back.svg" alt=""></button><button id="music-play" aria-label="播放音乐" aria-pressed="false"><img src="/frame/hv/desktop/assets/ion-play.svg" alt=""></button><button id="music-next" aria-label="下一首"><img src="/frame/hv/desktop/assets/ion-play-forward.svg" alt=""></button></div></div></section><span class="desktop-label">音乐</span></div>
+      <div class="widget-group home-group layout-item" data-layout="home"><section class="widget home-widget ha-frost" id="home-open" tabindex="0" aria-label="家庭控制">
+        <button class="home-heading home-widget-entry" aria-label="打开家庭主界面"><img src="/frame/hv/desktop/assets/public-home.svg" alt=""><span><strong id="widget-home-name">我的家</strong><small id="home-connection">正在连接</small></span><i class="home-status-dot" aria-hidden="true"></i></button>
+        <span class="home-overview"><span><strong id="home-temperature">--°</strong><small>室内温度</small></span><span><strong id="home-humidity">--%</strong><small>相对湿度</small></span></span>
+        <span class="home-favorites"><span class="home-mini" id="widget-light"><img src="/frame/hv/desktop/assets/ion-bulb-outline.svg" alt=""><b id="widget-light-name">灯光</b><small id="widget-light-state">尚未选择</small><button class="home-mini-toggle" id="widget-light-toggle" role="switch" aria-checked="false" aria-label="灯光开关" disabled><img src="/frame/hv/desktop/assets/power.svg" alt=""></button></span><span class="home-mini" id="widget-climate"><img src="/frame/hv/desktop/assets/ion-thermometer-outline.svg" alt=""><b id="widget-climate-name">空调</b><small id="widget-climate-state">尚未选择</small><button class="home-mini-toggle" id="widget-climate-toggle" role="switch" aria-checked="false" aria-label="空调开关" disabled><img src="/frame/hv/desktop/assets/power.svg" alt=""></button></span></span>
+        <button class="home-widget-footer home-widget-entry" aria-label="查看家庭"><span id="widget-home-summary">查看你的家</span><img src="/frame/hv/desktop/assets/ion-chevron-up.svg" alt=""></button>
+      </section></div>
+
+      <div class="widget-group photo-group layout-item" data-layout="photos"><button class="widget photo-widget is-empty" id="photo-open" aria-label="打开照片回忆"><img alt="" aria-hidden="true"><img alt="" aria-hidden="true"><span class="photo-caption"><small>连接照片来源</small><b>你的照片</b></span></button><span class="desktop-label">照片</span></div>
+      <a class="app layout-item" data-layout="app-clock" id="clock-open" href="/frame/hv/clock/"><img class="app-icon" src="/frame/hv/desktop/assets/public-clock.svg" alt=""><span>时钟</span></a>
+      <button class="app layout-item" data-layout="app-calendar" data-panel="calendar"><img class="app-icon" src="/frame/hv/desktop/assets/public-calendar.svg" alt=""><span>日历</span></button>
+      <button class="app layout-item" data-layout="app-photos" data-panel="photos"><img class="app-icon" src="/frame/hv/desktop/assets/public-photos.svg" alt=""><span>相册</span></button>
+      <a class="app layout-item" data-layout="app-apps" href="/frame/hv/apps/"><img class="app-icon" src="/frame/hv/desktop/assets/public-apps.svg" alt=""><span>应用</span></a>
+      <button class="app layout-item" data-layout="app-system" data-system-folder><span class="app-icon folder-preview ha-frost system-folder-preview"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>系统应用</span></button>
+      <a class="app layout-item" data-layout="app-files" href="pro8://files"><img class="app-icon" src="/frame/hv/desktop/assets/files.svg" alt=""><span>文件</span></a>
+      <a class="app layout-item" data-layout="app-settings" href="/frame/hv/settings/"><img class="app-icon" src="/frame/hv/desktop/assets/public-settings.svg" alt=""><span>设置</span></a>
+      <a class="app layout-item" data-layout="app-music" href="/frame/hv/music/"><img class="app-icon" src="/frame/hv/desktop/assets/public-music.svg" alt=""><span>音乐</span></a>
+      <a class="app layout-item" data-layout="app-home" href="/frame/hv/home/"><img class="app-icon" src="/frame/hv/desktop/assets/public-home.svg" alt=""><span>家庭</span></a>
+      <a class="app layout-item" data-layout="app-carplay" href="pro8://carplay"><img class="app-icon" src="/frame/hv/desktop/assets/public-carplay.svg" alt=""><span>CarPlay</span></a>
+      <a class="app layout-item" data-layout="app-blbl" href="pro8://blbl"><img class="app-icon" src="/frame/hv/desktop/assets/public-blbl.svg?v=134" alt=""><span>哔哩哔哩</span></a>
+      <a class="app layout-item" data-layout="app-vinyl" href="/frame/hv/vinyl/"><img class="app-icon" src="/frame/hv/desktop/assets/vinyl.svg" alt=""><span>黑胶音乐</span></a>
+      <div class="widget-group bilibili-group layout-item" data-layout="bilibili"><button class="widget bilibili-widget" id="bilibili-open" aria-label="打开哔哩哔哩"><span class="bilibili-backdrop" aria-hidden="true"></span><span class="bilibili-scrim" aria-hidden="true"></span><span class="bilibili-brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="8" width="24" height="18" rx="5"/><path d="m11 4 4 4m6-4-4 4M11 15v4m10-4v4"/></svg><span>bilibili</span></span><span class="bilibili-play-badge" aria-hidden="true">▶</span><span class="bilibili-copy"><small id="bilibili-widget-kicker">哔哩哔哩</small><strong id="bilibili-widget-title">发现新鲜好内容</strong><small id="bilibili-widget-status">点按打开</small></span><span class="bilibili-widget-arrow" aria-hidden="true">↗</span></button></div>
+    </section>
+  </main>
+  <button id="layout-edit" class="layout-edit-hint" aria-label="整理桌面"><span aria-hidden="true"></span></button>
+  <div id="layout-toolbar" class="layout-toolbar" hidden><span id="layout-status" role="status">拖动调整位置</span><button id="layout-wallpaper">更换壁纸</button><button id="layout-backup">备份布局</button><button id="layout-restore">恢复布局</button><button id="layout-reset">还原布局</button><button id="layout-done">完成</button></div>
+  <div class="desktop-modal" id="desktop-modal" hidden><div class="modal-scrim" data-dismiss="1"></div><section class="desktop-sheet" role="dialog" aria-modal="true" aria-labelledby="panel-title"><header><h2 id="panel-title"></h2><button id="panel-close" aria-label="关闭"><img src="/frame/hv/desktop/assets/ion-close.svg" alt=""></button></header><div id="panel-body"></div></section></div>
+  <div id="desktop-toast" role="status" aria-live="polite"></div>
+</div>
+<script src="/frame/hv/launcher-policy.js?v=150"></script>
+<script src="/frame/hv/desktop/shortcuts.js?v=153"></script>
+<script src="/frame/hv/desktop/layout.js?v=167"></script>
+<script src="/frame/hv/config.js"></script>
+<script src="/frame/shared/cond.js?v=1"></script>
+<script src="/frame/hv/hv.js?v=163"></script>
+<script src="/frame/hv/desktop/native-motion.js?v=94-recents"></script>
+<script src="/frame/hv/desktop/native-host.js?v=163"></script>
+<script src="/frame/hv/app-ui/weather-data.js?v=168"></script><script src="/frame/hv/home/ha-data.js?v=161"></script><script src="/frame/hv/home/wallpaper.js?v=164"></script><script src="/frame/hv/music/music-session.js?v=145"></script><script src="/frame/hv/desktop/saved-cover.js?v=145"></script><script src="/frame/hv/desktop/photos-widget.js?v=153"></script><script src="/frame/hv/desktop/desktop.js?v=162"></script>
+<script src="/frame/hv/desktop/clock-bridge.js?v=76"></script>
+<script src="/frame/hv/desktop/home-gestures.js?v=157"></script>
+<script src="/frame/hv/desktop/recent-apps.js?v=149"></script><script src="/frame/hv/desktop/home-indicator.js?v=128"></script>
+<script src="/frame/hv/desktop/bilibili-widget.js?v=153"></script>
+<script src="/frame/hv/system/installed-apps.js?v=150"></script><script src="/frame/hv/desktop/system-folder.js?v=153"></script>
+<script src="/frame/hv/press-feedback.js?v=153"></script></body>
+</html>

@@ -1,0 +1,75 @@
+/* Pro8 1280x800 fixed lanes. Grid gaps work in WebView72; text never relies on flex-gap. */
+.f-analog{display:grid;grid-template-columns:240px 560px 240px;column-gap:56px;padding:64px;align-items:center}
+.f-analog .dial{width:560px;height:560px}
+.f-analog .side{width:240px;min-width:0;align-items:stretch}
+.f-analog .side .cmp+.cmp{margin-top:64px}
+.f-analog .cmp{gap:0;align-items:flex-start}
+.f-analog .cmp .ic{width:32px;height:32px;flex:0 0 32px;margin-top:4px}
+.f-analog .side.l .cmp .ic{margin-right:16px}
+.f-analog .side.r .cmp .ic{margin-left:16px}
+.f-analog .side.l .cmp div,.f-analog .side.r .cmp div{max-width:192px;min-width:0}
+.f-analog .cmp span{font-size:18px;line-height:1.5;margin-bottom:8px}
+.f-analog .cmp b{font-size:24px;line-height:1.42;word-break:break-word;overflow-wrap:break-word;-webkit-line-clamp:3}
+.f-today{padding:64px;gap:0;align-items:center}
+.f-today .l{flex:0 0 330px;margin-right:64px}
+.f-today .d{font-size:42px;letter-spacing:.08em;line-height:1.4}
+.f-today .n{font-size:280px;line-height:.95;margin:18px 0 12px}
+.f-today .m{font-size:28px;line-height:1.5;margin:0}
+.f-today .r{gap:0;min-width:0}
+.f-today .r>.hv-card+.hv-card{margin-top:20px}
+.f-today .hv-card{padding:22px 26px}
+.f-today .hv-card h3{font-size:21px;line-height:1.5;margin-bottom:8px}
+.f-today .wx,.f-today .din{gap:0}
+.f-today .wx>.ic,.f-today .din>.ic{margin-right:20px;flex:0 0 48px;width:48px;height:48px}
+.f-today .wx>div,.f-today .din>div{min-width:0;flex:1}
+.f-today .wx b,.f-today .din b{font-size:28px;line-height:1.4}
+.f-today .wx span,.f-today .din span{font-size:20px;line-height:1.5}
+.f-today .hv-row{display:grid;grid-template-columns:6px minmax(0,1fr) 96px;column-gap:16px;align-items:start;font-size:24px;padding:14px 0}
+.f-today .hv-row i{width:6px;min-height:28px}
+.f-today .hv-row .t{white-space:normal;word-break:break-word;overflow-wrap:break-word;line-height:1.4;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.f-today .hv-row .v{font-size:19px;line-height:1.6;text-align:right;white-space:normal}
+.f-today .din em{position:static;font-size:17px;line-height:1.45;margin-left:18px;max-width:105px;flex:0 0 auto}
+.f-up{padding:64px;gap:0}
+.f-up .l{flex:0 0 280px;margin-right:64px}
+.f-up h2{font-size:64px;line-height:1.2}
+.f-up .sub{font-size:26px;line-height:1.5;margin-top:12px}
+.f-up .si{gap:0;align-items:flex-start}
+.f-up .si+.si{margin-top:26px}
+.f-up .sum{gap:0}
+.f-up .si .ic{width:36px;height:36px;flex:0 0 36px;margin-right:18px}
+.f-up .si>div{min-width:0}
+.f-up .si b{font-size:25px;line-height:1.4;white-space:normal;word-break:break-word}
+.f-up .si span{font-size:19px;line-height:1.5;margin-top:7px}
+.f-up .list{gap:0;min-width:0;max-height:672px;overflow:hidden}
+.f-up .day{font-size:20px;line-height:28px;margin:0 0 10px}
+.f-up .ev+.day{margin-top:12px}
+.f-up .ev{display:grid;grid-template-columns:6px minmax(0,1fr) 88px;column-gap:16px;align-items:start;border-radius:20px;padding:16px 22px;font-size:24px;line-height:1.45;margin-bottom:12px}
+.f-up .ev i{width:6px;min-height:32px}
+.f-up .ev .tt{white-space:normal;word-break:break-word;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.f-up .ev .when{font-size:20px;line-height:1.6;text-align:right}
+/* The separate information lounge keeps long todos readable on two lines. */
+.lc-task-list button{align-items:flex-start;min-height:58px;padding:10px 0;gap:0}
+.lc-task-list i{margin-right:14px;margin-top:5px}
+.lc-task-list span{flex:1;min-width:0;white-space:normal;word-break:break-word;overflow-wrap:break-word;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.lc-task-list{max-height:266px;overflow:hidden}
+.lc-time,.lc-weather,.lc-music,.lc-todos{z-index:1}
+.f-lounge .lc-wallpaper{position:absolute;inset:0;width:1280px;height:800px;object-fit:cover;z-index:0}
+.f-lounge .lc-wall-shade{position:absolute;inset:0;background:rgba(0,0,0,.36);z-index:0}
+.f-lounge.lc-has-wall .lc-time,.f-lounge.lc-has-wall .lc-weather{text-shadow:0 2px 12px rgba(0,0,0,.4)}
+.f-lounge.lc-has-wall .lc-date,.f-lounge.lc-has-wall .lc-weather-range,.f-lounge.lc-has-wall .lc-song span{color:rgba(255,255,255,.75)}
+.f-lounge.lc-has-wall .lc-todos{border-color:rgba(255,255,255,.25)}
+
+.f-lounge.lc-has-wall .lc-task-list i{border-color:rgba(255,255,255,.65)}
+.f-lounge.lc-has-wall .lc-todos small{color:rgba(255,255,255,.65)}
+/* Keep the new scene/wallpaper editors at the handoff's true 16:10 preview size.
+   The existing Numerals editor keeps its separately approved geometry. */
+.island-editor .ne-preview,.lounge-wall-editor .ne-preview{left:88px;top:132px;width:896px;height:560px}
+.island-editor h1,.lounge-wall-editor h1{left:48px;top:51px}
+.island-editor .ne-tabs,.lounge-wall-editor .ne-tabs{left:332px;top:38px}
+.island-editor .ne-options,.lounge-wall-editor .ne-options{left:1032px}
+.island-editor .ne-option-caption,.lounge-wall-editor .ne-option-caption{left:1020px;top:618px}
+.island-editor .ne-round,.lounge-wall-editor .ne-round{top:716px}
+.island-editor .ne-cancel,.lounge-wall-editor .ne-cancel{left:48px}
+.island-editor .ne-save,.lounge-wall-editor .ne-save{right:48px}
+.island-editor .ne-gallery{left:482px;bottom:27px}
+.f-lounge .lc-wallpaper,.f-lounge .lc-wall-shade{left:0;top:0;right:0;bottom:0}

@@ -1,0 +1,7 @@
+{
+  "desktop_icons": "Ionicons MIT paths and original SVG icons with geometric tiles",
+  "scene_artwork": "Original SVG primitives and gradients; editable SVG files are the source",
+  "alarm": "Original procedural synthesis: tools/generate_alarm.py",
+  "wallpaper": "One maintainer-selected image, recorded in WALLPAPER.json; blur is a derivative of the same image",
+  "fonts": "HomeView Sans subsets of Source Han Sans CN 2.005, renamed under OFL-1.1; see frame/hv/fonts/SOURCE.json"
+}

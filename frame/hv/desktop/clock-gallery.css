@@ -1,0 +1,51 @@
+/* Lock-screen selection, fixed 1280 x 800. Only foreground cards move. */
+.clock-touch .clock-face-dots,.clock-touch .clock-face-picker,.clock-touch .clock-swipe-hint{display:none!important}
+.lock-gallery[hidden]{display:none}
+.lock-gallery{position:absolute;left:0;top:0;width:1280px;height:800px;z-index:50;touch-action:none;overflow:hidden;color:#fff;font-family:var(--sf)}
+.lock-gallery-bg{position:absolute;left:0;top:0;width:1280px;height:800px;overflow:hidden;background:#000;opacity:0;transition:opacity .28s var(--ease)}
+.lock-gallery-bg img{display:none}
+.lock-gallery.is-open .lock-gallery-bg{opacity:1}
+.lock-gallery-controls{position:absolute;left:0;top:0;width:1280px;height:800px;opacity:0;transition:opacity .24s var(--ease) .06s}
+.is-open .lock-gallery-controls{opacity:1}
+.lock-gallery.is-editing .lock-gallery-controls{opacity:0;pointer-events:none;transition:none}
+.lock-gallery h1{position:absolute;left:440px;top:48px;width:400px;margin:0;text-align:center;font-size:16px;line-height:40px;font-weight:600;letter-spacing:.03em}
+.lock-round{position:absolute;top:42px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16)}
+.lock-round img{width:26px;height:26px;filter:invert(1);pointer-events:none}
+.lock-cancel{display:none}.lock-use{right:36px;background:rgba(255,255,255,.15)}
+.lock-manage{position:absolute;right:26px;bottom:27px;width:44px;height:44px;display:flex;align-items:center;justify-content:center}.lock-manage img{width:24px;height:24px;filter:invert(1)}
+.lock-card-zone{position:absolute;left:0;top:200px;width:1280px;height:390px}
+.lock-card{position:absolute;top:32px;width:512px;height:320px;border-radius:10px;outline:1px solid rgba(255,255,255,.6);outline-offset:0;background:transparent}
+.lock-previous{left:-192px}.lock-selected{left:384px;outline-color:rgba(255,255,255,.95);outline-width:1.5px}.lock-next{left:960px}
+.lock-customize{position:absolute;left:589px;top:574px;width:102px;height:40px;border-radius:22px;font-size:17px;line-height:40px;font-weight:500;white-space:nowrap;color:#eef8ff;background:rgba(255,255,255,.06);border:1px solid rgba(207,235,255,.28);box-shadow:inset 0 1px 1px rgba(255,255,255,.2),0 2px 8px rgba(0,0,0,.06);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.lock-customize-previous{left:13px}.lock-customize-next{left:1165px}
+.lock-customize:disabled{opacity:.38;cursor:default}
+.lock-face-name{position:absolute;left:440px;top:710px;width:400px;text-align:center;color:rgba(255,255,255,.72);font-size:16px;line-height:24px}
+.lock-gallery-dots{position:absolute;left:0;top:628px;width:1280px;height:36px;display:flex;justify-content:center;align-items:center}
+.lock-gallery-dots button{width:30px;height:36px;display:flex;align-items:center;justify-content:center}
+.lock-gallery-dots span{display:block;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.28)}
+.lock-gallery-dots [aria-pressed=true] span{background:#fff;width:7px;height:7px}
+.lock-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.lock-gallery button:focus-visible{outline:2px solid #fff;outline-offset:5px}
+.lock-gallery button:active:not(:disabled){opacity:.7}
+html.clock-gallery-open body.sb #stage{z-index:52;overflow:visible!important;pointer-events:none!important;transform-origin:0 0;background:transparent!important;opacity:1!important;visibility:visible!important;will-change:transform}
+html.clock-gallery-open #stage>.slide{width:1280px;height:800px;right:auto;bottom:auto;overflow:hidden;border-radius:25px;opacity:1!important;transition:none!important}
+html.clock-gallery-open #stage>.slide *{pointer-events:none!important}
+html.num-editing.clock-gallery-open body.sb #stage{visibility:hidden!important}
+.clock-gallery-open .clock-face-sheet{z-index:65}
+@media(prefers-reduced-motion:reduce){.lock-gallery-bg,.lock-gallery-controls{transition:none}.lock-gallery-bg img{filter:none}}
+
+/* Adjacent cards are cached raster previews, not additional running clock instances. */
+.lock-card{overflow:hidden;will-change:transform}
+.lock-card img{display:block;width:512px;height:320px;object-fit:cover;border-radius:10px;pointer-events:none}
+.lock-customize{-webkit-backdrop-filter:none;backdrop-filter:none;will-change:transform}
+
+/* WebView72 outlines have square corners. Keep the production rounded selection rings. */
+.lock-gallery .lock-card,.lock-gallery .lock-card:focus{outline:none!important;box-shadow:0 0 0 1px rgba(255,255,255,.6)}
+.lock-gallery .lock-selected,.lock-gallery .lock-selected:focus{box-shadow:0 0 0 1.5px rgba(255,255,255,.95)}
+
+/* The chooser owns three raster cards. The actual clock remains mounted but
+   paused and hidden; it never follows the finger or rebuilds while browsing. */
+html.clock-gallery-open body.sb #stage{visibility:hidden!important;pointer-events:none!important;will-change:auto;transform:none!important}
+.lock-gallery .lock-card-zone{transform-origin:640px 192px}
+.lock-gallery.is-closing .lock-gallery-bg,.lock-gallery.is-closing .lock-gallery-controls{opacity:1;transition:none}
+.lock-gallery.is-closing .lock-gallery-controls>header,.lock-gallery.is-closing .lock-customize,.lock-gallery.is-closing .lock-manage,.lock-gallery.is-closing .lock-gallery-dots{opacity:0;pointer-events:none;transition:opacity .14s cubic-bezier(.333333,1,.666667,1)}

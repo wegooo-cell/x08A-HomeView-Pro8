@@ -1,0 +1,15 @@
+/* Phone-only form. No persistent credentials, analytics or external scripts. */
+(function(){'use strict';
+var token=location.hash.slice(1),key=null,deadline=0,sending=false,form=document.getElementById('form'),state=document.getElementById('state'),button=document.getElementById('submit');
+function random(n){if(!window.crypto||!window.crypto.getRandomValues)throw new Error('此浏览器不支持安全填写，请使用 Safari 或 Chrome');var a=new Uint8Array(n);window.crypto.getRandomValues(a);var s='';for(var i=0;i<n;i++)s+=String.fromCharCode(a[i]);a.fill(0);return s;}
+function request(path,body){var h={'X-HomeView-Pair':token};if(body)h['Content-Type']='application/json';return fetch(path,{method:body?'POST':'GET',headers:h,body:body?JSON.stringify(body):undefined,cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'}).then(function(r){if(!r.ok)throw new Error('链接已关闭或提交未完成，请查看 Pro8 上的结果；需要重试时重新生成二维码。');return r.json();});}
+function error(e){state.textContent=e.message||'连接已中断，请在 Pro8 上重新生成二维码。';}
+if(!/^[A-Za-z0-9_-]{43}$/.test(token)){error(new Error('请扫描 Pro8 日历页面显示的二维码。'));return;}
+try{random(1);if(!window.forge)throw new Error('安全填写组件未能加载，请重新扫码');}catch(e){error(e);return;}
+request('/key').then(function(d){key=forge.pki.publicKeyFromPem(d.pem);deadline=Date.now()+d.seconds*1000;state.textContent='已连接 Pro8 · 请在 5 分钟内填写并发送';form.hidden=false;},error);
+form.onsubmit=function(e){e.preventDefault();if(sending)return;var email=document.getElementById('email').value.trim(),password=document.getElementById('password').value.trim().replace(/\s/g,'').replace(/-/g,'');if(password.length===16&&/^[A-Za-z0-9]+$/.test(password))password=password.match(/.{4}/g).join('-');if(!/^[^\s:@]+@[^\s:@]+\.[^\s:@]+$/.test(email)||email.length>254||!/^[A-Za-z0-9]{4}(-[A-Za-z0-9]{4}){3}$/.test(password)){error(new Error('请填写 Apple 邮箱和 16 位 App 专用密码。'));return;}if(!key||Date.now()>deadline){error(new Error('二维码已过期，请在 Pro8 上刷新后再扫码。'));return;}
+ sending=true;button.disabled=true;state.textContent='正在加密发送…';
+ try{var aes=random(32),iv=random(12),plain=forge.util.encodeUtf8(JSON.stringify({email:email,password:password}));document.getElementById('password').value='';password='';var cipher=forge.cipher.createCipher('AES-GCM',aes);cipher.start({iv:iv,additionalData:token,tagLength:128});cipher.update(forge.util.createBuffer(plain));plain='';if(!cipher.finish())throw new Error('加密未完成，请重新扫码');var data={v:1,key:forge.util.encode64(key.encrypt(aes,'RSA-OAEP',{md:forge.md.sha256.create(),mgf1:{md:forge.md.sha256.create()},seed:random(32)})),iv:forge.util.encode64(iv),data:forge.util.encode64(cipher.output.getBytes()+cipher.mode.tag.getBytes())};aes='';cipher=null;key=null;form.hidden=true;request('/submit',data).then(function(d){token='';history.replaceState(null,'',location.pathname);state.textContent=d.ok?'已发送给 Pro8。请回到 Pro8 查看连接结果，再选择要同步的日历。':'提交未完成，请在 Pro8 上重新扫码。';document.getElementById('help').hidden=true;},error);}catch(err){form.hidden=true;error(err);}
+};
+window.addEventListener('pagehide',function(){document.getElementById('password').value='';});
+})();

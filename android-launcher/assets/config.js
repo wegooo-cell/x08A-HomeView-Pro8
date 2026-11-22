@@ -1,0 +1,1 @@
+window.HV_CONFIG={"home_name": "我的家", "timezone": "Asia/Shanghai", "temp_unit": "C", "wind_unit": "kmh", "sonos": false, "spotify": false, "netease": true, "timers": [{"label": "茶", "seconds": 240}, {"label": "咖啡", "seconds": 300}], "calendars": []};

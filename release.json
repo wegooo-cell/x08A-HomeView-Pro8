@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "version": "v0.1.0",
+  "homeview": {
+    "name": "HomeView",
+    "package": "io.github.wegooo_cell.homeview",
+    "version_code": 169,
+    "sha256": "7519b541455befc86f9c6610475e952a3cf1fa2a039f0eeb901464badac878f5",
+    "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
+    "url": "https://github.com/wegooo-cell/HomeView/releases/download/v0.1.0/homeview-pro8.apk"
+  },
+  "companions": {
+    "fcitx": {
+      "name": "小企鹅输入法",
+      "package": "org.fcitx.fcitx5.android",
+      "version_code": 111,
+      "sha256": "0551b80a2d04150e68e1e923192368a9aa54f83e1715183a8197d9db94bd5219",
+      "certificate_sha256": "e4db1e9edff13629d07de4bbf8165fe9bd8557ab55092672da8e40dbe484ecd7",
+      "url": "https://github.com/fcitx5-android/fcitx5-android/releases/download/0.1.3/org.fcitx.fcitx5.android-0.1.3-0-g048f581c-armeabi-v7a-release.apk",
+      "source": "https://github.com/fcitx5-android/fcitx5-android/tree/048f581c",
+      "license": "LGPL-2.1; bundled components retain their own licenses"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# HomeView · Pro8
+
+本仓库提供 HomeView 源码、Mac / Windows 图形安装器和同一套命令行部署引擎。
+
+- 用户要求部署时，先阅读 README.md 和 config.example.json；只连接用户选定且允许 USB 调试的 Pro8。多台设备要求指定序列号。
+- 可运行 `python3 deploy.py --gui` 打开电脑端配置向导；AI 部署使用配置文件，先省略 `--apply` 检查，再执行 `python3 deploy.py --config config.json --apply`。
+- 默认保留系统输入法；只有用户明确选择小企鹅才启用并选择它，不禁用任何输入法。
+- 仅接受天气城市、输入法、家庭来源与名称、HA 地址、默认桌面、待机方式与等待时间，以及用户选定的壁纸和照片。不要把音乐、哔哩哔哩、HA 或 iCloud 凭据填入配置文件。
+- 导入图片使用 `--import /path/photo.png`，可重复；`--wallpaper /path/photo.png` 同时导入并设为桌面。仅传入用户选定文件，不扫描电脑其他目录。
+- 覆盖安装保留本机账号、照片与配置。不卸载、不清数据、不降级；签名冲突或同版本文件不同立即停止。
+- 目标为 X08A / Pro8、Android 9 / ARMv7 / 1280×800。JavaScript 保持 ES5。使用标准 ADB，不新增 root、Device Owner、无线调试或全局安全设置写权限。
+- 安装器只通过受系统权限保护的配置入口写入上述非敏感设置；不读取应用私有账号目录。
+- 用户登录在设备上完成；公开构建和源代码中不包含维护者的账号、历史、缓存、设备备份或签名私钥。
+- 公开包仅包含 WALLPAPER.json 指定的一张默认壁纸；同图的模糊纹理用于界面，不作为第二张可选壁纸。已有用户相册不清理、不覆盖、不在升级时重建。
+- 修改后执行 `python3 -m unittest discover -s tests`；涉及 Android 时按 docs/BUILDING.md 构建。区分自动化检查、模拟设备和真实硬件结果。

@@ -1,0 +1,135 @@
+/* Static frosted material, compatible with WebView 72. */
+:root{--ha-wall:none;--ha-soft:none}
+.home-app{background:#000;color:#fff}
+.home-app .app-wall{background-color:#000;background-image:var(--ha-wall);background-size:1280px 800px}
+.home-app .app-wall:after{background:rgba(12,12,60,.2)}
+.follow-wallpaper .desktop-wall,.follow-wallpaper .app-wall{background-color:#000;background-image:var(--ha-wall);background-size:1280px 800px;background-position:center;background-repeat:no-repeat}
+body.apps-app.follow-wallpaper{background-color:#000!important;background-image:var(--ha-wall)!important;background-size:1280px 800px!important}
+.follow-wallpaper.calendar-app .app-wall:after,.follow-wallpaper.photos-app .app-wall:after{display:block;background:rgba(10,18,43,.24)}
+.follow-wallpaper.calendar-app .app-nav,.follow-wallpaper.calendar-app .app-home,.follow-wallpaper.calendar-app .app-heading,.follow-wallpaper.photos-app .app-nav,.follow-wallpaper.photos-app .app-home,.follow-wallpaper.photos-app .app-heading{color:#fff}
+.follow-wallpaper.calendar-app .app-home img,.follow-wallpaper.photos-app .app-home img{filter:invert(1)}
+.follow-wallpaper.calendar-app .app-heading p,.follow-wallpaper.calendar-app .app-note,.follow-wallpaper.photos-app .app-heading p,.follow-wallpaper.photos-app .app-note{color:rgba(255,255,255,.78)}
+.follow-wallpaper.apps-app .hv-title,.follow-wallpaper.apps-app .hv-sub{color:#fff}
+.home-app .head-action{background:rgba(255,255,255,.16);color:#fff;box-shadow:none}
+.home-app .head-action img{filter:invert(1);opacity:.9}
+.ha-frost{isolation:isolate;border:1px solid rgba(239,239,255,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.08),0 6px 20px rgba(16,15,81,.1);background:rgba(231,230,255,.07);color:#fff}
+.ha-frost:before,.ha-frost:after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none;border-radius:inherit;z-index:-1}
+.ha-frost:before{background-image:var(--ha-soft);background-size:1280px 800px;background-position:var(--glass-x,0px) var(--glass-y,0px);opacity:.82}
+.ha-frost:after{background:rgba(42,35,114,.17)}
+.ha-card.ha-frost{border-radius:28px;padding:22px;transition:opacity .16s var(--ease),box-shadow .16s var(--ease)}
+.ha-card.ha-frost.on{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.66);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 5px 20px rgba(16,15,81,.12)}
+.ha-card.ha-frost.on:after{background:rgba(216,214,255,.12)}
+.ha-card.ha-frost .ha-card-icon{filter:invert(1);opacity:.9}
+.ha-card.ha-frost.on .ha-card-icon{filter:invert(1);opacity:1}
+.ha-card.ha-frost b{color:#fff}
+.ha-card.ha-frost small{color:rgba(255,255,255,.75)}
+.ha-card.ha-frost .ha-power{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.ha-card.ha-frost.on .ha-power{background:rgba(255,255,255,.24);color:#fff}
+.ha-power img{width:20px;height:20px;filter:invert(1);opacity:.85}
+.ha-card.ha-frost .ha-sensor-value em{color:rgba(255,255,255,.7)}
+.ha-card.ha-frost .ha-climate-row button{color:#fff;background:rgba(255,255,255,.16)}
+.ha-reading.ha-frost{position:relative;border-radius:22px;color:#fff;overflow:hidden}
+.ha-reading.ha-frost img{filter:invert(1);opacity:.83}
+.ha-reading.ha-frost small{color:rgba(255,255,255,.7)}
+.ha-filters button{background:rgba(18,17,83,.16);color:rgba(255,255,255,.8)}
+.ha-filters button.on{background:rgba(255,255,255,.89);color:#34356e}
+.ha-entities{padding-left:1px;padding-right:1px}
+.home-widget.ha-frost{position:relative;background:rgba(233,239,247,.1);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 20px rgba(19,23,42,.12)}
+.home-widget.ha-frost:before{opacity:.72}
+.home-widget.ha-frost:after{background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.025));background-color:rgba(20,28,44,.18)}
+.home-widget>*{position:relative}
+.home-heading strong{color:#fff}
+.home-widget .home-heading,.home-widget .home-widget-footer{width:100%}
+.home-heading small,.home-overview small,.home-mini small,.home-widget-footer{color:rgba(255,255,255,.76)}
+.home-mini{background:rgba(213,208,255,.16);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.17);color:#fff}
+.home-mini>img,.home-mini.on>img{filter:invert(1);opacity:.9}
+.home-mini.on{background:rgba(229,224,255,.32);border-color:rgba(255,255,255,.4)}
+.home-widget-footer img{filter:invert(1);opacity:.7}
+.home-status-dot{background:rgba(255,255,255,.4)}.is-connected .home-status-dot{background:#b2f2d4}
+.wallpaper-sheet{width:720px;background:#eeedf5}
+.wallpaper-sheet>header p{font-size:16px;color:#7b7a8d;margin-top:6px}
+.wallpaper-options{display:flex;margin:22px -7px 20px}
+.wallpaper-option{width:206px;margin:0 7px;text-align:left;color:#454457}
+.wallpaper-option>img,.wallpaper-option>span{display:block;width:206px;height:129px;object-fit:cover;border-radius:17px;border:3px solid transparent;background:#dbdbe6}
+.wallpaper-option>span{display:flex;align-items:center;justify-content:center;font-size:17px;color:#858399}
+.wallpaper-option.on>img,.wallpaper-option.on>span{border-color:#6e60d6}
+.wallpaper-option b{display:block;font-size:17px;line-height:27px;font-weight:500;margin:8px 3px 0}
+.wallpaper-footer{display:flex;align-items:center;justify-content:space-between;margin-top:22px}
+.wallpaper-footer label{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 20px;background:#7163cf;color:#fff;border-radius:23px;font-size:17px;cursor:pointer}
+.wallpaper-footer p{font-size:14px;line-height:22px;color:#7c7b8d;max-width:335px}
+#wallpaper-message{font-size:15px;line-height:23px;color:#777487;min-height:23px;margin-top:14px}
+html[data-home-wallpaper="custom"] .home-app .app-wall:after{background:rgba(7,10,30,.48)}
+html[data-home-wallpaper="custom"] .ha-frost:after{background:rgba(8,13,35,.46)}
+html[data-home-wallpaper="custom"] .ha-card.ha-frost.on:after{background:rgba(8,13,35,.34)}
+html[data-home-wallpaper="custom"] .home-widget.ha-frost:after{background-color:rgba(8,13,35,.28)}
+html[data-home-wallpaper="album"] .home-app .app-wall:after{background:rgba(7,10,30,.32)}
+html[data-home-wallpaper="album"] .ha-frost:after{background:rgba(8,13,35,.37)}
+html[data-home-wallpaper="album"] .ha-card.ha-frost.on:after{background:rgba(8,13,35,.26)}
+html[data-home-wallpaper="album"] .home-widget.ha-frost:after{background-color:rgba(8,13,35,.22)}
+
+.follow-wallpaper.photos-app .segment{background:rgba(21,35,63,.17)}.follow-wallpaper.photos-app .segment button{color:rgba(255,255,255,.84)}.follow-wallpaper.photos-app .segment button[aria-pressed="true"]{color:#1c1c1e;background:rgba(255,255,255,.94)}
+.apps-app.follow-wallpaper:before{content:"";position:fixed;left:0;top:0;width:1280px;height:800px;background:rgba(8,17,37,.2);pointer-events:none}.apps-app.follow-wallpaper .app-launch{z-index:1}
+
+.follow-wallpaper.weather-page .weather-background{background-image:var(--ha-wall);background-size:1280px 800px;background-position:center}
+.follow-wallpaper.weather-page .current-temp{background-image:linear-gradient(132deg,rgba(255,255,255,.96),rgba(239,253,255,.4) 45%,rgba(246,255,255,.8)),var(--ha-wall)}
+
+/* White and very light colors keep the same surfaces with dark foreground text. */
+html[data-wallpaper-tone="light"] .follow-wallpaper .app-wall:after,html[data-wallpaper-tone="light"] .follow-wallpaper .desktop-wall:after,html[data-wallpaper-tone="light"] .follow-wallpaper .weather-background:after,html[data-wallpaper-tone="light"] .apps-app.follow-wallpaper:before{background:transparent}
+html[data-wallpaper-tone="light"] .follow-wallpaper .app-nav,html[data-wallpaper-tone="light"] .follow-wallpaper .app-home,html[data-wallpaper-tone="light"] .follow-wallpaper .app-heading,html[data-wallpaper-tone="light"] .follow-wallpaper .hv-title,html[data-wallpaper-tone="light"] .follow-wallpaper .hv-sub,html[data-wallpaper-tone="light"] .desktop-status,html[data-wallpaper-tone="light"] .desktop-label,html[data-wallpaper-tone="light"] .follow-wallpaper .app>span:last-child,html[data-wallpaper-tone="light"] .layout-edit-hint{color:#2d333d;text-shadow:none}
+html[data-wallpaper-tone="light"] .follow-wallpaper .app-heading p,html[data-wallpaper-tone="light"] .follow-wallpaper .app-note{color:#747980}
+html[data-wallpaper-tone="light"] .follow-wallpaper .app-home img,html[data-wallpaper-tone="light"] .desktop-status img{filter:none}
+html[data-wallpaper-tone="light"] .ha-frost,html[data-wallpaper-tone="light"] .home-widget.ha-frost{color:#303744;border-color:rgba(53,65,84,.16);background:rgba(240,243,247,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 5px 19px rgba(35,44,60,.06)}
+html[data-wallpaper-tone="light"] .ha-frost:after,html[data-wallpaper-tone="light"] .home-widget.ha-frost:after{background:rgba(238,241,246,.28)}
+html[data-wallpaper-tone="light"] .ha-card.ha-frost.on:after{background:rgba(255,255,255,.5)}
+html[data-wallpaper-tone="light"] .ha-card.ha-frost b,html[data-wallpaper-tone="light"] .home-heading strong{color:#303744}
+html[data-wallpaper-tone="light"] .ha-card.ha-frost small,html[data-wallpaper-tone="light"] .ha-reading.ha-frost small,html[data-wallpaper-tone="light"] .home-heading small,html[data-wallpaper-tone="light"] .home-overview small,html[data-wallpaper-tone="light"] .home-mini small,html[data-wallpaper-tone="light"] .home-widget-footer,html[data-wallpaper-tone="light"] .ha-sensor-value em,html[data-wallpaper-tone="light"] .ha-filter-row>span,html[data-wallpaper-tone="light"] .ha-pages,html[data-wallpaper-tone="light"] .ha-empty,html[data-wallpaper-tone="light"] .ha-empty span{color:#737b86}
+html[data-wallpaper-tone="light"] .ha-frost .ha-card-icon,html[data-wallpaper-tone="light"] .ha-reading.ha-frost img,html[data-wallpaper-tone="light"] .home-mini>img,html[data-wallpaper-tone="light"] .home-widget-footer img,html[data-wallpaper-tone="light"] .ha-power img,html[data-wallpaper-tone="light"] #ha-refresh img{filter:none}
+html[data-wallpaper-tone="light"] .home-mini{color:#303744;background:rgba(80,95,120,.055);border-color:rgba(53,65,84,.11);box-shadow:none}
+html[data-wallpaper-tone="light"] .home-mini.on{background:rgba(255,255,255,.8);border-color:rgba(53,65,84,.17)}
+html[data-wallpaper-tone="light"] .home-app .head-action,html[data-wallpaper-tone="light"] .ha-filters button,html[data-wallpaper-tone="light"] .ha-card.ha-frost .ha-power,html[data-wallpaper-tone="light"] .ha-card.ha-frost .ha-climate-row button{background:rgba(80,95,120,.07);color:#596374}
+html[data-wallpaper-tone="light"] .home-app .head-action img{filter:none}
+html[data-wallpaper-tone="light"] .ha-filters button.on{background:#e7ebf2;color:#303744}
+html[data-wallpaper-tone="light"] .follow-wallpaper.photos-app .segment{background:rgba(80,95,120,.09)}
+html[data-wallpaper-tone="light"] .follow-wallpaper.photos-app .segment button{color:#737b86}
+html[data-wallpaper-tone="light"] .follow-wallpaper.photos-app .segment button[aria-pressed="true"]{color:#303744}
+html[data-wallpaper-tone="light"] .follow-wallpaper .app-tile{color:#303744;background:rgba(240,242,246,.9);border-color:rgba(53,65,84,.11)}
+html[data-wallpaper-tone="light"] .follow-wallpaper .app-tile small{color:#737b86}
+html[data-wallpaper-tone="light"] .weather-page{color:#303744}
+html[data-wallpaper-tone="light"] .weather-page .home-link{color:#303744;text-shadow:none}
+html[data-wallpaper-tone="light"] .weather-page .weather-date,html[data-wallpaper-tone="light"] .weather-page .current-range span,html[data-wallpaper-tone="light"] .weather-page .current-summary,html[data-wallpaper-tone="light"] .weather-page .weather-source{color:#737b86}
+html[data-wallpaper-tone="light"] .weather-page .current-weather{text-shadow:none}
+html[data-wallpaper-tone="light"] .weather-page .current-temp{background:none;color:#43536a;-webkit-text-fill-color:currentColor;-webkit-text-stroke:0;text-shadow:none}
+html[data-wallpaper-tone="light"] .weather-page .weather-card{background:rgba(80,95,120,.05);border-color:rgba(53,65,84,.1)}
+html[data-wallpaper-tone="light"] .weather-page .weather-card h2{color:#43536a}
+html[data-wallpaper-tone="light"] .weather-page .metric-note,html[data-wallpaper-tone="light"] .weather-page .card-note,html[data-wallpaper-tone="light"] .weather-page .hourly-tools span,html[data-wallpaper-tone="light"] .weather-page .hour-item small,html[data-wallpaper-tone="light"] .weather-page .chance,html[data-wallpaper-tone="light"] .weather-page .low,html[data-wallpaper-tone="light"] .weather-page .sun-times span,html[data-wallpaper-tone="light"] .weather-page .weather-empty{color:#737b86}
+html[data-wallpaper-tone="light"] .weather-page .home-link img,html[data-wallpaper-tone="light"] .weather-page .current-condition img,html[data-wallpaper-tone="light"] .weather-page .weather-card img{filter:none}
+html[data-wallpaper-tone="light"] .ha-card.ha-frost .ha-card-icon,html[data-wallpaper-tone="light"] .ha-card.ha-frost.on .ha-card-icon{filter:none}
+html[data-wallpaper-tone="light"] .ha-card.ha-frost.on{border-color:rgba(53,65,84,.16)}
+
+html[data-wallpaper-neutral="true"] .follow-wallpaper .app-wall:after,html[data-wallpaper-neutral="true"] .follow-wallpaper .weather-background:after,html[data-wallpaper-neutral="true"] .apps-app.follow-wallpaper:before{background:transparent}
+
+/* Weather night mode overrides a light wallpaper's daytime contrast rules. */
+html body.weather-page.is-night{background:#10192f;color:#f3f6ff}
+html body.weather-page.is-night .weather-background{background-color:#10192f;background-image:linear-gradient(145deg,rgba(12,24,49,.87),rgba(7,13,29,.93)),var(--ha-wall);background-size:cover}
+html body.weather-page.is-night .weather-background:after{background:radial-gradient(circle at 23% 8%,rgba(230,239,255,.8) 0,rgba(230,239,255,.8) 1px,transparent 2px),radial-gradient(circle at 61% 5%,rgba(230,239,255,.55) 0,rgba(230,239,255,.55) 1px,transparent 2px),radial-gradient(circle at 87% 11%,rgba(230,239,255,.65) 0,rgba(230,239,255,.65) 1px,transparent 2px),radial-gradient(ellipse at 13% 0%,rgba(101,135,206,.15),transparent 70%)}
+html body.weather-page.is-night .home-link,html body.weather-page.is-night .weather-card h2{color:#f3f6ff}
+html body.weather-page.is-night .weather-date,html body.weather-page.is-night .current-range span,html body.weather-page.is-night .current-summary,html body.weather-page.is-night .weather-source,html body.weather-page.is-night .metric-note,html body.weather-page.is-night .card-note,html body.weather-page.is-night .hourly-tools span,html body.weather-page.is-night .hour-item small,html body.weather-page.is-night .chance,html body.weather-page.is-night .low,html body.weather-page.is-night .sun-times span,html body.weather-page.is-night .weather-empty{color:#b7c5df}
+html body.weather-page.is-night .current-temp{background:none;color:#e0eaff;-webkit-text-fill-color:currentColor;-webkit-text-stroke:0;text-shadow:0 2px 18px rgba(80,115,180,.12)}
+html body.weather-page.is-night .weather-card{background:rgba(57,78,115,.25);border-color:rgba(190,213,255,.12);box-shadow:none}
+html body.weather-page.is-night .home-link img,html body.weather-page.is-night .current-condition img,html body.weather-page.is-night .weather-card img{filter:invert(1)}
+html body.weather-page.is-night .day-sheet{background:#202c43;color:#f3f6ff;box-shadow:0 20px 55px rgba(0,0,0,.3)}
+html body.weather-page.is-night .day-sheet header p,html body.weather-page.is-night .day-big small,html body.weather-page.is-night .day-description,html body.weather-page.is-night .day-stats,html body.weather-page.is-night #day-position{color:#acbdd7}
+html body.weather-page.is-night .day-stats b{color:#e4edff}html body.weather-page.is-night .day-sheet img{filter:invert(1)}html body.weather-page.is-night .day-hourly,html body.weather-page.is-night .day-sheet>footer{border-color:rgba(190,213,255,.14)}
+
+/* Each built-in app now owns its background; untouched apps start in light gray. */
+body.follow-wallpaper:not([data-wallpaper-scope="desktop"]){background-color:#e6e7eb;background-image:var(--ha-wall);background-size:1280px 800px;background-position:center;background-repeat:no-repeat}
+.follow-wallpaper.settings-app,.follow-wallpaper.faces-app{--ink:#fff;--ink-2:rgba(255,255,255,.82);--ink-3:rgba(255,255,255,.68);--card:rgba(246,248,252,.92)}
+.follow-wallpaper.settings-app .st-card,.follow-wallpaper.faces-app .fc{color:#303744;--ink:#303744;--ink-2:#737b86;--ink-3:#858c96}
+html[data-wallpaper-tone="light"] .follow-wallpaper.settings-app,html[data-wallpaper-tone="light"] .follow-wallpaper.faces-app{--ink:#303744;--ink-2:#737b86;--ink-3:#858c96}
+.wallpaper-floating{position:absolute;right:48px;top:26px;height:44px;min-width:76px;padding:0 18px;border-radius:22px;background:rgba(255,255,255,.82);color:#303744;font:inherit;font-size:17px;z-index:5}.weather-wallpaper-entry{right:400px}.weather-page.is-night .weather-wallpaper-entry{background:rgba(170,190,220,.14);color:#f3f6ff}
+html[data-wallpaper-tone="light"] .follow-wallpaper .head-action{background:rgba(255,255,255,.65);color:#434c5a;box-shadow:none}
+html[data-wallpaper-tone="light"] .follow-wallpaper .app-note{color:#737b86}
+
+.wallpaper-floating:not(.weather-wallpaper-entry){right:230px}html[data-wallpaper-tone="light"] .follow-wallpaper .hv-chip{color:#434c5a;background:rgba(255,255,255,.65);box-shadow:none}
+
+.follow-wallpaper .panel{color:#303744;--ink:#303744;--ink-2:#737b86;--ink-3:#858c96}

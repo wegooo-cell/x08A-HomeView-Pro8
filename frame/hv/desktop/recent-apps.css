@@ -1,0 +1,14 @@
+/* iOS landscape switcher: wallpaper, app label, overlapping rounded cards. */
+.recent-apps[hidden]{display:none!important}.recent-apps.desktop-modal{position:fixed;left:0;right:0;top:0;bottom:0;z-index:1700;display:block;color:#fff;opacity:0;overflow:hidden;touch-action:pan-x;background:#444e60}
+.recent-wallpaper{position:absolute;left:0;right:0;top:0;bottom:0;background-image:linear-gradient(rgba(12,16,23,.16),rgba(12,16,23,.24)),var(--ha-soft);background-size:1280px 800px;background-position:center;transform:scale(1.035);pointer-events:auto}
+.recent-apps-open .desktop-content{pointer-events:none}.recent-apps-open .desktop-status{visibility:hidden}
+.recent-rail{position:absolute;left:0;right:0;top:78px;height:622px;display:flex;align-items:center;padding:0;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x;scroll-snap-type:x mandatory}
+.recent-rail:before,.recent-rail:after{content:'';display:block;flex:0 0 256px;height:1px}
+.recent-rail::-webkit-scrollbar{display:none}.recent-item{position:relative;flex:0 0 768px;min-width:0;height:532px;will-change:transform,opacity;touch-action:pan-x;scroll-snap-align:center}.recent-item+.recent-item{margin-left:-112px}
+.recent-card-title{height:52px;display:flex;align-items:center;padding:0 15px 12px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.24)}.recent-card-title>img{width:32px;height:32px;border-radius:8px;object-fit:contain;margin-right:11px}.recent-card-title b{font-size:22px;line-height:32px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.recent-preview{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:768px;height:480px;border:0;border-radius:32px;background:#e6e7eb;overflow:hidden;box-shadow:0 16px 32px rgba(0,0,0,.24);padding:0;color:#454c59}
+.recent-screen{position:absolute;left:0;top:0;width:768px;height:480px;max-width:none;display:block;object-fit:cover}.recent-preview.is-placeholder{background:linear-gradient(145deg,#e6e9ef,#c7d0df)}.recent-app-icon{width:88px;height:88px;object-fit:contain;border-radius:22px}
+.recent-preview strong{display:none}.recent-status{position:absolute;left:100px;right:100px;top:365px;text-align:center;color:rgba(255,255,255,.8);font-size:22px;line-height:32px;pointer-events:none}
+.recent-status:empty{display:none}.recent-apps.has-cards .recent-status{top:auto;bottom:62px;left:240px;right:240px;margin:0;padding:9px 18px;border-radius:23px;background:rgba(20,24,32,.84);font-size:17px;line-height:28px;color:#fff}
+.recent-apps.is-settling{transition:opacity .18s cubic-bezier(.333333,1,.666667,1)}.recent-apps.is-settling .recent-rail,.recent-item.is-settling{transition:transform .18s cubic-bezier(.333333,1,.666667,1),opacity .18s cubic-bezier(.333333,1,.666667,1)}
+@media(prefers-reduced-motion:reduce){.recent-apps,.recent-rail,.recent-item{transition:none!important}}

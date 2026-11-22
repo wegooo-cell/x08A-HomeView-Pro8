@@ -1,0 +1,5 @@
+.hv-pressed-icon{-webkit-filter:brightness(.76)!important;filter:brightness(.76)!important}
+.hv-press-shade{position:absolute!important;left:0;top:0;right:0;bottom:0;border-radius:inherit;background:rgba(0,0,0,.14);pointer-events:none;z-index:50}
+/* Replace the old tap-only shrink while preserving widget layout scale and opening animations. */
+html:not(.layout-editing) .desktop-items .app:active,html:not(.layout-editing) .desktop-items .app:active>.app-icon,.folder-child:active,.app-tile:active,.sy-open:active{transform:none}
+html:not(.layout-editing) .desktop-items .widget-group>.widget:active{transform:scale(.9)}

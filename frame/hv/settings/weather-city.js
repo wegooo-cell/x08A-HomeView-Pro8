@@ -1,0 +1,21 @@
+/* Explicit city search; no location permission, polling or third-party scripts. ES5. */
+(function(){'use strict';var current=null,results=[],busy=false,request=0,focusBefore=null;
+var overlay=document.createElement('div');overlay.className='weather-city-dialog';overlay.hidden=true;
+overlay.innerHTML='<section class="weather-city-sheet" role="dialog" aria-modal="true" aria-labelledby="city-title"><header><div><h2 id="city-title">选择天气城市</h2><p>天气与空气质量使用同一城市</p></div><button class="city-close" aria-label="关闭城市选择">×</button></header><form class="city-search"><input id="city-query" type="search" placeholder="输入城市名称，如上海、杭州" maxlength="80" autocomplete="off" aria-label="搜索天气城市"><button type="submit">搜索</button></form><p class="city-status" role="status" aria-live="polite">输入城市名称后搜索</p><div class="city-results"></div><footer>城市搜索由 <a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noopener">Open-Meteo</a> 提供</footer></section>';
+document.body.appendChild(overlay);var query=overlay.querySelector('input'),status=overlay.querySelector('.city-status'),list=overlay.querySelector('.city-results');
+function labels(){Array.prototype.forEach.call(document.querySelectorAll('[data-weather-city-name]'),function(e){e.textContent=current?current.name:'未设置 · 点击选择城市';});}
+function same(a,b){return a&&b&&a.name===b.name&&a.latitude===b.latitude&&a.longitude===b.longitude&&a.timezone===b.timezone;}
+function open(){focusBefore=document.activeElement;overlay.hidden=false;query.focus();}
+function close(){if(busy)return;request++;overlay.hidden=true;if(focusBefore&&focusBefore.focus)focusBefore.focus();}
+function draw(){list.innerHTML=results.map(function(c,i){var detail=[c.admin1,c.country].filter(Boolean).join(' · ');return '<button type="button" class="city-result" data-city-index="'+i+'"><span><b>'+HV.esc(c.name)+'</b><small>'+HV.esc(detail)+' · '+HV.esc(c.timezone)+'</small></span><em>'+ (same(c,current)?'当前':'选择')+'</em></button>';}).join('');}
+function search(e){e.preventDefault();if(busy)return;var name=query.value.trim(),id=++request;if(name.length<2){status.textContent='请输入至少2个字的城市名';return;}query.blur();status.textContent='正在搜索…';list.innerHTML='';HVJson('/api/hv/weather/search?q='+encodeURIComponent(name)).then(function(d){if(id!==request)return;if(d.ok===false)throw new Error(d.error);results=d.results||[];status.textContent=results.length?'请选择对应的城市和地区':'没有找到城市，请尝试完整名称或英文名';draw();}).catch(function(e){if(id===request)status.textContent='搜索失败：'+(e.message||'请检查网络后重试');});}
+function choose(i){var city=results[i];if(!city||busy)return;busy=true;status.textContent='正在保存城市…';Array.prototype.forEach.call(list.querySelectorAll('button'),function(b){b.disabled=true;});HV.post('/api/hv/weather/location',city).then(function(d){current=d.location;HV.setWeatherLocation(current);labels();busy=false;close();HV.toast('天气城市已设为'+current.name);},function(e){busy=false;draw();status.textContent='保存失败：'+(e.message||'请稍后重试');});}
+overlay.querySelector('form').addEventListener('submit',search);overlay.querySelector('.city-close').onclick=close;
+overlay.addEventListener('click',function(e){if(e.target===overlay)close();var b=e.target.closest('[data-city-index]');if(b)choose(+b.getAttribute('data-city-index'));});
+overlay.addEventListener('keydown',function(e){if(e.key==='Escape'){close();e.preventDefault();}if(e.key==='Tab'){var all=overlay.querySelectorAll('button:not(:disabled),input,a'),first=all[0],last=all[all.length-1];if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault();}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}}});
+document.addEventListener('click',function(e){if(e.target.closest('[data-weather-city]'))open();});
+document.addEventListener('hv-weather-location-change',function(e){current=e.detail;labels();});
+current=HV.weatherLocation();labels();HVJson('/api/hv/weather/location').then(function(d){current=d.location||null;if(!same(current,HV.weatherLocation())&&(current||HV.weatherLocation()))HV.setWeatherLocation(current);labels();},function(){});
+window.HVWeatherCity={back:function(){if(overlay.hidden)return false;close();return true;}};
+if(/[?&]weather-city=1(?:&|$)/.test(location.search))open();
+})();

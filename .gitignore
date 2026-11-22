@@ -1,0 +1,16 @@
+.cache/
+build/
+dist/
+.local/
+__pycache__/
+*.pyc
+*.jks
+*.keystore
+*.apk
+*.idsig
+*.log
+*.part
+config.json
+setup-*.json
+*.result.json
+.DS_Store

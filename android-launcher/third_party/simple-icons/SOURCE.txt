@@ -1,0 +1,8 @@
+AirPlay Audio icon — Simple Icons
+https://github.com/simple-icons/simple-icons
+Commit: c71c69e3a27e4436936b831c72643e6513b9f49b
+Source: https://raw.githubusercontent.com/simple-icons/simple-icons/c71c69e3a27e4436936b831c72643e6513b9f49b/icons/airplayaudio.svg
+Source SVG SHA256: 3a189e2eeb32ca2eabf2f3e5a548454ae6695d93ea979d01180c86c4d70f9801
+License: CC0-1.0
+Adaptation: currentColor fill, no stroke, 1-unit viewBox padding, accessibility handled by the enclosing button. Geometry unchanged.
+Runtime: inline SVG in frame/hv/music/netease.js; reusable SVG in music/icons/airplay-audio.svg. No remote font, runtime library, bitmap upscale, or animation.

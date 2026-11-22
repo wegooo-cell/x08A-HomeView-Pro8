@@ -1,0 +1,13 @@
+/* Local app helpers; shared navigation, household timezone and modal lifecycle. ES5. */
+(function(){'use strict';var lastFocus=null,opened=null;
+function pad(n){return n<10?'0'+n:String(n);}function key(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}function esc(s){return HV.esc(s);}
+function read(k,f){try{var s=localStorage.getItem('hv-app:'+k);return s===null?f:JSON.parse(s);}catch(e){return f;}}function write(k,v){localStorage.setItem('hv-app:'+k,JSON.stringify(v));}
+function masked(on){Array.prototype.forEach.call(document.querySelectorAll('.app-nav,.app-heading,.app-content'),function(e){if(on)e.setAttribute('aria-hidden','true');else e.removeAttribute('aria-hidden');});}
+function open(id){var box=document.getElementById(id);lastFocus=document.activeElement;opened=box;box.hidden=false;masked(true);var focus=box.querySelector('[data-first-focus]:not(:disabled)')||box.querySelector('button:not(:disabled),input:not(:disabled),select:not(:disabled),a');if(focus)focus.focus({preventScroll:true});}
+function close(){if(!opened)return false;var box=opened;box.hidden=true;opened=null;masked(false);document.dispatchEvent(new CustomEvent('app-modal-close',{detail:box.id}));if(lastFocus&&document.contains(lastFocus)&&lastFocus.focus)lastFocus.focus();return true;}
+document.addEventListener('click',function(e){if(e.target.closest('[data-close-modal]'))close();});document.addEventListener('keydown',function(e){if(!opened)return;if(e.key==='Escape'){close();e.preventDefault();}else if(e.key==='Tab'){var all=opened.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),a[href]'),first=all[0],last=all[all.length-1];if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault();}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}}});
+var weekdays=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];function clock(){if(!HV.hostActive)return;var n=HV.local(),e=document.getElementById('nav-time');if(e)e.textContent=pad(n.h)+':'+pad(n.mi);}clock();setInterval(clock,15000);
+function get(url){return HVJson(url).then(function(d){if(d.ok===false)throw new Error(d.error||'暂时无法获取数据');return d;});}
+window.AppUI={pad:pad,key:key,esc:esc,read:read,write:write,open:open,close:close,back:close,get:get,weekdays:weekdays,today:function(){var d=HV.local();return new Date(d.y,d.mo-1,d.d);},date:function(s){var a=s.split('-');return new Date(+a[0],+a[1]-1,+a[2]);}};
+window.addEventListener('message',function(e){if(e.origin===location.origin&&e.source===parent&&e.data&&e.data.type==='hv-frame:visibility')document.dispatchEvent(new CustomEvent('app-visibility',{detail:!!e.data.visible}));});
+})();

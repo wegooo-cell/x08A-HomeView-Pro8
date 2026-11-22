@@ -1,0 +1,3 @@
+Simple Icons is dedicated to the public domain under CC0 1.0 Universal.
+License text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Upstream license: https://github.com/simple-icons/simple-icons/blob/c71c69e3a27e4436936b831c72643e6513b9f49b/LICENSE.md

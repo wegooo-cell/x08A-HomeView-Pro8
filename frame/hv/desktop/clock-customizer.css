@@ -1,0 +1,71 @@
+/* User-selected PingFang SC: numeric-only thin weights keep the Pro8 font cache small. */
+@font-face{font-family:"HomeView Clock";src:url(/frame/hv/fonts/homeview-digits.woff2) format("woff2");font-style:normal;font-weight:200;font-display:swap;unicode-range:U+0020-003A}
+@font-face{font-family:"HomeView Clock";src:url(/frame/hv/fonts/homeview-digits.woff2) format("woff2");font-style:normal;font-weight:100;font-display:swap;unicode-range:U+0020-003A}
+/* Numerals editor. Fixed Pro8 canvas; existing clock SVG remains live UI. */
+.num-surface{background:#73a3d9;overflow:hidden;color:#050909}
+.num-surface .nm{position:absolute;left:256px;top:16px;width:768px;height:768px;overflow:visible}
+.num-surface .num-digit,.num-surface .num-digit-size,.num-surface .num-tick-grow,.num-surface .num-date{transition:transform .68s cubic-bezier(.22,.85,.24,1),opacity .4s ease}
+.num-surface .num-digit text{font-variant-numeric:lining-nums;letter-spacing:0}
+.num-surface .num-digit[data-number="12"] text{letter-spacing:-.12em}
+.num-surface .num-tick-grow{transform-origin:0 0}
+.num-surface .num-second{transition:transform 1s linear}
+.num-surface .num-date{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:5.7px;font-weight:500;letter-spacing:-.12px}
+.num-editor[hidden]{display:none}
+.num-editor{position:absolute;left:0;top:0;width:1280px;height:800px;z-index:80;background:#000;color:#fff;overflow:hidden;touch-action:none;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;opacity:0;transition:opacity .25s ease}
+.num-editor.is-open{opacity:1}
+.num-editor h1{position:absolute;left:48px;top:51px;margin:0;font-size:19px;line-height:28px;font-weight:500;color:#8e8e93}
+.ne-tabs{position:absolute;left:332px;top:38px;display:flex;align-items:center;gap:36px;height:56px}
+.ne-tabs button{height:56px;padding:0 9px;font-size:20px;letter-spacing:.04em;font-weight:500;color:#77777d;transition:color .2s}
+.ne-tabs button[aria-selected=true]{color:#fff}
+.ne-preview{position:absolute;left:88px;top:132px;width:896px;height:560px;border-radius:47px;overflow:hidden;outline:2px solid rgba(255,255,255,.9);outline-offset:4px;transform:scale(1.025);opacity:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+.is-open .ne-preview{transform:scale(1);opacity:1}
+.ne-preview-face{position:absolute!important;left:0!important;top:0!important;width:1280px!important;height:800px!important;opacity:1!important;transform:scale(.7);transform-origin:0 0}
+.ne-options{position:absolute;left:1032px;top:154px;width:160px;min-height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px}
+.ne-options[hidden]{display:none}
+.ne-choice{position:relative;width:108px;min-height:70px;border-radius:16px;border:1.5px solid transparent;background:transparent;display:flex;align-items:center;justify-content:center;color:#aaa;transition:border-color .2s,background-color .2s}
+.ne-choice[aria-checked=true]{border-color:#f5f5f7;background:#101012;color:#fff}
+.ne-thumb{position:relative;width:96px;height:60px;border-radius:11px;overflow:hidden;background:#171719;pointer-events:none}
+.ne-thumb-face{position:absolute;left:0;top:0;width:1280px;height:800px;transform:scale(.075);transform-origin:0 0}
+.ne-thumb-face .num-date{display:none}
+.ne-option-caption{position:absolute;top:618px;left:1020px;width:184px;text-align:center;font-size:17px;font-weight:400;color:#a1a1a6;line-height:25px;margin:0}
+.ne-color-options{display:grid;grid-template-columns:64px 64px;gap:22px 18px;align-content:center;justify-content:center}
+.ne-color{width:64px;height:64px;min-height:64px;border-radius:50%;padding:7px;border:1.5px solid transparent}
+.ne-color[aria-checked=true]{background:transparent;border-color:#fff}
+.ne-color span{display:block;width:46px;height:46px;border-radius:50%;background:var(--swatch);pointer-events:none}
+.ne-font{height:86px;min-height:86px;width:108px;font-size:39px;line-height:1;font-weight:300}
+.ne-hand{min-height:82px;height:82px;flex-direction:column;gap:5px}
+.ne-hand .ne-thumb{width:80px;height:50px}
+.ne-hand .ne-thumb-face{transform:scale(.0625)}
+.ne-hand>span{font-size:15px;line-height:18px;color:#b0b0b5}
+.ne-round{position:absolute;top:716px;width:56px;height:56px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center}
+.ne-round img{width:27px;height:27px;filter:invert(1);pointer-events:none}
+.ne-cancel{left:48px;color:#aaa}
+.ne-cancel img{opacity:.7}
+.ne-save{right:48px;background:#007aff}
+.ne-save img{width:29px;height:29px}
+.ne-gallery{position:absolute;left:482px;bottom:27px;width:180px;height:44px;color:#8e8e93;font-size:17px;font-weight:400}
+.num-editor button:focus-visible{outline:2px solid #8bc1ff;outline-offset:5px}
+.num-editor button:active{opacity:.75}
+.num-editing .clock-face-dots{visibility:hidden}
+@media(prefers-reduced-motion:reduce){.num-surface .num-digit,.num-surface .num-digit-size,.num-surface .num-tick-grow,.num-surface .num-date,.num-surface .num-second,.num-editor,.ne-preview{transition:none!important}}
+
+/* Production WebView72: preserve the selected editor, use bundled UI font and explicit flex spacing. */
+.num-editor,.num-surface .num-date{font-family:var(--sf)}.ne-tabs{gap:0}.ne-tabs button+button{margin-left:36px}.ne-options{gap:0}.ne-options>.ne-choice+.ne-choice{margin-top:15px}.ne-color-options{gap:22px 18px}.ne-color-options>.ne-choice+.ne-choice{margin-top:0}.ne-hand{gap:0}.ne-hand>span{margin-top:5px}
+.num-surface .num-digit,.num-surface .num-digit-size,.num-surface .num-tick-grow,.num-surface .num-date{transition-timing-function:var(--ease)}.num-editor,.ne-preview{transition-timing-function:var(--ease)}.num-editor button:focus{outline:none}.num-editor button:focus-visible{outline:2px solid rgba(255,255,255,.55)}
+/* Match the rounded preview ring on WebView72, whose outline renderer has square corners. */
+.ne-preview{outline:none;box-shadow:0 0 0 4px #000,0 0 0 6px rgba(255,255,255,.9)}
+
+/* Latest user screenshot, measured at the fixed 1280x800 Pro8 canvas. */
+.num-editor h1{left:26px;top:37px}
+.ne-tabs{left:318px;top:28px}
+.ne-preview{left:68px;top:120px;width:916px;height:586px;border-radius:47px}
+.ne-preview-face{transform:scale(.715625,.7325)}
+.ne-options{left:1038px}
+.ne-option-caption{top:630px;left:1026px}
+.ne-round{top:735px}.ne-cancel{left:27px}.ne-save{right:38px}
+.ne-gallery{left:474px;bottom:8px}
+#ne-panel-style>.ne-choice{width:112px;min-height:74px}
+#ne-panel-style .ne-thumb{width:98px;height:61.25px}
+#ne-panel-style .ne-thumb-face{transform:scale(.0765625)}
+.ne-options{top:152px}
+.num-surface .num-date{font-weight:600}

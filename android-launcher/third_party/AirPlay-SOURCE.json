@@ -1,0 +1,16 @@
+{
+  "project": "https://github.com/jqssun/android-airplay-server",
+  "version": "v0.0.36",
+  "commit": "a46cca0a6a1274e9e33c0e750f0f1c1eb1d881ea",
+  "apk_sha256": "b8c7c595ed93f91562feedce92c27800f08f9c84df424f6ac2045e82324cf2a4",
+  "source": "third_party/airplay; exact submodule and dependency archives in HomeView-corresponding-source.zip",
+  "scope": "Native RAOP/audio JNI; HomeView Java adapter is shipped as source in android-launcher/src",
+  "libraries": [
+    "UxPlay",
+    "OpenSSL 3.4.4",
+    "Oboe",
+    "FFmpeg ALAC decoder",
+    "libplist"
+  ],
+  "source_lock": "third_party/sources.lock.json"
+}

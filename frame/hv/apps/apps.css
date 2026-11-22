@@ -1,0 +1,24 @@
+.app-launch{padding-top:11vh;padding-bottom:4vh;gap:2.6vh}
+.app-launch header{padding-right:25vw}
+.app-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:172px;gap:16px 20px;overflow-y:auto;overscroll-behavior:contain;padding:1px 2px 28px;scrollbar-width:none}
+.app-grid::-webkit-scrollbar{display:none}
+.app-tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1.1vh;min-width:0;border-radius:var(--r-lg);background:var(--card);padding:3vh 2vw;text-align:left;text-decoration:none;color:var(--ink);box-shadow:0 .15vh .5vh rgba(0,0,0,.05)}
+.app-tile:active{transform:scale(.98)}
+.app-icon{height:10vh;width:10vh;border-radius:2.4vh;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 .8vh 1.5vh rgba(0,0,0,.11)}
+.app-icon svg{height:6vh;width:6vh;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.app-tile strong{font-size:3.5vh;line-height:1.05;letter-spacing:-.025em;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.app-tile small{font-size:2.5vh;color:var(--ink-2);font-weight:550}
+.app-mi{background:#ffac24}.app-ha{background:#2298d7}.app-xiaoai{background:#666a80}.app-music{background:#ef3b62}.app-clock{background:#202126}.app-weather{background:#5498e1}.app-photos{background:#be65ab}.app-config{background:#8c919d}
+.app-grid .app-tile{padding:16px 22px;gap:6px}
+.app-grid .app-icon{height:56px;width:56px;border-radius:14px}
+.app-grid .app-icon svg{height:36px;width:36px}
+.app-grid .app-tile strong{font-size:25px;line-height:1.2}
+.app-grid .app-tile small{font-size:17px;line-height:1.3}
+html.look-glass .app-tile{background:var(--g-fill);border:1px solid var(--g-line);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 1.2vh 3vh rgba(0,0,0,.12)}
+html.look-glass .app-tile small{color:var(--g-ink-2)}
+@media (prefers-reduced-motion:reduce){.app-tile{transition:none!important}}
+html.legacy-webview .app-launch header{margin-bottom:2.6vh}
+html.legacy-webview .app-tile .app-icon{margin-bottom:1.1vh}
+html.legacy-webview .app-tile strong{margin-bottom:1.1vh}
+
+.app-icon.app-keyboard{background:linear-gradient(145deg,#7c91fa,#5c58cb);color:#fff}.app-keyboard svg{fill:none;stroke:currentColor}
