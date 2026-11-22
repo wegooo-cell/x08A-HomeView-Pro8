@@ -61,7 +61,7 @@ class Deployment(unittest.TestCase):
     d=Mock();d.check.return_value={'model':'Pro8'};d.call.return_value='Success';d.package_path.side_effect=lambda pkg:'/producer.apk' if producer and pkg=='dev.pro8.bili' else None
     with patch('installer.core.devices',return_value=[{'serial':'test','state':'device'}]),patch('installer.core.Device',return_value=d),patch('installer.core.verify_installed',return_value='keep'),patch('installer.core.ensure_apk',return_value=Path('/bridge.apk')) as download,patch('installer.core.validate_apk') as validate,patch('installer.core.apply_configuration'),patch('installer.core.choose_keyboard'):
      core.deploy({'set_home':False,'optimize_apps':False,'limit_background':False},adb='adb',manifest=manifest,log=lambda _:None)
-     if producer:download.assert_called_once_with(bridge);validate.assert_called_once_with(Path('/bridge.apk'),bridge);d.call.assert_called_once_with('install','-r','/bridge.apk',timeout=300)
+     if producer:download.assert_called_once_with(bridge);validate.assert_called_once_with(Path('/bridge.apk'),bridge);d.call.assert_called_once_with('install','-r',str(Path('/bridge.apk')),timeout=300)
      else:download.assert_not_called();d.call.assert_not_called()
  def test_existing_widget_bridge_keeps_its_data(self):
   d=Mock();d.check.return_value={'model':'Pro8'};d.package_path.return_value='/existing.apk'
