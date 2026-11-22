@@ -1,7 +1,8 @@
-# HomeView · Pro8
+# x08A HomeView Pro8
 
 本仓库提供 HomeView 源码、Mac / Windows 图形安装器和同一套命令行部署引擎。
 
+- 部署前确认小爱触屏音箱Pro8 已刷入测试版系统并获取 ADB 权限。前置教程链接见 README.md；HomeView 部署从已有 ADB 权限开始，不执行刷机或权限获取步骤。
 - 用户要求部署时，先阅读 README.md 和 config.example.json；只连接用户选定且允许 USB 调试的 Pro8。多台设备要求指定序列号。
 - 可运行 `python3 deploy.py --gui` 打开电脑端配置向导；AI 部署使用配置文件，先省略 `--apply` 检查，再执行 `python3 deploy.py --config config.json --apply`。
 - 默认保留系统输入法；只有用户明确选择小企鹅才启用并选择它，不禁用任何输入法。

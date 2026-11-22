@@ -2,6 +2,8 @@
 
 AI 需要能够访问本地终端、USB 设备和网络。普通在线聊天窗口不能直接操作你的 USB 设备；此时使用桌面安装器。
 
+部署前提：小爱触屏音箱Pro8 已刷入测试版系统、获取 ADB 权限，并允许当前电脑的 USB 调试。前置准备参见 [README 的设备与教程说明](../README.md#适用设备与前置准备)，此处从 HomeView 安装开始。
+
 ## 同一套部署引擎
 
 使用 Python 3.12，无额外 Python 运行依赖。先阅读 `AGENTS.md`；`installer/core.py` 同时被 GUI 与 CLI 调用。

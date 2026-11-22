@@ -1,17 +1,20 @@
-# 安装与电脑端配置
+# x08A HomeView Pro8 · 安装与电脑端配置
 
 ## 安装前准备
 
-- 设备：小爱触屏音箱 Pro 8，型号 X08A，Android 9 / ARMv7 / 1280×800。
+- 设备：小爱触屏音箱Pro8，型号 X08A，Android 9 / ARMv7 / 1280×800。
 - 电脑：Windows 10/11 x64，或 Apple Silicon / Intel Mac。macOS 打包最低版本由所带 Python 决定，建议 macOS 13 及以上。
 - 一根可传输数据的 USB 线，设备保持供电、亮屏。首次下载 ADB、APK 和可选输入法需要联网。
-- 在 Pro8 系统设置里打开开发者选项与 USB 调试。不同固件菜单位置不同；如当前固件隐藏了开发者入口，需要先按该固件支持的方法开放，安装器本身不会破解或解锁设备。
+- **系统前提：提前刷入测试版系统。**
+- **权限前提：已获取 ADB 权限，并允许电脑通过 USB 调试连接设备。**
 
-HomeView 不需要 root。安装器不会设置 Device Owner，不会关闭系统输入法，不会清理账号或相册。
+前置准备视频：[手把手教你破解小爱音箱丨小米触屏音箱Pro8刷机教程](https://www.bilibili.com/video/BV1U3C9Y7E61/)。具体刷机与权限获取步骤请参见该视频，完成后再进行下面的 HomeView 部署。
+
+HomeView 部署程序通过已有 ADB 权限安装桌面应用，不负责刷写固件。HomeView 不需要 root。安装器不会设置 Device Owner，不会关闭系统输入法，不会清理账号或相册。
 
 ## 1. 下载并打开
 
-进入 [最新 Release](https://github.com/wegooo-cell/HomeView/releases/latest)，选择与你电脑匹配的 ZIP。
+进入 [最新 Release](https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/latest)，选择与你电脑匹配的 ZIP。
 
 | 电脑 | ZIP 中的程序 |
 | --- | --- |

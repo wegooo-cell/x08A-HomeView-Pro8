@@ -1,12 +1,12 @@
 <div align="center">
 
-# HomeView · Pro8
+# x08A HomeView Pro8
 
-**让小爱触屏音箱 Pro 8，成为家里的信息桌面。**
+**让小爱触屏音箱Pro8，成为家里的信息桌面。**
 
 音乐、天气、家庭、相册和常用应用，放到一张熟悉的主屏幕上。
 
-[下载安装器](https://github.com/wegooo-cell/HomeView/releases/latest) · [详细安装步骤](docs/INSTALL.md) · [让 AI 帮你部署](docs/AI-DEPLOY.md) · [常见问题](docs/FAQ.md)
+[下载安装器](https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/latest) · [详细安装步骤](docs/INSTALL.md) · [让 AI 帮你部署](docs/AI-DEPLOY.md) · [常见问题](docs/FAQ.md)
 
 由 **Kiiko厂长** 维护 · 面向 **Pro8 / X08A · Android 9 · ARMv7 · 1280 × 800**
 
@@ -15,6 +15,21 @@
 </div>
 
 > 配图来自公开版界面，使用独立示意数据；天气数值不代表实时天气。公开仓库和安装包不包含维护者的账号、家庭设备、登录凭据或个人相册。
+
+## 适用设备与前置准备
+
+**x08A HomeView Pro8** 面向 **小爱触屏音箱Pro8**，在这台带屏智能音箱上提供音乐、天气、家庭控制、相册和应用启动桌面。
+
+| 项目 | 要求 |
+| --- | --- |
+| 设备 | 小爱触屏音箱Pro8，型号 X08A |
+| 已验证环境 | Android 9 · ARMv7 · 1280 × 800 |
+| 系统准备 | **提前刷入测试版系统** |
+| 连接权限 | **已获取 ADB 权限，并允许电脑的 USB 调试** |
+
+完成以上准备后，再使用 Windows / Mac 部署程序安装 HomeView。刷机与 ADB 权限获取的具体操作参见前置视频教程：
+
+[手把手教你破解小爱音箱丨小米触屏音箱Pro8刷机教程（哔哩哔哩）](https://www.bilibili.com/video/BV1U3C9Y7E61/)
 
 ## 你可以用它做什么
 
@@ -36,11 +51,11 @@
 
 | 你的电脑 | 下载文件 |
 | --- | --- |
-| Windows 10 / 11，64 位 | [HomeView-Windows-x64.zip](https://github.com/wegooo-cell/HomeView/releases/latest/download/HomeView-Windows-x64.zip) |
-| Mac，Apple Silicon（M 系列） | [HomeView-macOS-arm64.zip](https://github.com/wegooo-cell/HomeView/releases/latest/download/HomeView-macOS-arm64.zip) |
-| Mac，Intel 芯片 | [HomeView-macOS-x64.zip](https://github.com/wegooo-cell/HomeView/releases/latest/download/HomeView-macOS-x64.zip) |
-| 已经会使用 ADB | [homeview-pro8.apk](https://github.com/wegooo-cell/HomeView/releases/latest/download/homeview-pro8.apk) |
-| 开发与许可证审阅 | [完整对应源码包](https://github.com/wegooo-cell/HomeView/releases/latest/download/HomeView-corresponding-source.zip) |
+| Windows 10 / 11，64 位 | [HomeView-Windows-x64.zip](https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/latest/download/HomeView-Windows-x64.zip) |
+| Mac，Apple Silicon（M 系列） | [HomeView-macOS-arm64.zip](https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/latest/download/HomeView-macOS-arm64.zip) |
+| Mac，Intel 芯片 | [HomeView-macOS-x64.zip](https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/latest/download/HomeView-macOS-x64.zip) |
+| 已经会使用 ADB | [homeview-pro8.apk](https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/latest/download/homeview-pro8.apk) |
+| 开发与许可证审阅 | [完整对应源码包](https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/latest/download/HomeView-corresponding-source.zip) |
 
 安装器在你的电脑上运行，会自动准备 Google 官方 ADB，验证应用 SHA256、签名、版本与设备型号。首次使用需要联网下载；连接设备后需在 Pro8 上允许 USB 调试。发行版目前没有商业 Windows 签名或 Apple Developer ID 公证，首次打开方式见[安装说明](docs/INSTALL.md)。
 
@@ -48,7 +63,7 @@
 
 ### 1 · USB 连接 Pro8
 
-在 Pro8 的系统设置中启用开发者选项与 USB 调试，使用支持数据传输的 USB 线连接电脑。打开安装器，点击 **准备连接**，在设备上允许这台电脑的 USB 调试，然后选中目标设备。
+确认设备已刷入测试版系统、获取 ADB 权限并启用 USB 调试后，使用支持数据传输的 USB 线连接电脑。打开安装器，点击 **准备连接**，在设备上允许这台电脑的 USB 调试，然后选中目标设备。
 
 ### 2 · 在电脑上选好设置
 
@@ -102,7 +117,8 @@
 
 ```text
 请阅读这个仓库的 README.md、AGENTS.md 和 docs/AI-DEPLOY.md，
-帮我在已连接并允许 USB 调试的 Pro8 上部署 HomeView。
+设备已刷入测试版系统并获取 ADB 权限，
+请在已连接并允许 USB 调试的小爱触屏音箱Pro8 上部署 x08A HomeView Pro8。
 先列出设备和待应用配置，再安装。
 保留系统输入法、设备照片和已有账号，不卸载、不清数据、不降级。
 天气城市、家庭来源和壁纸请按我提供的信息设置；不索取账号密码或令牌。
@@ -124,7 +140,7 @@ python deploy.py --gui
 - 本公开版使用独立包名，旧个人测试包或朋友分享包不自动迁移；两个版本不要同时运行。[旧版说明](docs/FAQ.md)
 - 返回原桌面可在 HomeView 的系统设置入口进入 Android 默认桌面设置，选择系统桌面；电脑端高级操作见安装说明。
 
-[隐私与权限](docs/PRIVACY.md) · [构建说明](docs/BUILDING.md) · [更新记录](CHANGELOG.md) · [报告问题](https://github.com/wegooo-cell/HomeView/issues)
+[隐私与权限](docs/PRIVACY.md) · [构建说明](docs/BUILDING.md) · [更新记录](CHANGELOG.md) · [报告问题](https://github.com/wegooo-cell/x08A-HomeView-Pro8/issues)
 
 ## 开源与致谢
 
