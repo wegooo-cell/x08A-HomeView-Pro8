@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "v0.1.1",
+  "version": "v0.1.2",
   "homeview": {
     "name": "HomeView",
     "package": "io.github.wegooo_cell.homeview",
-    "version_code": 173,
-    "sha256": "64a9cb7b48b44e697db8c99d62a9038880eca561aee15ebdc0b1a0bf53beeb24",
+    "version_code": 174,
+    "sha256": "12226edd7e5f07abdf5e52dd43a6f4954d0327e80597c62249a63f9dba11c4ac",
     "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
-    "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.1/homeview-pro8.apk"
+    "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.2/homeview-pro8.apk"
   },
   "companions": {
     "fcitx": {
@@ -24,9 +24,17 @@
       "name": "旧客户端兼容入口",
       "package": "dev.pro8.homeview.direct",
       "version_code": 170,
-      "sha256": "29243fa56951e34f7269aa44d662b004d63225461737970f1d26832552c89a9d",
+      "sha256": "dc53e7587cffe40815653612080ae5fa2e37e1617ed7db2fb1ebfccd7b01505a",
       "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
-      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.1/homeview-compat.apk"
+      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.2/homeview-compat.apk"
+    },
+    "homeview_widget_bridge": {
+      "name": "视频标题与封面只读兼容组件",
+      "package": "io.github.wegooo_cell.homeview.bili_bridge",
+      "version_code": 1,
+      "sha256": "044d4491623e92bd35ac539a2427defb36167e85674710ec0d7b644e8ec2ba24",
+      "certificate_sha256": "47093be42e10de68eef68ac0a6c4621c2b6c9c765fce440f95fcb8cba64b7104",
+      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.2/homeview-widget-bridge.apk"
     }
   },
   "keyboard_theme": {

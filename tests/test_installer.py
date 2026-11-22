@@ -53,6 +53,23 @@ class Deployment(unittest.TestCase):
    result=core.deploy({'set_home':False,'optimize_apps':False,'limit_background':False},adb='adb',manifest={'homeview':{'package':'example.app','version_code':169}},log=lambda _:None)
    self.assertEqual(result['action'],'keep');self.assertFalse(result['accounts_copied']);d.call.assert_not_called();d.shell.assert_not_called();keyboard.assert_called_once_with(d,'preserve');apply.assert_called_once()
 
+
+ def test_widget_bridge_only_with_existing_video_component(self):
+  bridge={'name':'widget bridge','package':'io.github.example.widget','version_code':1};manifest={'homeview':{'package':'example.app','version_code':174},'companions':{'homeview_widget_bridge':bridge}}
+  for producer in (False,True):
+   with self.subTest(producer=producer):
+    d=Mock();d.check.return_value={'model':'Pro8'};d.call.return_value='Success';d.package_path.side_effect=lambda pkg:'/producer.apk' if producer and pkg=='dev.pro8.bili' else None
+    with patch('installer.core.devices',return_value=[{'serial':'test','state':'device'}]),patch('installer.core.Device',return_value=d),patch('installer.core.verify_installed',return_value='keep'),patch('installer.core.ensure_apk',return_value=Path('/bridge.apk')) as download,patch('installer.core.validate_apk') as validate,patch('installer.core.apply_configuration'),patch('installer.core.choose_keyboard'):
+     core.deploy({'set_home':False,'optimize_apps':False,'limit_background':False},adb='adb',manifest=manifest,log=lambda _:None)
+     if producer:download.assert_called_once_with(bridge);validate.assert_called_once_with(Path('/bridge.apk'),bridge);d.call.assert_called_once_with('install','-r','/bridge.apk',timeout=300)
+     else:download.assert_not_called();d.call.assert_not_called()
+ def test_existing_widget_bridge_keeps_its_data(self):
+  d=Mock();d.check.return_value={'model':'Pro8'};d.package_path.return_value='/existing.apk'
+  manifest={'homeview':{'package':'example.app','version_code':174},'companions':{'homeview_widget_bridge':{'package':'io.github.example.widget'}}}
+  with patch('installer.core.devices',return_value=[{'serial':'test','state':'device'}]),patch('installer.core.Device',return_value=d),patch('installer.core.verify_installed',return_value='keep'),patch('installer.core.ensure_apk') as download,patch('installer.core.apply_configuration'),patch('installer.core.choose_keyboard'):
+   core.deploy({'set_home':False,'optimize_apps':False,'limit_background':False},adb='adb',manifest=manifest,log=lambda _:None)
+   download.assert_not_called();d.call.assert_not_called()
+
 class LocalWizard(unittest.TestCase):
  @classmethod
  def setUpClass(cls):

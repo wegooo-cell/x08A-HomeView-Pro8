@@ -33,6 +33,14 @@ python tools/build_android.py --keystore /path/outside/repository/homeview.jks
 python tools/build_compat.py --keystore /path/outside/repository/homeview.jks
 ```
 
+视频标题与封面的只读签名桥：
+
+```sh
+python tools/build_widget_bridge.py --keystore /path/outside/repository/widget-publisher.jks --alias publisher
+```
+
+正式构建分别验证视频组件签名身份与 HomeView 签名身份。自行构建时，应使用自己信任的组件和密钥，并相应调整双向证书白名单；不降低为任意应用可读取的接口。
+
 公开包名为 `io.github.wegooo_cell.homeview`。个人测试包和旧朋友分享包可能使用不同包名与签名，安装器不自动读取或迁移其私有数据。两个 HomeView 版本不能同时运行本地服务；测试时先退出另一个版本。
 
 ## AirPlay 原生库的对应源码

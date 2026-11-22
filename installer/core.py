@@ -183,6 +183,9 @@ def deploy(config,serial=None,manifest=None,log=print,adb=None,media_paths=None,
  compat=release.get('companions',{}).get('homeview_compat')
  if compat and not d.package_path(compat['package']):
   log('准备旧客户端相册与返回桌面的兼容入口');packages.append((compat,ensure_apk(compat)))
+ bridge=release.get('companions',{}).get('homeview_widget_bridge')
+ if bridge and d.package_path('dev.pro8.bili') and not d.package_path(bridge['package']):
+  log('准备视频标题与封面的只读兼容组件，保留视频账号');packages.append((bridge,ensure_apk(bridge)))
  # Verify every artifact before beginning installation.
  for metadata,path in packages:validate_apk(path,metadata)
  for metadata,path in packages:

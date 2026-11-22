@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.github.wegooo_cell.homeview.bili_bridge" android:versionCode="1" android:versionName="0.1.2">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="28" />
+  <uses-permission android:name="dev.pro8.bili.permission.WIDGET" />
+  <application android:label="HomeView 视频组件兼容" android:allowBackup="false">
+    <provider android:name="dev.pro8.homeview.widget.WidgetBridge" android:authorities="io.github.wegooo_cell.homeview.bili_bridge" android:exported="true" />
+  </application>
+</manifest>
