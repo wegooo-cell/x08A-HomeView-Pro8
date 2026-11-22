@@ -16,7 +16,7 @@
 .desktop-items .app.is-docked .folder-preview{width:80px!important;height:80px!important;margin:8px;flex:0 0 80px}
 .layout-editing .desktop-dock.is-target{border-color:rgba(255,255,255,.95)}
 .layout-editing .layout-drop-slot{z-index:1}
-.layout-editing .layout-toolbar{bottom:18px}
+.layout-editing .layout-toolbar{top:12px;bottom:auto}
 
 /* Preserve the original widget design above the single, generously spaced icon row. */
 .desktop-items .widget-group>.widget{transform:scale(.9);transform-origin:0 0}

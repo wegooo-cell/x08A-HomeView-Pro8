@@ -4,8 +4,8 @@
   "homeview": {
     "name": "HomeView",
     "package": "io.github.wegooo_cell.homeview",
-    "version_code": 172,
-    "sha256": "95e8340b59f787d5a44b0de3aeb82ad700dbec3ab7c32987cd5da4aecbd48b6d",
+    "version_code": 173,
+    "sha256": "64a9cb7b48b44e697db8c99d62a9038880eca561aee15ebdc0b1a0bf53beeb24",
     "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
     "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.1/homeview-pro8.apk"
   },
@@ -24,7 +24,7 @@
       "name": "旧客户端兼容入口",
       "package": "dev.pro8.homeview.direct",
       "version_code": 170,
-      "sha256": "4c2be5d62be8a94ac615846a50ef1ff4788a09c9827795c109531a17b6f13e4e",
+      "sha256": "29243fa56951e34f7269aa44d662b004d63225461737970f1d26832552c89a9d",
       "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
       "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.1/homeview-compat.apk"
     }
