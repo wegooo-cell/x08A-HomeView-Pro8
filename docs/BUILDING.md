@@ -27,6 +27,12 @@ python tools/build_android.py --unsigned
 python tools/build_android.py --keystore /path/outside/repository/homeview.jks
 ```
 
+旧客户端兼容入口独立构建，使用同一个外部签名密钥：
+
+```sh
+python tools/build_compat.py --keystore /path/outside/repository/homeview.jks
+```
+
 公开包名为 `io.github.wegooo_cell.homeview`。个人测试包和旧朋友分享包可能使用不同包名与签名，安装器不自动读取或迁移其私有数据。两个 HomeView 版本不能同时运行本地服务；测试时先退出另一个版本。
 
 ## AirPlay 原生库的对应源码
@@ -54,6 +60,6 @@ python tools/fetch_sources.py --materialize /tmp/homeview-native-source
 ## 字体、图标与音效
 
 - 字体：`python tools/generate_fonts.py`，需要 `fonttools[woff]`。固定 Adobe 字体来源及校验值见生成器。修改后的字体已改名为 HomeView Sans，保留 OFL 声明。
-- 图标和场景：SVG 本身即为可编辑源码，见 `ASSETS.json` 与各资源目录许可。
+- 图标和场景：源码树提供可再分发的默认素材，SVG 与各资源许可见 `ASSETS.json`。构建器支持 `--appearance-archive /path/outside/repository/appearance.zip`，仅覆盖 `frame/` 与 `android-launcher/res/` 下的图片、字体和 SVG；代码从当前源码构建，资源权利需单独确认。此可选归档不存入 Git，默认源码构建使用仓库素材。
 - 闹钟：`python tools/generate_alarm.py`，需要 NumPy；音效由正弦波合成，无外部录音采样。
 - 默认壁纸：仅 `WALLPAPER.json` 指定的一张图片。用户导入的图片、截图和配置不会进入构建过程。

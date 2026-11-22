@@ -5,7 +5,7 @@
  function mount(root,canvas,floor){
   var image=new Image(),sea=new Image(),ready=false,floorReady=false,disposed=false,raf=0,last=0,time=0,frame=0,acc=0,painted=0,meterAt=0,meterFrames=0;
   var media=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)');
-  canvas.width=1280;canvas.height=550;var water=HVIslandWater.mount(floor,'/frame/hv/standby/island/assets/aquarium-public.svg',470,650,790,140);
+  canvas.width=1280;canvas.height=550;var water=HVIslandWater.mount(floor,'/frame/hv/standby/island/assets/aquarium-museum-v4.webp',470,650,790,140);
   var gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false}),ctx=null,program=null,timeLoc,indexCount=0,texture=null;
   var rows=[{y:0,h:234},{y:234,h:350},{y:584,h:184}],buffers=[],sources=[];
   function smooth(a,b,v){var n=Math.max(0,Math.min(1,(v-a)/(b-a)));return n*n*(3-2*n);}
@@ -75,7 +75,7 @@
   function sync(){if(disposed)return;if(active()&&!raf){last=painted=meterAt=performance.now();acc=0;meterFrames=0;canvas.setAttribute('data-aquarium-state','running');raf=requestAnimationFrame(step);}else if(!active()){if(raf)cancelAnimationFrame(raf);raf=0;canvas.setAttribute('data-aquarium-state','paused');}}
   function destroy(){disposed=true;if(raf)cancelAnimationFrame(raf);raf=0;if(media&&media.removeListener)media.removeListener(sync);image.onload=sea.onload=null;water.destroy();if(gl){var loss=gl.getExtension('WEBGL_lose_context');if(loss)loss.loseContext();}}
   if(gl)initGL();canvas.setAttribute('data-aquarium-renderer',gl?'webgl-continuous-mesh':'canvas-continuous-strips');canvas.setAttribute('data-aquarium-animation','single-pose');
-  image.onload=function(){if(disposed)return;if(gl){gl.bindTexture(gl.TEXTURE_2D,texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,image);}else initCanvas();ready=true;draw();sync();};image.src='/frame/hv/standby/island/assets/aquarium-fish-public.svg';
+  image.onload=function(){if(disposed)return;if(gl){gl.bindTexture(gl.TEXTURE_2D,texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,image);}else initCanvas();ready=true;draw();sync();};image.src='/frame/hv/standby/island/assets/aquarium-fish-pose-v5.webp';
   if(media&&media.addListener)media.addListener(sync);return {sync:sync,destroy:destroy};
  }
  window.HVIslandAquarium={mount:mount};

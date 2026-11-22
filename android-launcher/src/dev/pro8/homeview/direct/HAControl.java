@@ -10,11 +10,12 @@ final class HAControl {
     private static double finite(JSONObject b,String key,double min,double max){Object raw=b.opt(key);if(!(raw instanceof Number))throw new IllegalArgumentException("调节数值无效");double n=((Number)raw).doubleValue();if(!Double.isFinite(n)||n<min||n>max)throw new IllegalArgumentException("调节数值超出设备范围");return n;}
     static JSONObject plan(JSONObject entity,JSONObject body,String lastMode)throws Exception{
         String id=entity.optString("entity_id"),state=entity.optString("state"),domain=id.split("\\.")[0],action=body.optString("action"),service=action;
-        if(!id.equals(body.optString("entity_id"))||!id.matches("(?:light|switch|climate|scene)\\.[a-z0-9_]+"))throw new IllegalArgumentException("请选择有效的家庭设备");
+        if(!id.equals(body.optString("entity_id"))||!id.matches("(?:light|switch|climate|fan|input_boolean|humidifier|scene)\\.[a-z0-9_]+"))throw new IllegalArgumentException("请选择有效的家庭设备");
         if(state.equals("unavailable")||state.equals("unknown"))throw new IllegalArgumentException("设备当前离线");
         JSONObject a=entity.optJSONObject("attributes");if(a==null)a=new JSONObject();
         JSONObject data=new JSONObject().put("entity_id",id);
         if((domain.equals("light")||domain.equals("switch"))&&action.equals("toggle")){}
+        else if((domain.equals("fan")||domain.equals("input_boolean")||domain.equals("humidifier"))&&action.equals("toggle")){service=state.equals("off")?"turn_on":"turn_off";}
         else if(domain.equals("scene")&&action.equals("turn_on")){}
         else if(domain.equals("light")&&action.equals("set_brightness")){
             if(!brightness(a))throw new IllegalArgumentException("这盏灯不支持亮度调节");

@@ -1,6 +1,6 @@
 /* User-selected PingFang SC: numeric-only thin weights keep the Pro8 font cache small. */
-@font-face{font-family:"HomeView Clock";src:url(/frame/hv/fonts/homeview-digits.woff2) format("woff2");font-style:normal;font-weight:200;font-display:swap;unicode-range:U+0020-003A}
-@font-face{font-family:"HomeView Clock";src:url(/frame/hv/fonts/homeview-digits.woff2) format("woff2");font-style:normal;font-weight:100;font-display:swap;unicode-range:U+0020-003A}
+@font-face{font-family:"HV Clock PingFang";src:url(/frame/hv/fonts/pingfang-sc-thin-digits-v1.woff2) format("woff2");font-style:normal;font-weight:200;font-display:swap;unicode-range:U+0020-003A}
+@font-face{font-family:"HV Clock PingFang";src:url(/frame/hv/fonts/pingfang-sc-ultralight-digits-v1.woff2) format("woff2");font-style:normal;font-weight:100;font-display:swap;unicode-range:U+0020-003A}
 /* Numerals editor. Fixed Pro8 canvas; existing clock SVG remains live UI. */
 .num-surface{background:#73a3d9;overflow:hidden;color:#050909}
 .num-surface .nm{position:absolute;left:256px;top:16px;width:768px;height:768px;overflow:visible}

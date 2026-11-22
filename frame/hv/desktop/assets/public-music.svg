@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect x="16" y="16" width="224" height="224" rx="53" fill="#bd407c"/><path d="M112 165V87l69-16v78M112 105l69-16" fill="none" stroke="#fff" stroke-width="13" stroke-linejoin="round"/><ellipse cx="94" cy="170" rx="25" ry="19" fill="#fff"/><ellipse cx="163" cy="153" rx="25" ry="19" fill="#fff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<defs>
+ <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#ff3c71"/><stop offset="1" stop-color="#fa003d"/></linearGradient>
+ <linearGradient id="rim" x2=".3" y2="1"><stop stop-color="#fff" stop-opacity=".6"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".13"/></linearGradient>
+ <clipPath id="clip"><rect x="16" y="16" width="224" height="224" rx="53"/></clipPath>
+ <linearGradient id="note" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".45" stop-color="#fff7f9"/><stop offset="1" stop-color="#ffdce6"/></linearGradient>
+</defs>
+<g clip-path="url(#clip)">
+ <rect x="16" y="16" width="224" height="224" rx="53" fill="url(#bg)"/>
+
+ <path d="M104 68 L179 51 Q185 50 185 57 V168 C185 180 177 186 164 189 C153 192 143 190 142 179 C141 168 148 162 160 159 L172 156 V90 Q172 86 168 87 L115 99 Q111 100 111 105 V183 C111 196 101 203 88 206 C77 209 68 204 68 194 C68 183 75 177 87 174 L99 171 V77 Q99 70 104 68Z" fill="#bd083e" opacity=".13" transform="translate(0 1.5)"/>
+ <path d="M104 68 L179 51 Q185 50 185 57 V168 C185 180 177 186 164 189 C153 192 143 190 142 179 C141 168 148 162 160 159 L172 156 V90 Q172 86 168 87 L115 99 Q111 100 111 105 V183 C111 196 101 203 88 206 C77 209 68 204 68 194 C68 183 75 177 87 174 L99 171 V77 Q99 70 104 68Z" fill="url(#note)"/>
+ <path d="M101 169 V77 Q101 72 106 71 L178 55" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="1.6" stroke-linecap="round"/>
+
+ <rect x="17" y="17" width="222" height="222" rx="52" fill="none" stroke="url(#rim)" stroke-width="2"/>
+</g>
+</svg>

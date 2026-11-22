@@ -8,7 +8,7 @@
   function smooth(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);}
   function noise(i,t){var n=Math.sin(i*73.156+t*19.17)*43758.5453;return n-Math.floor(n);}
   function makeAtlas(){
-    if(atlas)return;var mask=canvas(N,N),m=mask.getContext('2d');m.fillStyle='#fff';m.font='400 116px "HomeView Sans", sans-serif';m.textAlign='center';m.textBaseline='middle';
+    if(atlas)return;var mask=canvas(N,N),m=mask.getContext('2d');m.fillStyle='#fff';m.font='400 116px "HV PingFang SC", sans-serif';m.textAlign='center';m.textBaseline='middle';
     for(var n=1;n<=12;n++){
       var angle=n*Math.PI/6,rotation=((n*30+90)%180)-90;if(rotation===-90)rotation=n===9?-90:90;
       m.save();m.translate(C+Math.sin(angle)*286,C-Math.cos(angle)*286);m.rotate(rotation*Math.PI/180);m.fillText(String(n),0,-11);m.restore();
@@ -40,7 +40,7 @@
   function asleep(){var stage=document.getElementById('stage');var gallery=document.documentElement.getAttribute('data-clock-gallery');return !HV.canWork()||gallery&&gallery!=='closed'||document.documentElement.classList.contains('num-editing')||stage&&stage.getAttribute('aria-hidden')==='true';}
   function mount(root){
     makeAtlas();root.classList.add('f-sand');root.setAttribute('aria-label','砂金时钟');root.setAttribute('data-sand-mode','live');
-    var bg=document.createElement('img');bg.className='sand-bg bg';bg.src='/frame/hv/standby/assets/sand-surface.svg';bg.alt='';root.appendChild(bg);
+    var bg=document.createElement('img');bg.className='sand-bg bg';bg.src='/frame/hv/standby/assets/sand-surface.png';bg.alt='';root.appendChild(bg);
     var numbers=document.createElement('div');numbers.className='sand-numbers';var mask=document.createElement('div');mask.className='sand-rotation-mask';mask.style.webkitMaskImage='url('+wipeURL+')';var glyphs=document.createElement('img');glyphs.className='sand-glyphs';glyphs.src=atlasURL;glyphs.alt='';mask.appendChild(glyphs);numbers.appendChild(mask);root.appendChild(numbers);var movement=document.createElement('div');movement.className='sand-movement';root.appendChild(movement);
     var minute=handSprite('minute'),hour=handSprite('hour');minute.className='sand-minute';hour.className='sand-hour';movement.appendChild(hour);movement.appendChild(minute);
     /* One narrow texture replaces 112 animated SVG nodes. Only this 32x414 canvas repaints at 12Hz. */

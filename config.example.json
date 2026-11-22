@@ -2,7 +2,11 @@
   "schema": 1,
   "weather": null,
   "keyboard": "preserve",
-  "family": {"provider": "preserve"},
+  "family": {
+    "provider": "preserve"
+  },
   "idle": null,
-  "set_home": true
+  "set_home": true,
+  "optimize_apps": true,
+  "limit_background": true
 }

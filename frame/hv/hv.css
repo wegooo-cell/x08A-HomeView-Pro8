@@ -1,4 +1,4 @@
-@import url("/frame/hv/fonts/homeview-fonts.css");
+@import url("/frame/hv/fonts/pingfang-sc-v2.css");
 /* HomeView look for the frame screens (frame/hv/). Apple's idiom: SF Pro + SF Rounded, light
    grouped surfaces, system colors, big continuous corners. Separate from shared/ui.css on purpose.
 
@@ -9,8 +9,8 @@
 
 
 :root{
-  --sf:"HomeView Sans","PingFang SC",-apple-system,system-ui,Roboto,sans-serif;
-  --sfr:"HomeView Sans","PingFang SC",-apple-system,system-ui,Roboto,sans-serif;
+  --sf:"HV PingFang SC","PingFang SC",-apple-system,system-ui,Roboto,sans-serif;
+  --sfr:"HV PingFang SC","PingFang SC",-apple-system,system-ui,Roboto,sans-serif;
 
   /* light (Home, Today, Coming up) */
   --bg:#f2f2f7;            /* systemGroupedBackground */

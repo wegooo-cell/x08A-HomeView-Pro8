@@ -17,12 +17,13 @@
 | World Atlas / Natural Earth | 2.0.2 / geographic data | ISC / public domain，地图资源目录保留声明 |
 | node-forge | 1.4.0 | 选择 BSD-3-Clause，`android-launcher/third_party/node-forge/` |
 | Simple Icons | 固定来源提交见其声明 | CC0，`android-launcher/third_party/simple-icons/` |
-| HomeView Sans | Source Han Sans CN 2.005 的重命名子集 | OFL-1.1，`frame/hv/fonts/OFL.txt` 与 `SOURCE.json` |
+| 源码默认字体 | Source Han Sans，生成与改名见 `tools/generate_fonts.py` | OFL-1.1；`frame/hv/fonts/OFL.txt` |
+| Nunito 等独立字体 | 场景目录内各字体与声明 | 保留对应 OFL 声明 |
 | 小企鹅输入法 | 官方 0.1.3 ARMv7 APK，按需直接下载 | 上游主许可 LGPL-2.1，各组件保留自身许可；不重新打包、不改签名；来源见 `release.json` |
 | PyInstaller | 6.20.0，仅用于电脑端打包 | GPL-2.0-or-later，附带 bootloader 分发例外；[官方许可](https://pyinstaller.org/en/stable/license.html) |
 | Python | 电脑端打包的 Python 3.12 运行时 | PSF License；运行时保留其自带声明 |
 
-HomeView 的新增几何图标与场景采用可编辑 SVG，闹钟是 `tools/generate_alarm.py` 的合成音。默认壁纸来源与校验值见 `WALLPAPER.json`，公开包只选择这一张。未分发 Apple 字体、SF Symbols、提取的系统图标或游戏素材。
+源码默认图标与几何场景由可编辑 SVG 生成，闹钟来自 `tools/generate_alarm.py` 的合成音。默认壁纸来源与校验值见 `WALLPAPER.json`，只选择这一张。代码许可不授予第三方商标或独立图片、字体的权利；可选外部资源包须按各自许可使用，不包含在开源素材授权中。
 
 ## 获取和重建对应源码
 

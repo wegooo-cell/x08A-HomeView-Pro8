@@ -50,7 +50,7 @@ class Deployment(unittest.TestCase):
  def test_preserve_deployment(self):
   d=Mock();d.check.return_value={'model':'Pro8'};d.package_path.return_value='/base.apk'
   with patch('installer.core.devices',return_value=[{'serial':'test','state':'device'}]),patch('installer.core.Device',return_value=d),patch('installer.core.verify_installed',return_value='keep'),patch('installer.core.apply_configuration') as apply,patch('installer.core.choose_keyboard') as keyboard:
-   result=core.deploy({'set_home':False},adb='adb',manifest={'homeview':{'package':'example.app','version_code':169}},log=lambda _:None)
+   result=core.deploy({'set_home':False,'optimize_apps':False,'limit_background':False},adb='adb',manifest={'homeview':{'package':'example.app','version_code':169}},log=lambda _:None)
    self.assertEqual(result['action'],'keep');self.assertFalse(result['accounts_copied']);d.call.assert_not_called();d.shell.assert_not_called();keyboard.assert_called_once_with(d,'preserve');apply.assert_called_once()
 
 class LocalWizard(unittest.TestCase):
@@ -77,3 +77,35 @@ class LocalWizard(unittest.TestCase):
   with self.assertRaises(ValueError):self.wizard.start({},'test',['../../secret'])
 
 if __name__=='__main__':unittest.main()
+
+class DeviceDiscovery(unittest.TestCase):
+ def test_startup_messages_are_not_devices(self):
+  raw='* daemon started successfully\nList of devices attached\none device product:test model:X08A\ntwo unauthorized\nthree offline\n'
+  with patch('installer.core.run',side_effect=['',raw]) as call:
+   self.assertEqual([d['serial'] for d in core.devices('adb')],['one','two','three']);self.assertEqual(call.call_args_list[0].args[0],['adb','start-server'])
+ def test_keyboard_theme_preserves_existing(self):
+  d=Mock();d.shell.return_value='/storage/emulated/0/Android/data/org.fcitx.fcitx5.android/files/theme/HomeView iOS Light.json';core.seed_keyboard_theme(d,lambda _:None);d.call.assert_not_called()
+
+class OptimizationPolicy(unittest.TestCase):
+ def test_default_enabled_and_can_opt_out(self):
+  c=normalize({});self.assertTrue(c['optimize_apps']);self.assertTrue(c['limit_background']);self.assertFalse(normalize({'optimize_apps':False})['optimize_apps'])
+ def test_disabled_has_no_device_calls(self):
+  from installer.optimization import apply
+  d=Mock();result=apply(d,{'optimize_apps':False,'limit_background':False},'example.app');self.assertFalse(result['enabled']);self.assertEqual(d.mock_calls,[])
+ def test_scope_backup_and_restore(self):
+  from installer import optimization as opt
+  class Fake:
+   serial='TEST-ONLY'
+   def __init__(self):self.states={p:0 for p in opt.TARGETS};self.ops={};self.calls=[]
+   def package_path(self,p):return '/base.apk' if p in self.states else None
+   def shell(self,*args):
+    self.calls.append(args)
+    if args[0]=='ime':return 'org.fcitx.fcitx5.android/.IME'
+    if args[0]=='dumpsys':return 'User 0: installed=true enabled='+str(self.states[args[2]])
+    if args[:3]==('cmd','appops','get'):return args[4]+': '+self.ops.get((args[3],args[4]),'default')
+    if args[:3]==('cmd','appops','set'):self.ops[(args[3],args[4])]=args[5];return ''
+    if args[0]=='pm':self.states[args[-1]]={'default-state':0,'enable':1,'disable':2,'disable-user':3,'disable-until-used':4}[args[1]];return ''
+    return ''
+  d=Fake()
+  with tempfile.TemporaryDirectory() as temp,patch('installer.core.cache_dir',return_value=Path(temp)):
+   report=opt.apply(d,{'optimize_apps':True,'limit_background':True},'example.app',lambda _:None);self.assertFalse(report['errors']);self.assertEqual(set(d.states.values()),{3});self.assertTrue(Path(report['restore_file']).is_file());opt.restore(d,report['restore_file'],lambda _:None);self.assertEqual(set(d.states.values()),{0});self.assertEqual(set(d.ops.values()),{'default'});self.assertTrue(all('uninstall' not in c for c in d.calls))

@@ -133,9 +133,16 @@
     ['today','今天','大日期、天气与日程',1],
     ['up','接下来','未来两周日程',1],
     ['analog','指针','时钟与日期、天气',1],['numerals','数字','醒目的数字时钟',1],
-    ['island','动森锁屏','海边、烟火与水族馆',0],['collage','封面拼贴','专辑封面墙、居中时间与日期',1],['sand','砂金','细砂凹刻与连续扫秒',0],['minimal','极简','柔和的时钟',1],['month','月份','月历与日期',0]];
+    ['island','动森锁屏','海边、烟火与水族馆',1],['collage','封面拼贴','专辑封面墙、居中时间与日期',1],['sand','砂金','细砂凹刻与连续扫秒',1],['minimal','极简','柔和的时钟',1],['month','月份','月历与日期',1]];
   HV.facesOn=function(){var on={};HV.FACES.forEach(function(f){on[f[0]]=!!f[3];});
-    try{var v=JSON.parse(localStorage.getItem('hv-faces')||'null');if(v)for(var k in v)if(k in on)on[k]=!!v[k];}catch(e){}if(!Object.keys(on).some(function(k){return on[k];}))on.numerals=true;return on;};
+    try{var v=JSON.parse(localStorage.getItem('hv-faces')||'null');if(v)for(var k in v)if(k in on)on[k]=!!v[k];
+      /* The old picker saved all seven default flags together. Upgrade only that unchanged default set. */
+      var revision='hv-faces-defaults:v1',added=['island','sand','month'];
+      if(!localStorage.getItem(revision)){
+        if(v&&HV.FACES.every(function(f){return on[f[0]]===(added.indexOf(f[0])<0);})){added.forEach(function(k){on[k]=true;});localStorage.setItem('hv-faces',JSON.stringify(on));}
+        localStorage.setItem(revision,'all-ten');
+      }
+    }catch(e){}if(!Object.keys(on).some(function(k){return on[k];}))on.numerals=true;return on;};
   HV.setFace=function(k,v){var on=HV.facesOn();if(!(k in on))return on;if(!v&&on[k]&&Object.keys(on).filter(function(x){return on[x];}).length<=1)return on;on[k]=!!v;try{localStorage.setItem('hv-faces',JSON.stringify(on));}catch(e){}return on;};
   HV.calendarEvents=function(feed){(feed||[]).forEach(function(e){if(e.homeview_calendar&&e.cal)CALS[e.cal]={name:e.calendar_name||'日历',color:e.calendar_color||'#168bff'};});var out=(feed||[]).filter(function(e){return String(e.uid||'').indexOf('hv-local-')!==0;});var locals=[];try{locals=JSON.parse(localStorage.getItem('hv-app:calendar-events:v1')||'[]');}catch(ignore){}if(!Array.isArray(locals))return out;locals.forEach(function(e){if(!/^\d{4}-\d{2}-\d{2}$/.test(e.date)||!/^\d{2}:\d{2}$/.test(e.time))return;var d=e.date.split('-'),t=e.time.split(':'),wanted=Date.UTC(+d[0],+d[1]-1,+d[2],+t[0],+t[1]),candidate=wanted;for(var i=0;i<3;i++){var local=HV.local(new Date(candidate));candidate+=wanted-Date.UTC(local.y,local.mo-1,local.d,local.h,local.mi);}out.push({uid:'hv-local-'+e.id,title:e.title,start:new Date(candidate).toISOString(),end:new Date(candidate+(+e.duration||30)*60000).toISOString(),cal:'local',all_day:false});});return out;};
   HV.on=function(fn){subs.push(fn);try{fn(HV.state);}catch(e){}};

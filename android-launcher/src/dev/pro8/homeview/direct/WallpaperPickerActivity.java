@@ -24,7 +24,7 @@ public final class WallpaperPickerActivity extends Activity {
         font=Typeface.create("sans-serif",Typeface.NORMAL);
         getWindow().setFlags(1024,1024);getWindow().getDecorView().setSystemUiVisibility(5894);
         LinearLayout root=new LinearLayout(this);root.setOrientation(1);root.setPadding(44,28,44,36);
-        try(InputStream in=getAssets().open("frame/hv/desktop/assets/default-wallpaper-soft.webp")){BitmapFactory.Options o=new BitmapFactory.Options();o.inSampleSize=2;root.setBackground(new BitmapDrawable(getResources(),BitmapFactory.decodeStream(in,null,o)));}catch(Exception ignored){root.setBackgroundColor(0xff3e526b);}
+        try(InputStream in=getAssets().open("frame/hv/home/assets/blue-soft.webp")){BitmapFactory.Options o=new BitmapFactory.Options();o.inSampleSize=2;root.setBackground(new BitmapDrawable(getResources(),BitmapFactory.decodeStream(in,null,o)));}catch(Exception ignored){root.setBackgroundColor(0xff3e526b);}
         LinearLayout header=new LinearLayout(this);header.setGravity(Gravity.CENTER_VERTICAL);
         TextView title=text("选择壁纸",30);header.addView(title,new LinearLayout.LayoutParams(0,62,1));
         TextView cancel=text("取消",21);cancel.setGravity(Gravity.CENTER);cancel.setBackground(glass());cancel.setPadding(24,0,24,0);cancel.setOnClickListener(v->finish());header.addView(cancel,new LinearLayout.LayoutParams(100,48));root.addView(header);

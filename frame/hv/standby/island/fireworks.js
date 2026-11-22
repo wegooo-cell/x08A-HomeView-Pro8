@@ -15,7 +15,7 @@
   var media=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)'),ctx;
   var W=740,H=710,particles=[],embers=[],rockets=[],flashes=[],raf=0,last=0,time=0,next=0,cycle=0,disposed=false,frames=0,lit=-1,acc=0,painted=0,meterAt=0,meterFrames=0;
   var hands=[{x:112,y:627,color:'#dffaff'},{x:153,y:617,color:colors.gold}];
-  var waterFX=HVIslandWater.mount(water,'/frame/hv/standby/island/assets/fireworks-public.svg',90,480,1000,154);
+  var waterFX=HVIslandWater.mount(water,'/frame/hv/standby/island/assets/fireworks-motion-base.webp',90,480,1000,154);
   var plans=[{at:.15,type:'willow',x:358,y:155},{at:3.0,type:'inner',x:354,y:158},{at:10.8,type:'gold',x:510,y:165},{at:14.0,type:'ring',x:245,y:142},{at:18.2,type:'peony',x:420,y:153}];
   canvas.width=W/2;canvas.height=H/2;ctx=HVIslandInk.create(canvas,W,H);var batched=!!ctx;if(!ctx){ctx=canvas.getContext('2d');ctx.scale(.5,.5);}
 

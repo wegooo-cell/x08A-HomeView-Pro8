@@ -4,7 +4,7 @@
 var inkCanvas=null,inkCache={},inkKeys=[],collectionsDay='',collectionsLoading=false,collectionsError='',collectionsSeq=0;
 function core(){return window.HVMusicPresentation;}
 function esc(s){return HV.esc(s==null?'':s);}
-function art(t,size){return core().art(t&&t.art,size||256)||A+'public-music.svg';}
+function art(t,size){return core().art(t&&t.art,size||256)||A+'music.png';}
 function icon(file){return '<img src="'+A+file+'.svg" alt="">';}
 function q(s){return root.querySelector(s);}
 function albums(s){var out=[],map={};(s.browseTracks.length?s.browseTracks:s.tracks).forEach(function(t){var name=t.album||t.title,k=name+'|'+t.artist;if(!map[k]){map[k]={id:'album:'+k,name:name,artist:t.artist,artistId:t.artistId||'',artistName:t.artistName||'',art:t.art,kind:'album',items:[]};out.push(map[k]);}map[k].items.push(t);});return out;}

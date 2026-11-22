@@ -4,7 +4,7 @@
   var KEY='homeview:clock-numerals:v1',LEGACY='homeview-design:numerals:v1',ASSETS='/frame/hv/desktop/assets/',Q=new URLSearchParams(location.search);
   var styles=[['minimal','简约'],['full','经典'],['ticks','刻度'],['quarters','数字']];
   var colors=[['blue','晴蓝','#6899d4','#050909','#fff4d9'],['green','薄荷','#9ab9a2','#244433','#f8f3e8'],['orange','珊瑚','#df8868','#602d21','#fff5e5'],['yellow','麦黄','#dbc479','#544421','#fff9e8'],['pink','浅粉','#d6adb9','#633d4e','#fff4ec'],['graphite','石墨','#4d535e','#171b23','#f5f3ec']];
-  var fonts=[['rounded','默认','"HomeView Clock","HomeView Sans",sans-serif',200],['system','标准','"HomeView Clock","HomeView Sans",sans-serif',400],['light','纤细','"HomeView Clock","HomeView Sans",sans-serif',100]];
+  var fonts=[['rounded','默认','"HV Clock PingFang","HV PingFang SC",sans-serif',200],['system','标准','"HV Clock PingFang","HV PingFang SC",sans-serif',400],['light','纤细','"HV Clock PingFang","HV PingFang SC",sans-serif',100]];
   var handNames=[['classic','经典'],['slim','纤细'],['bold','实心']];
   var layer=null,preview=null,draft=null,tab='style',focusBefore=null,timer=null,opened=false,onCloseCallback=null;
   function copy(o){return {style:o.style,color:o.color,font:o.font,hands:o.hands};}
@@ -95,6 +95,6 @@
   },true);
   window.addEventListener('storage',function(e){if(e.key===KEY||e.key===LEGACY)refresh();});
   /* Wait once before mounting clocks: canvas atlases must never cache a fallback glyph. */
-  var ready=document.fonts&&document.fonts.load?Promise.all([document.fonts.load('200 64px "HomeView Clock"','0123456789'),document.fonts.load('100 64px "HomeView Clock"','0123456789'),document.fonts.load('400 116px "HomeView Sans"','0123456789')]).then(function(){return true;},function(){return false;}):Promise.resolve(false);
+  var ready=document.fonts&&document.fonts.load?Promise.all([document.fonts.load('200 64px "HV Clock PingFang"','0123456789'),document.fonts.load('100 64px "HV Clock PingFang"','0123456789'),document.fonts.load('400 116px "HV PingFang SC"','0123456789')]).then(function(){return true;},function(){return false;}):Promise.resolve(false);
   window.HVNumerals={ready:ready,mount:function(root){return build(root,read(),false);},open:open,close:close,isOpen:function(){return opened;}};
 })();

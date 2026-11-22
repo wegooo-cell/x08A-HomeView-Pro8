@@ -1,0 +1,11 @@
+{
+  "theme": "HomeView iOS Light",
+  "follow_system_dark_mode": false,
+  "key_border": true,
+  "key_border_stroke": false,
+  "key_ripple_effect": false,
+  "keyboard_height_percent_landscape": 38,
+  "key_horizontal_margin_landscape": 6,
+  "key_vertical_margin_landscape": 6,
+  "key_radius": 12
+}

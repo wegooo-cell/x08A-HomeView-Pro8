@@ -51,7 +51,7 @@
   });
  }
  function url(name){
-  if(name!=='collage')return '/frame/hv/faces/thumbs/'+name+'.svg?v=1';
+  if(name!=='collage')return '/frame/hv/faces/thumbs/'+name+'.jpg?v=134';
   return stored()||(empty||(empty=compose([],{x:0,y:0},false)));
  }
  function custom(name){return name==='photos'||name==='photo'||name==='island'||name==='numerals';}

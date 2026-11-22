@@ -133,7 +133,7 @@
     var d=el('f-analog'), h='<svg class="dial" viewBox="0 0 200 200" aria-label="Clock"><circle cx="100" cy="100" r="97" fill="#f8f5ef"/>';
     for(var i=0;i<60;i++){var a=i*Math.PI/30,L=i%5?5:11,w=i%5?1:2.6,r=93;
       h+='<line x1="'+(100+Math.sin(a)*(r-L)).toFixed(2)+'" y1="'+(100-Math.cos(a)*(r-L)).toFixed(2)+'" x2="'+(100+Math.sin(a)*r).toFixed(2)+'" y2="'+(100-Math.cos(a)*r).toFixed(2)+'" stroke="'+(i%5?'#b8b0a3':'#3a3a3c')+'" stroke-width="'+w+'" stroke-linecap="round"/>';}
-    for(var q=1;q<=12;q++){var b=q*Math.PI/6;h+='<text x="'+(100+Math.sin(b)*70).toFixed(1)+'" y="'+(100-Math.cos(b)*70+7).toFixed(1)+'" text-anchor="middle" font-size="19" font-weight="600" fill="#3a3a3c" font-family="HomeView Sans, sans-serif">'+q+'</text>';}
+    for(var q=1;q<=12;q++){var b=q*Math.PI/6;h+='<text x="'+(100+Math.sin(b)*70).toFixed(1)+'" y="'+(100-Math.cos(b)*70+7).toFixed(1)+'" text-anchor="middle" font-size="19" font-weight="600" fill="#3a3a3c" font-family="HV PingFang SC, sans-serif">'+q+'</text>';}
     h+='<line class="hh" x1="100" y1="104" x2="100" y2="54" stroke="#1d1d1f" stroke-width="6.5" stroke-linecap="round"/>'+
        '<line class="mh" x1="100" y1="106" x2="100" y2="26" stroke="#1d1d1f" stroke-width="4.5" stroke-linecap="round"/>'+
        '<line class="sh" x1="100" y1="116" x2="100" y2="20" stroke="#ff9f0a" stroke-width="1.6" stroke-linecap="round"/>'+
@@ -252,7 +252,7 @@
     }
     var clock='<svg class="ic-clock" viewBox="0 0 200 200">';
     for(var i=0;i<60;i++){var a=i*Math.PI/30,L=i%5?4:9;clock+='<line x1="'+(100+Math.sin(a)*(92-L)).toFixed(1)+'" y1="'+(100-Math.cos(a)*(92-L)).toFixed(1)+'" x2="'+(100+Math.sin(a)*92).toFixed(1)+'" y2="'+(100-Math.cos(a)*92).toFixed(1)+'" stroke="'+(i%5?'#7d8794':'#1d1d1f')+'" stroke-width="'+(i%5?1.2:2.4)+'" stroke-linecap="round"/>';}
-    for(var q=1;q<=12;q++){var b=q*Math.PI/6;clock+='<text x="'+(100+Math.sin(b)*70).toFixed(1)+'" y="'+(100-Math.cos(b)*70+7).toFixed(1)+'" text-anchor="middle" font-size="20" font-weight="600" fill="#1d1d1f" font-family="HomeView Sans, sans-serif">'+q+'</text>';}
+    for(var q=1;q<=12;q++){var b=q*Math.PI/6;clock+='<text x="'+(100+Math.sin(b)*70).toFixed(1)+'" y="'+(100-Math.cos(b)*70+7).toFixed(1)+'" text-anchor="middle" font-size="20" font-weight="600" fill="#1d1d1f" font-family="HV PingFang SC, sans-serif">'+q+'</text>';}
     clock+=hands(100,100,48,74,'#1d1d1f',6,4,'#ff9f0a')+'</svg>';
     var d=el('f-info','<div class="il"><div class="idt">'+'周'+ZW[t.dow]+' '+ZM[t.mo-1]+'</div><div class="inum">'+t.d+'</div><div class="iag">'+ag+'</div></div>'+
       '<div class="ir">'+clock+(wx&&wx.temp_f!=null?'<div class="iw"><div class="iloc">'+HV.esc(HV.cfg.place||'Home')+'</div><div class="it">'+Math.round(wx.temp_f)+'°</div><div class="ic2">'+icon(wxIcon(wx.code,wx.is_day))+'<span>'+kind(wx.code,wx.is_day)+'<br>最高:'+Math.round(Math.max(wx.hi_f,wx.temp_f))+'° 最低:'+Math.round(Math.min(wx.lo_f,wx.temp_f))+'°</span></div></div>':'')+'</div>');
@@ -275,7 +275,7 @@
   }
   /* Minimal: soft pink, embossed numerals at the quarter marks, slim hands (Apple's rose face). */
   function minimalFace(){
-    var s='<svg class="mn" viewBox="0 0 200 200"><g font-family="HomeView Sans, sans-serif" font-weight="300" fill="rgba(122,52,72,.22)" text-anchor="middle" font-size="26">'+
+    var s='<svg class="mn" viewBox="0 0 200 200"><g font-family="HV PingFang SC, sans-serif" font-weight="300" fill="rgba(122,52,72,.22)" text-anchor="middle" font-size="26">'+
       '<text x="100" y="34">12</text><text x="174" y="109">3</text><text x="100" y="186">6</text><text x="26" y="109">9</text></g>'+
       hands(100,100,44,70,'#8a3a52',3.4,2.4,'#c9607e')+'</svg>';
     var d=el('f-min',s);d.tick=function(){tickHands(d,100,100);};d.tick();d.fast=true;return d;

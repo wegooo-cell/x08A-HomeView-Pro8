@@ -23,7 +23,7 @@ def city(value):
   out[key]=v
  return out
 def normalize(value):
- if not isinstance(value,dict) or set(value)-{'schema','weather','keyboard','family','set_home','idle','media','wallpaper'}:raise ConfigError('配置包含不支持的项目；请勿放入任何账号凭据')
+ if not isinstance(value,dict) or set(value)-{'schema','weather','keyboard','family','set_home','idle','media','wallpaper','optimize_apps','limit_background'}:raise ConfigError('配置包含不支持的项目；请勿放入任何账号凭据')
  if value.get('schema',SCHEMA)!=SCHEMA:raise ConfigError('配置版本不支持')
  keyboard=value.get('keyboard','preserve');family=value.get('family',{'provider':'preserve'})
  if keyboard not in ('preserve','fcitx'):raise ConfigError('请选择保留系统输入法或小企鹅')
@@ -43,6 +43,9 @@ def normalize(value):
   if 'mode' in idle and idle['mode'] not in ('photos','dim','off'):raise ConfigError('待机方式不正确')
   if 'minutes' in idle and (type(idle['minutes']) is not int or idle['minutes'] not in (1,3,5,10)):raise ConfigError('待机等待时间不正确')
   out['idle']=dict(idle)
+ for key in ('optimize_apps','limit_background'):
+  if type(value.get(key,True)) is not bool:raise ConfigError('系统优化选项不正确')
+  out[key]=value.get(key,True)
  media=value.get('media',[])
  if not isinstance(media,list) or len(media)>30:raise ConfigError('每次最多导入 30 张图片')
  names=set()

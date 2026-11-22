@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def main():
  system=platform.system();arch='arm64' if platform.machine().lower() in ('arm64','aarch64') else 'x64';out=ROOT/'dist';out.mkdir(exist_ok=True)
- args=[sys.executable,'-m','PyInstaller','--noconfirm','--clean','--windowed','--name','HomeView-Installer','--specpath',str(ROOT/'build/spec'),'--distpath',str(out/'desktop'),'--workpath',str(ROOT/'build/desktop'),'--add-data',str(ROOT/'installer/web')+':installer/web','--add-data',str(ROOT/'release.json')+':.']
+ args=[sys.executable,'-m','PyInstaller','--noconfirm','--clean','--windowed','--name','HomeView-Installer','--specpath',str(ROOT/'build/spec'),'--distpath',str(out/'desktop'),'--workpath',str(ROOT/'build/desktop'),'--add-data',str(ROOT/'installer/web')+':installer/web','--add-data',str(ROOT/'release.json')+':.','--add-data',str(ROOT/'keyboard')+':keyboard']
  if system=='Darwin':args+=['--onedir','--osx-bundle-identifier','io.github.wegooo-cell.homeview.installer']
  elif system=='Windows':args+=['--onefile']
  else:raise SystemExit('Build the desktop installer on Windows or macOS')

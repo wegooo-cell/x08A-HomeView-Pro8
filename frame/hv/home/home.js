@@ -1,6 +1,6 @@
 (function(){'use strict';
 var U=AppUI,H=HVHome,C=HVHAControls,A='/frame/hv/desktop/assets/';
-var fields=[['light','灯光 / 开关',['light','switch']],['climate','空调',['climate']],['temperature','温度',['sensor']],['humidity','湿度',['sensor']],['home_scene','回家场景',['scene']],['night_scene','晚安场景',['scene']]];
+var fields=[['light','控制 1',['light','switch','climate','fan','input_boolean','humidifier']],['climate','控制 2',['light','switch','climate','fan','input_boolean','humidifier']],['temperature','温度',['sensor']],['humidity','湿度',['sensor']],['home_scene','回家场景',['scene']],['night_scene','晚安场景',['scene']]];
 var state=null,filter='all',page=0,stamp='',loading=false,sequence=0,asked=false,initial=true,choosing=false;
 function el(id){return document.getElementById(id);}function esc(s){return U.esc(s);}function domain(e){return e.entity_id.split('.')[0];}
 function providerName(){return state&&state.provider==='mijia'?'米家':'Home Assistant';}

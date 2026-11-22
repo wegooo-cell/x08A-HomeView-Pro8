@@ -77,10 +77,12 @@ class Device:
  def version(self,pkg):
   m=re.search(r'versionCode=(\d+)',self.shell('dumpsys','package',pkg));return int(m.group(1)) if m else 0
 def devices(adb):
+ run([adb,'start-server'])
  out=[]
- for line in run([adb,'devices','-l']).splitlines()[1:]:
+ for line in run([adb,'devices','-l']).splitlines():
   fields=line.split()
-  if len(fields)>=2:out.append({'serial':fields[0],'state':fields[1],'label':next((x[6:].replace('_',' ') for x in fields[2:] if x.startswith('model:')),fields[0])})
+  if len(fields)>=2 and fields[1] in ('device','offline','unauthorized','recovery','sideload','bootloader'):
+   out.append({'serial':fields[0],'state':fields[1],'label':next((x[6:].replace('_',' ') for x in fields[2:] if x.startswith('model:')),fields[0])})
  return out
 def release_manifest(path=None):
  p=Path(path) if path else ROOT/'release.json';data=json.loads(p.read_text(encoding='utf-8'))
@@ -115,11 +117,18 @@ def choose_keyboard(device,choice):
   device.shell('ime','enable',IME);device.shell('ime','set',IME)
   if device.shell('settings','get','secure','default_input_method')!=IME:raise DeployError('小企鹅尚未选为默认，请在设备端输入法设置中选择')
  elif choice!='preserve':raise DeployError('输入法选项不正确')
+def seed_keyboard_theme(device,log=print):
+ source=ROOT/'keyboard/HomeView iOS Light.json';remote='/storage/emulated/0/Android/data/org.fcitx.fcitx5.android/files/theme/'+source.name
+ if not source.is_file():raise DeployError('缺少小企鹅 Pro8 定制主题，请重新下载完整安装器')
+ if device.shell('ls','-d',remote,check=False).strip()==remote:
+  log('小企鹅已有同名主题，保留现有配置');return
+ device.shell('mkdir','-p',remote.rsplit('/',1)[0]);device.call('push',str(source),remote)
+ log('Pro8 浅色主题已传入；请在小企鹅设置中选择 HomeView iOS Light，横屏参数见键盘指南')
 def seed_wallpaper(device,apk_path):
  folder='/storage/emulated/0/Pictures/HomeView'
  existing=device.shell('find',folder,'-maxdepth','1','-type','f',check=False)
  if any(re.search(r'\.(jpe?g|png|webp)$',x,re.I) for x in existing.splitlines()):return
- with zipfile.ZipFile(apk_path) as z:content=z.read('assets/frame/hv/desktop/assets/default-wallpaper.png')
+ with zipfile.ZipFile(apk_path) as z:content=z.read('assets/frame/hv/desktop/assets/wallpaper-blue.png')
  with tempfile.TemporaryDirectory(prefix='homeview-wallpaper-') as temp:
   file=Path(temp)/'HomeView-default.png';file.write_bytes(content);device.shell('mkdir','-p',folder);device.call('push',str(file),folder+'/HomeView-default.png')
 def apply_configuration(device,item,config,log,timeout=180,media=None,wallpaper=None):
@@ -136,7 +145,7 @@ def apply_configuration(device,item,config,log,timeout=180,media=None,wallpaper=
     entries.append({'file':filename,'source':filename})
     if wallpaper is not None and path==wallpaper:config['wallpaper']=filename
    config['media']=entries
-  config=normalize(config)
+  config={k:v for k,v in normalize(config).items() if k not in ('optimize_apps','limit_background')}
   with tempfile.TemporaryDirectory(prefix='homeview-setup-') as folder:
    path=Path(folder)/name;path.write_text(json.dumps(config,ensure_ascii=False),encoding='utf-8');device.call('push',str(path),base+'/'+name)
   device.shell('am','start','-n',item['package']+'/dev.pro8.homeview.direct.SetupActivity','--es','setup_name',name)
@@ -171,6 +180,9 @@ def deploy(config,serial=None,manifest=None,log=print,adb=None,media_paths=None,
   fcitx=release.get('companions',{}).get('fcitx')
   if not fcitx:raise DeployError('本发布暂未提供小企鹅，请先保留系统输入法')
   log('下载并校验小企鹅官方安装包');packages.append((fcitx,ensure_apk(fcitx)))
+ compat=release.get('companions',{}).get('homeview_compat')
+ if compat and not d.package_path(compat['package']):
+  log('准备旧客户端相册与返回桌面的兼容入口');packages.append((compat,ensure_apk(compat)))
  # Verify every artifact before beginning installation.
  for metadata,path in packages:validate_apk(path,metadata)
  for metadata,path in packages:
@@ -180,11 +192,14 @@ def deploy(config,serial=None,manifest=None,log=print,adb=None,media_paths=None,
  if action=='install':
   home_apk=next((p for m,p in packages if m['package']==item['package']),None)
   if home_apk:seed_wallpaper(d,home_apk)
+ if config['keyboard']=='fcitx':seed_keyboard_theme(d,log)
  choose_keyboard(d,config['keyboard'])
  if config['set_home']:
   d.shell('cmd','package','set-home-activity','--user','0',item['package']+'/dev.pro8.homeview.direct.HomeActivity')
+ from .optimization import apply as apply_optimization
+ optimization=apply_optimization(d,config,item['package'],log)
  log('部署完成。请在设备端登录音乐和家庭账号')
- return {'ok':True,'version':item['version_code'],'action':action,'device':device_info,'keyboard':config['keyboard'],'accounts_copied':False}
+ return {'ok':True,'version':item['version_code'],'action':action,'device':device_info,'keyboard':config['keyboard'],'accounts_copied':False,'optimization':optimization}
 def search_cities(query):
  q=query.strip()
  if len(q)<2 or len(q)>80 or any(ord(x)<32 for x in q):raise ConfigError('请输入2到80个字的城市名')

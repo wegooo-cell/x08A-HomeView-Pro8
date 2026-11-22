@@ -4,7 +4,7 @@ import argparse,hashlib,json,os,shutil,subprocess,tempfile,urllib.request,ssl,zi
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- p=argparse.ArgumentParser();p.add_argument('--unsigned',action='store_true');p.add_argument('--keystore',type=Path);p.add_argument('--alias',default='homeview');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--unsigned',action='store_true');p.add_argument('--keystore',type=Path);p.add_argument('--alias',default='homeview');p.add_argument('--appearance-archive',type=Path);a=p.parse_args()
  sdk=Path(os.environ.get('ANDROID_HOME',os.environ.get('ANDROID_SDK_ROOT','')));jdk=Path(os.environ.get('JAVA_HOME',''));bt=sdk/'build-tools/35.0.0';jar=sdk/'platforms/android-28/android.jar';java=jdk/'bin'
  if not jar.is_file() or not (java/'javac').is_file() or not (bt/'aapt2').is_file():raise SystemExit('Need Android SDK 28, Build Tools 35.0.0 and JAVA_HOME JDK17')
  if not a.unsigned and (not a.keystore or not a.keystore.is_file()):raise SystemExit('Provide --keystore outside the source tree, or --unsigned')
@@ -18,8 +18,23 @@ def main():
  env=dict(os.environ,JAVA_HOME=str(jdk),PATH=str(java)+os.pathsep+os.environ['PATH'])
  def run(*args):subprocess.run([str(x) for x in args],check=True,env=env,stdout=subprocess.DEVNULL)
  with tempfile.TemporaryDirectory(prefix='homeview-public-build-') as temp:
-  work=Path(temp);classes=work/'classes';classes.mkdir();dex=work/'dex';dex.mkdir();assets=work/'assets';shutil.copytree(project/'assets',assets);shutil.copytree(ROOT/'frame',assets/'frame');shutil.copytree(project/'third_party',assets/'licenses')
-  run(bt/'aapt2','compile','--dir',project/'res','-o',work/'res.zip');run(bt/'aapt2','link','--auto-add-overlay','--manifest',project/'AndroidManifest.xml','-I',jar,'-R',work/'res.zip','-o',work/'unsigned.apk')
+  work=Path(temp);res=work/'res';shutil.copytree(project/'res',res);classes=work/'classes';classes.mkdir();dex=work/'dex';dex.mkdir();assets=work/'assets';shutil.copytree(project/'assets',assets);shutil.copytree(ROOT/'frame',assets/'frame');shutil.copytree(project/'third_party',assets/'licenses')
+  if a.appearance_archive:
+   with zipfile.ZipFile(a.appearance_archive) as archive:
+    total=0
+    for entry in archive.infolist():
+     name=entry.filename
+     if entry.is_dir():continue
+     if '..' in Path(name).parts or '\\' in name or entry.file_size>30*1024*1024:raise SystemExit('Appearance archive path or file is invalid')
+     total+=entry.file_size
+     if total>250*1024*1024:raise SystemExit('Appearance archive is too large')
+     if name.startswith('frame/'):destination=assets/name
+     elif name.startswith('android-launcher/res/'):destination=res/name[len('android-launcher/res/'):]
+     else:raise SystemExit('Appearance archive may contain only frame data and resource files')
+     if not destination.resolve().is_relative_to(work.resolve()):raise SystemExit('Invalid appearance path')
+     if destination.suffix.lower() not in ('.png','.jpg','.jpeg','.webp','.svg','.woff2','.ttf','.otf'):raise SystemExit('Appearance archive contains unsupported file type')
+     destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(archive.read(entry))
+  run(bt/'aapt2','compile','--dir',res,'-o',work/'res.zip');run(bt/'aapt2','link','--auto-add-overlay','--manifest',project/'AndroidManifest.xml','-I',jar,'-R',work/'res.zip','-o',work/'unsigned.apk')
   run(java/'javac','--release','8','-cp',str(jar)+os.pathsep+str(zxing),'-d',classes,*sorted((project/'src').rglob('*.java')))
   run(bt/'d8','--min-api','26','--lib',jar,'--output',dex,*sorted(classes.rglob('*.class')),zxing)
   with zipfile.ZipFile(work/'unsigned.apk','a',compression=zipfile.ZIP_DEFLATED) as z:

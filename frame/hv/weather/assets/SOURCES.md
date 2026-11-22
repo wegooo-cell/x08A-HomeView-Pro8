@@ -1,7 +1,3 @@
-# Weather page assets
+# 天气界面素材
 
-The page reuses ../desktop/assets/weather-sky.svg (generated sky used by the selected desktop weather widget), plus the desktop Ionicons and Bootstrap weather icons. No new raster artwork.
-
-ion-cloudy.svg, ion-rainy.svg, ion-eye-outline.svg: Ionicons 7.4.0, fetched from https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/svg/ . MIT license in ionicons-LICENSE.txt.
-
-Glass temperature is editable UI text using the same CSS text clipping, static sky texture and highlight treatment as the desktop widget. Forecast bars are native data indicators, not illustration assets.
+源码默认天空图形见 tools/appearance-source；天气符号来自 Ionicons 与 Bootstrap Icons，MIT 许可随对应资源保留。温度、预报条与指标由 HTML/CSS 和实际天气数据渲染。

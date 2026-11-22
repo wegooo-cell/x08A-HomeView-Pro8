@@ -9,5 +9,5 @@ html[data-scene="dissolving"] .scene-clock{will-change:opacity}
 .clock-face-picker:focus-visible{outline:3px solid #fff;outline-offset:4px}
 .clock-face-picker[hidden]{display:none}
 
-body.pro8-scene{background:#244e7e url(/frame/hv/desktop/assets/default-wallpaper.png) left top/1280px 800px no-repeat!important}
+body.pro8-scene{background:#244e7e url(/frame/hv/desktop/assets/wallpaper-blue.png) left top/1280px 800px no-repeat!important}
 .pro8-scene .desktop-content{will-change:transform}

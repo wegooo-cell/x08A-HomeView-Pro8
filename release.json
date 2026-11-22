@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "v0.1.0",
+  "version": "v0.1.1",
   "homeview": {
     "name": "HomeView",
     "package": "io.github.wegooo_cell.homeview",
-    "version_code": 169,
-    "sha256": "7519b541455befc86f9c6610475e952a3cf1fa2a039f0eeb901464badac878f5",
+    "version_code": 172,
+    "sha256": "95e8340b59f787d5a44b0de3aeb82ad700dbec3ab7c32987cd5da4aecbd48b6d",
     "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
-    "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.0/homeview-pro8.apk"
+    "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.1/homeview-pro8.apk"
   },
   "companions": {
     "fcitx": {
@@ -19,6 +19,18 @@
       "url": "https://github.com/fcitx5-android/fcitx5-android/releases/download/0.1.3/org.fcitx.fcitx5.android-0.1.3-0-g048f581c-armeabi-v7a-release.apk",
       "source": "https://github.com/fcitx5-android/fcitx5-android/tree/048f581c",
       "license": "LGPL-2.1; bundled components retain their own licenses"
+    },
+    "homeview_compat": {
+      "name": "旧客户端兼容入口",
+      "package": "dev.pro8.homeview.direct",
+      "version_code": 170,
+      "sha256": "4c2be5d62be8a94ac615846a50ef1ff4788a09c9827795c109531a17b6f13e4e",
+      "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
+      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.1/homeview-compat.apk"
     }
+  },
+  "keyboard_theme": {
+    "file": "keyboard/HomeView iOS Light.json",
+    "sha256": "9aeec05265d0b7ffa163539df4c38c4317fbf172f3ad2802720f8babacdc8190"
   }
 }

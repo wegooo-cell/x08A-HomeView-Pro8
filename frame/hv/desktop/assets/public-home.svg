@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect x="16" y="16" width="224" height="224" rx="53" fill="#98672e"/><g transform="translate(58 58) scale(0.2734375)" fill="#fff" stroke="#fff"><path d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#f0f0f1"/></linearGradient>
+<linearGradient id="rim" x2=".3" y2="1"><stop stop-color="#fff" stop-opacity=".55"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".09"/></linearGradient>
+<clipPath id="clip"><rect x="16" y="16" width="224" height="224" rx="53"/></clipPath><linearGradient id="gold" x2="0" y2="1"><stop stop-color="#ffc14d"/><stop offset=".55" stop-color="#ffb62a"/><stop offset="1" stop-color="#e99a0d"/></linearGradient></defs>
+<g clip-path="url(#clip)"><rect x="16" y="16" width="224" height="224" rx="53" fill="url(#bg)"/>
+ <path d="M72 119 H184 V192 H72Z" fill="#693a00" opacity=".13" transform="translate(0 5)"/>
+ <path d="M128 52 L208 120 H184 V189 Q184 195 178 195 H78 Q72 195 72 189 V120 H48Z" fill="url(#gold)" stroke="#ec970e" stroke-width="2" stroke-linejoin="round"/>
+ <path d="M77 121 L128 78 L179 121 V180 H77Z" fill="#ffe390" stroke="#ffc04b" stroke-width="5" stroke-linejoin="round"/>
+ <path d="M101 127 L128 104 L155 127 V165 H101Z" fill="#fff5c6" stroke="#edba58" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M62 115 L128 60 L194 115" fill="none" stroke="#fff2ca" stroke-opacity=".75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+<rect x="17" y="17" width="222" height="222" rx="52" fill="none" stroke="url(#rim)" stroke-width="2"/></g></svg>

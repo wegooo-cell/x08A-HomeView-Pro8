@@ -2,7 +2,7 @@
 html,body{width:1280px;height:800px;background:#000!important;color:#fff;touch-action:none}
 body{font-family:var(--sf);letter-spacing:0}
 #desktop-canvas{position:absolute;left:0;top:0;width:1280px;height:800px;overflow:hidden}
-.desktop-wall{position:absolute;inset:0;background:#244e7e url('/frame/hv/desktop/assets/default-wallpaper.png') center/cover no-repeat}
+.desktop-wall{position:absolute;inset:0;background:#244e7e url('/frame/hv/desktop/assets/wallpaper-blue.png') center/cover no-repeat}
 .desktop-wall:after{content:"";position:absolute;inset:0;background:rgba(4,28,61,.12)}
 .desktop-status{position:absolute;left:40px;right:40px;top:22px;display:flex;align-items:center;justify-content:space-between;color:#fff;font-size:16px;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,.2)}
 .desktop-status>div{display:flex;align-items:center;gap:18px}.desktop-status time{font-weight:600}.status-right{gap:9px!important}.status-right span{margin-right:8px;font-size:15px}.status-right img{width:20px;height:20px;filter:invert(1)}.status-right .battery{width:28px;height:24px}
@@ -10,7 +10,7 @@ body{font-family:var(--sf);letter-spacing:0}
 .widget-group{position:relative;min-width:0}.widget{border-radius:29px;overflow:hidden;width:100%;box-shadow:0 5px 19px rgba(6,29,57,.15)}
 .desktop-label{display:block;text-align:center;font-size:16px;line-height:22px;font-weight:500;margin-top:8px;text-shadow:0 1px 5px rgba(0,21,49,.65)}
 .widget-group>.desktop-label{display:none}
-.weather-widget{height:354px;background:#286ba8 url('/frame/hv/desktop/assets/weather-sky.svg') center/cover no-repeat;color:#fff;text-align:left;display:flex;flex-direction:column;padding:25px 25px 23px;position:relative;text-shadow:0 1px 4px rgba(9,41,79,.22)}
+.weather-widget{height:354px;background:#286ba8 url('/frame/hv/desktop/assets/weather-sky.png') center/cover no-repeat;color:#fff;text-align:left;display:flex;flex-direction:column;padding:25px 25px 23px;position:relative;text-shadow:0 1px 4px rgba(9,41,79,.22)}
 .weather-widget:before{content:"";position:absolute;left:0;top:0;right:0;bottom:0;background:rgba(11,45,87,.13)}
 .weather-widget>*{position:relative;z-index:1}
 .weather-top{display:flex;justify-content:space-between;align-items:flex-start;width:100%;flex:0 0 auto}
@@ -18,7 +18,7 @@ body{font-family:var(--sf);letter-spacing:0}
 .weather-condition img{width:19px;height:19px;margin-right:5px;filter:invert(1)}
 .weather-range{display:block;font-size:15px;line-height:22px;color:rgba(255,255,255,.92)}
 .weather-top time{font-size:25px;font-weight:500;line-height:29px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
-.weather-temp{font-size:144px;line-height:146px;letter-spacing:-9px;font-weight:400;margin:0 0 0 -7px;align-self:flex-start;color:rgba(232,249,255,.6);-webkit-text-fill-color:transparent;-webkit-text-stroke:.65px rgba(233,250,255,.65);background-image:linear-gradient(132deg,rgba(255,255,255,.94) 0%,rgba(239,253,255,.45) 19%,rgba(171,222,251,.12) 42%,rgba(246,255,255,.7) 65%,rgba(215,244,255,.14) 86%,rgba(255,255,255,.65) 100%),url('/frame/hv/desktop/assets/weather-sky.svg');background-size:100% 100%,380px 380px;background-position:center,-17px -63px;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;text-shadow:0 -1px 0 rgba(255,255,255,.2),0 2px 2px rgba(9,48,94,.16),0 5px 12px rgba(18,60,98,.09)}
+.weather-temp{font-size:144px;line-height:146px;letter-spacing:-9px;font-weight:400;margin:0 0 0 -7px;align-self:flex-start;color:rgba(232,249,255,.6);-webkit-text-fill-color:transparent;-webkit-text-stroke:.65px rgba(233,250,255,.65);background-image:linear-gradient(132deg,rgba(255,255,255,.94) 0%,rgba(239,253,255,.45) 19%,rgba(171,222,251,.12) 42%,rgba(246,255,255,.7) 65%,rgba(215,244,255,.14) 86%,rgba(255,255,255,.65) 100%),url('/frame/hv/desktop/assets/weather-sky.png');background-size:100% 100%,380px 380px;background-position:center,-17px -63px;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;text-shadow:0 -1px 0 rgba(255,255,255,.2),0 2px 2px rgba(9,48,94,.16),0 5px 12px rgba(18,60,98,.09)}
 .weather-metrics{display:flex;justify-content:space-between;align-items:flex-start;width:100%;margin-top:auto;padding:0 1px}
 .weather-metrics>span{display:flex;flex-direction:column;align-items:center;min-width:57px;text-align:center}
 .weather-metrics img{width:27px;height:27px;filter:invert(1);margin-bottom:7px}

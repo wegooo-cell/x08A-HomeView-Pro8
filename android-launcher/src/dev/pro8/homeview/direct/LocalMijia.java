@@ -80,13 +80,13 @@ final class LocalMijia {
     static String key(String did)throws Exception{byte[] bytes=MessageDigest.getInstance("SHA-256").digest(did.getBytes("UTF-8"));StringBuilder s=new StringBuilder();for(int i=0;i<12;i++)s.append(String.format(Locale.ROOT,"%02x",bytes[i]&255));return s.toString();}
     synchronized JSONObject pins()throws Exception{
         android.content.SharedPreferences p=context.getSharedPreferences("homeview_mijia",0);if(p.contains("pins"))return new JSONObject(p.getString("pins","{}"));
-        JSONObject chosen=new JSONObject();for(int i=0;i<items.length();i++){JSONObject e=items.getJSONObject(i);String id=e.getString("entity_id"),kind=id.split("\\.")[0];if((kind.equals("light")||kind.equals("climate"))&&!chosen.has(kind))chosen.put(kind,id);JSONObject a=e.getJSONObject("attributes");String sensor=a.optString("device_class");if((sensor.equals("temperature")||sensor.equals("humidity"))&&!chosen.has(sensor))chosen.put(sensor,id);}
+        JSONObject chosen=new JSONObject();for(int i=0;i<items.length();i++){JSONObject e=items.getJSONObject(i);String id=e.getString("entity_id"),kind=id.split("\\.")[0];if(kind.equals("light")||kind.equals("switch")||kind.equals("climate")){if(!chosen.has("light"))chosen.put("light",id);else if(!chosen.has("climate")&&!id.equals(chosen.optString("light")))chosen.put("climate",id);}JSONObject a=e.getJSONObject("attributes");String sensor=a.optString("device_class");if((sensor.equals("temperature")||sensor.equals("humidity"))&&!chosen.has(sensor))chosen.put(sensor,id);}
         if(items.length()>0)p.edit().putString("pins",chosen.toString()).apply();return chosen;
     }
     synchronized JSONObject savePins(JSONObject data)throws Exception{
         JSONArray list=entities();JSONObject selected=new JSONObject();for(String slot:new String[]{"light","climate","temperature","humidity","home_scene","night_scene"}){
             String id=data.optString(slot);if(id.isEmpty())continue;JSONObject e=null;for(int i=0;i<list.length();i++)if(id.equals(list.getJSONObject(i).getString("entity_id")))e=list.getJSONObject(i);
-            String kind=id.split("\\.")[0];boolean valid=e!=null&&(slot.equals("light")?(kind.equals("light")||kind.equals("switch")):slot.equals("climate")?kind.equals("climate"):slot.equals("temperature")||slot.equals("humidity")?kind.equals("sensor")&&slot.equals(e.getJSONObject("attributes").optString("device_class")):false);
+            String kind=id.split("\\.")[0];boolean valid=e!=null&&((slot.equals("light")||slot.equals("climate"))?(kind.equals("light")||kind.equals("switch")||kind.equals("climate")):slot.equals("temperature")||slot.equals("humidity")?kind.equals("sensor")&&slot.equals(e.getJSONObject("attributes").optString("device_class")):false);
             if(!valid)throw new IllegalArgumentException("请选择对应的米家设备");selected.put(slot,id);
         }
         if(!context.getSharedPreferences("homeview_mijia",0).edit().putString("pins",selected.toString()).commit())throw new IOException("组件保存失败，请重试");return NetEaseClient.obj("ok",true,"pins",selected);
@@ -94,9 +94,9 @@ final class LocalMijia {
     synchronized JSONObject control(JSONObject data)throws Exception{
         entities();DeviceInfo d=controls.get(data.optString("entity_id"));
         if(d==null||!d.online||!d.canSwitch)throw new IllegalArgumentException("设备离线或不支持开关控制");
-        if(!data.optString("action").equals("toggle"))throw new IllegalArgumentException("请在内置米家中进行这项调节");
+        boolean target=MijiaSwitch.target(d.on,data.optString("action"),data.optString("hvac_mode"));if(target==d.on)return NetEaseClient.obj("ok",true,"unchanged",true);
         IBinder b=connect();CountDownLatch done=new CountDownLatch(1);AtomicBoolean ok=new AtomicBoolean();Reply reply=new Reply(){void receive(boolean success,Bundle ignored){ok.set(success);done.countDown();}void failed(){done.countDown();}};
-        Parcel in=Parcel.obtain(),out=Parcel.obtain();try{in.writeInterfaceToken(INTERFACE);in.writeString(d.did);in.writeInt(d.on?0:1);in.writeStrongBinder(reply);if(!b.transact(4,in,out,0))throw new IOException("米家暂不支持这项控制");out.readException();}finally{in.recycle();out.recycle();}
+        Parcel in=Parcel.obtain(),out=Parcel.obtain();try{in.writeInterfaceToken(INTERFACE);in.writeString(d.did);in.writeInt(MijiaSwitch.wireCurrent(d.on));in.writeStrongBinder(reply);if(!b.transact(4,in,out,0))throw new IOException("米家暂不支持这项控制");out.readException();}finally{in.recycle();out.recycle();}
         if(!done.await(5,TimeUnit.SECONDS)||!ok.get())throw new IOException("米家未确认操作，请刷新设备状态");loadedAt=0;return NetEaseClient.obj("ok",true);
     }
     void close(){closed=true;remote=null;main.post(()->{if(bound){try{context.unbindService(connection);}catch(Exception ignored){}bound=false;}ready.countDown();});}
