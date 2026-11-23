@@ -138,7 +138,7 @@
         (img?'<img src="'+img+'" alt="网易云音乐登录二维码">':'<div class="cm-qr-wait">正在生成二维码…</div>')+
         '<p>'+esc(S.qr.message||'用手机端扫码，并在手机上确认')+'</p></div></div>';}
     h+='</div>';
-    app.innerHTML=h;app.classList.toggle('show-lyrics',S.lyricsOpen);app.classList.toggle('controls-hidden',!S.controlsVisible);app.classList.toggle('library-open',S.libraryOpen);updateProgress();layoutCovers(0,false);updateLyrics();renderLibraryContent();
+    app.innerHTML=h;app.classList.toggle('show-lyrics',S.lyricsOpen);app.classList.toggle('controls-hidden',!S.controlsVisible&&!!(signed||external));app.classList.toggle('library-open',S.libraryOpen);updateProgress();layoutCovers(0,false);updateLyrics();renderLibraryContent();
     if(restoreSearch&&S.libraryOpen){var input=document.getElementById('cm-search');if(input){input.focus();try{input.setSelectionRange(caret,caret);}catch(ignore){}}}
   }
   function textAt(selector,value){var el=app.querySelector(selector);if(el&&el.textContent!==value)el.textContent=value;}
@@ -193,6 +193,7 @@
       var image=artUrl(s&&s.art,96,true);if(image)transitionBackdrop(image);
       var lyricBox=document.getElementById('cm-lyrics-text');lyricBox.removeAttribute('data-ready');S.lyricIndex=-1;updateLyrics();
     }
+    if(!s&&S.status&&!external){textAt('.cm-artist',signed?'在 Pro 8 上浏览歌单与音乐':'点击资料库，扫码登录后听歌');textAt('.cm-album',signed?'选择歌曲开始播放':'资料库 → 扫码登录');}
     app.classList.toggle('airplay-source',!!external);textAt('.cm-account',external?'来自 AirPlay':'音乐');
     var playing=external?external.playing!==false&&external.streaming:S.playing,playButton=app.querySelector('.cm-play'),icon=playing?PAUSE:PLAY;if(playButton.innerHTML!==icon)playButton.innerHTML=icon;
     playButton.setAttribute('aria-label',playing?'暂停':'播放');
@@ -200,7 +201,7 @@
     document.getElementById('cm-search').disabled=!signed;
     var syncButton=app.querySelector('[data-sync-library]');syncButton.disabled=!signed||!!librarySync;syncButton.setAttribute('aria-busy',String(!!librarySync));textAt('.cm-sync-status',libraryText);var ob=app.querySelector('[data-order]');if(ob.getAttribute('data-mode')!==order.mode){ob.innerHTML=orderIcon();ob.setAttribute('data-mode',order.mode);}ob.setAttribute('aria-label',orderNames[order.mode]);ob.title=orderNames[order.mode];ob.disabled=!!external;
     if(S.libraryOpen&&!app.classList.contains('library-open'))librarySnapshot();
-    app.classList.toggle('show-lyrics',S.lyricsOpen);app.classList.toggle('controls-hidden',!S.controlsVisible);app.classList.toggle('library-open',S.libraryOpen);
+    app.classList.toggle('show-lyrics',S.lyricsOpen);app.classList.toggle('controls-hidden',!S.controlsVisible&&!!(signed||external));app.classList.toggle('library-open',S.libraryOpen);
     var panel=app.querySelector('.cm-library');panel.classList.toggle('on',S.libraryOpen);app.querySelector('.cm-panel-shade').classList.toggle('on',S.libraryOpen);
     app.querySelector('.cm-mode [data-library]').classList.toggle('on',S.libraryOpen);app.querySelector('.cm-mode [data-panel-close]').classList.toggle('on',!S.libraryOpen);
     var note=app.querySelector('.cm-note');note.hidden=!S.error;textAt('.cm-note',S.error);renderLike();
@@ -533,6 +534,7 @@
   audio.volume=.65;try{if(parent!==window&&parent.HVDesktopHost&&parent.HVDesktopHost.silent())audio.muted=true;}catch(ignore){}
   var idleTimer=null,lastActivity=0;
   function setControlsVisible(visible){
+    if(!external&&!(S.status&&S.status.signed_in))visible=true;
     if(vinyl&&!vinylPlayer)visible=true;
     if(S.controlsVisible===visible)return;
     S.controlsVisible=visible;app.classList.toggle('controls-hidden',!visible);

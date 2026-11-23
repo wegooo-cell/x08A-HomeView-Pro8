@@ -41,7 +41,37 @@ def canonical_admin(value,country):
    if value in [full,*aliases.split('|')]:return full
  return value
 
+def search_domestic(query,fetch):
+ from .config import city
+ for name,country in plans(query):
+  parts=name.split(', ',1);province=next((r[0] for r in provinces() if len(parts)>1 and r[2]==parts[1]),'')
+  params={'keywords':parts[0],'limit':100}
+  if country:params['country']=country
+  data=fetch('https://uapis.cn/api/v1/misc/district?'+urllib.parse.urlencode(params));rows=[]
+  for row in data.get('results') or []:
+   level=row.get('level');admin=canonical_admin(row.get('province',''),row.get('country_code'))
+   if province and province!=admin:continue
+   if level not in ('city','district') and not (level=='province' and row.get('name') in ('北京市','上海市','天津市','重庆市')):continue
+   if not accept_name(parts[0],row.get('name','')):continue
+   try:
+    china=row.get('country_code')=='CN';center=row['center']
+    value={'name':row['name'],'latitude':center['lat'],'longitude':center['lng'],'timezone':'Asia/Shanghai' if china else row.get('timezone',''),'country':row.get('country',''),'admin1':admin,'admin2':row.get('city',''),'feature_code':'PPLA3' if level=='district' else 'PPLA2'}
+    if china:value['adcode']=row['adcode']
+    rows.append(city(value))
+   except (KeyError,ValueError,TypeError):continue
+  rows.sort(key=lambda c:rank(c['feature_code']))
+  if rows:return rows[:10]
+ return []
+
 def search(query,fetch):
+ plans(query)
+ try:
+  domestic=search_domestic(query,fetch)
+  if domestic:return domestic
+ except (OSError,ValueError):pass
+ return search_open_meteo(query,fetch)
+
+def search_open_meteo(query,fetch):
  from .config import city
  found=[]
  for name,country in plans(query):

@@ -1,0 +1,26 @@
+{
+  "code": 200,
+  "success": true,
+  "city": "长春",
+  "location": {
+    "name": "长春",
+    "province": "吉林省"
+  },
+  "current": {
+    "temperature": -0.8,
+    "feels_like": -5.4,
+    "humidity": 52,
+    "weather": null,
+    "wind_speed": 3.8,
+    "wind_level": "3级",
+    "updated_at": "2026-01-01 10:00"
+  },
+  "forecast": [
+    {
+      "date": "2026-01-01",
+      "day_weather": "多云",
+      "max_temp": 0,
+      "min_temp": -11
+    }
+  ]
+}

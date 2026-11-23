@@ -51,6 +51,7 @@ final class CitySearch {
         }
         return value;
     }
+    List<String[]> provinceRows(){return Collections.unmodifiableList(provinces);}
     static int rank(String code){
         switch(code){case "PPLC":return 0;case "PPLA":return 1;case "PPLA2":return 2;case "PPLA3":return 3;case "PPL":return 4;case "PPLX":return 5;case "PPLA4":return 6;default:return 99;}
     }

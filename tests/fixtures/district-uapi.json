@@ -1,0 +1,83 @@
+{
+  "total": 5,
+  "results": [
+    {
+      "name": "长春街道",
+      "level": "street",
+      "country": "中国",
+      "country_code": "CN",
+      "province": "辽宁省",
+      "city": "抚顺市",
+      "district": "顺城区",
+      "street": "长春街道",
+      "adcode": "210411",
+      "citycode": "0413",
+      "center": {
+        "lat": 41.90266,
+        "lng": 123.94264
+      }
+    },
+    {
+      "name": "长春市",
+      "level": "city",
+      "country": "中国",
+      "country_code": "CN",
+      "province": "吉林省",
+      "city": "长春市",
+      "adcode": "220100",
+      "citycode": "0431",
+      "center": {
+        "lat": 43.816996,
+        "lng": 125.323643
+      }
+    },
+    {
+      "name": "长春镇",
+      "level": "street",
+      "country": "中国",
+      "country_code": "CN",
+      "province": "黑龙江省",
+      "city": "齐齐哈尔市",
+      "district": "拜泉县",
+      "street": "长春镇",
+      "adcode": "230231",
+      "citycode": "0452",
+      "center": {
+        "lat": 47.830426,
+        "lng": 125.534607
+      }
+    },
+    {
+      "name": "长春镇",
+      "level": "street",
+      "country": "中国",
+      "country_code": "CN",
+      "province": "福建省",
+      "city": "宁德市",
+      "district": "霞浦县",
+      "street": "长春镇",
+      "adcode": "350921",
+      "citycode": "0593",
+      "center": {
+        "lat": 26.60986,
+        "lng": 120.110069
+      }
+    },
+    {
+      "name": "长春镇",
+      "level": "street",
+      "country": "中国",
+      "country_code": "CN",
+      "province": "湖南省",
+      "city": "益阳市",
+      "district": "资阳区",
+      "street": "长春镇",
+      "adcode": "430902",
+      "citycode": "0737",
+      "center": {
+        "lat": 28.710458,
+        "lng": 112.31585
+      }
+    }
+  ]
+}

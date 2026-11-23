@@ -20,6 +20,10 @@ def place(name='长春市', **extra):
 
 
 class CitySearch(unittest.TestCase):
+    def setUp(self):
+        # Preserve regression coverage of the legacy search used on fallback.
+        override = patch('installer.geocoding.search_domestic', return_value=[])
+        override.start(); self.addCleanup(override.stop)
     def test_short_name_uses_city_coordinates_without_homonym_query(self):
         with patch('installer.core.request_json', return_value={'results': [place()]}) as fetch:
             result = core.search_cities('长春')

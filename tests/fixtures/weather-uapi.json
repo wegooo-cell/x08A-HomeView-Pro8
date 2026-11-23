@@ -1,0 +1,33 @@
+{
+  "province": "吉林省",
+  "city": "长春市",
+  "adcode": "220100",
+  "temperature": 0,
+  "weather": "小雪",
+  "humidity": 52,
+  "wind_power": "4级",
+  "feels_like": -6,
+  "visibility": 18.2,
+  "uv": 1,
+  "aqi": 46,
+  "report_time": "2026-01-01 10:00:00",
+  "forecast": [
+    {
+      "date": "2026-01-01",
+      "temp_max": 0,
+      "temp_min": -11,
+      "weather_day": "多云",
+      "sunrise": "06:42",
+      "sunset": "16:08"
+    }
+  ],
+  "hourly_forecast": [
+    {
+      "time": "2026-01-01 10:00:00",
+      "temperature": 0,
+      "weather": "小雪",
+      "wind_speed": 24,
+      "precipitation_probability": 0
+    }
+  ]
+}
