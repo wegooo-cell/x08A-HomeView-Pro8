@@ -2,7 +2,7 @@
 import math,re
 from urllib.parse import urlsplit,urlunsplit
 SCHEMA=1
-PRESETS=[{'name':n,'latitude':a,'longitude':b,'timezone':'Asia/Shanghai','country':'中国','admin1':n} for n,a,b in [('北京',39.9075,116.39723),('上海',31.22222,121.45806),('广州',23.1291,113.2644),('深圳',22.5431,114.0579),('杭州',30.2741,120.1551),('成都',30.5728,104.0668),('武汉',30.5928,114.3055),('西安',34.3416,108.9398)]]
+PRESETS=[{'name':n,'latitude':a,'longitude':b,'timezone':'Asia/Shanghai','country':'中国','admin1':{'北京':'北京市','上海':'上海市','广州':'广东省','深圳':'广东省','杭州':'浙江省','成都':'四川省','武汉':'湖北省','西安':'陕西省'}[n]} for n,a,b in [('北京',39.9075,116.39723),('上海',31.22222,121.45806),('广州',23.1291,113.2644),('深圳',22.5431,114.0579),('杭州',30.2741,120.1551),('成都',30.5728,104.0668),('武汉',30.5928,114.3055),('西安',34.3416,108.9398)]]
 class ConfigError(ValueError):pass
 def text(value,limit):
  if not isinstance(value,str) or len(value)>limit or any(ord(c)<32 for c in value):raise ConfigError('配置文字格式不正确')
@@ -14,13 +14,16 @@ def ha_url(raw):
  if u.scheme not in ('http','https') or not u.hostname or u.username is not None or u.password is not None or u.query or u.fragment or u.path not in ('','/') or port is not None and not 1<=port<=65535:raise ConfigError('请填写完整 HA 地址，如 http://192.168.1.10:8123，不填写账号、密码或令牌')
  return urlunsplit((u.scheme,u.netloc,'','',''))
 def city(value):
- if not isinstance(value,dict) or set(value)-{'name','latitude','longitude','timezone','country','admin1'}:raise ConfigError('请从搜索结果中选择城市')
+ if not isinstance(value,dict) or set(value)-{'name','latitude','longitude','timezone','country','admin1','admin2','feature_code'}:raise ConfigError('请从搜索结果中选择城市')
  out={k:text(value.get(k,''),80) for k in ['name','timezone','country','admin1']}
  if not out['name'] or not re.fullmatch(r'[A-Za-z0-9_+./-]{1,80}',out['timezone']):raise ConfigError('城市或时区不正确')
  for key,bound in [('latitude',90),('longitude',180)]:
   v=value.get(key)
   if isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) or abs(v)>bound:raise ConfigError('城市坐标不正确')
   out[key]=v
+ for key in ('admin2','feature_code'):
+  if value.get(key):out[key]=text(value[key],80)
+ if out.get('feature_code') and not re.fullmatch(r'PPL[A-Z0-9]{0,4}',out['feature_code']):raise ConfigError('地点类型不正确')
  return out
 def normalize(value):
  if not isinstance(value,dict) or set(value)-{'schema','weather','keyboard','family','set_home','idle','media','wallpaper','optimize_apps','limit_background'}:raise ConfigError('配置包含不支持的项目；请勿放入任何账号凭据')

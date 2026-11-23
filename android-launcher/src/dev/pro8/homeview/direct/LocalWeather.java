@@ -15,6 +15,7 @@ final class LocalWeather implements Closeable {
     private static final Set<String> ZONES=new HashSet<>(Arrays.asList(TimeZone.getAvailableIDs()));
     interface Fetcher { JSONObject get(String url,int timeout) throws Exception; }
     private final Fetcher fetcher;
+    private CitySearch citySearch=new CitySearch();
     private final File cache,legacy;
     private final AtomicFile config;
     private final ExecutorService airWorker=new ThreadPoolExecutor(1,1,0,TimeUnit.SECONDS,new ArrayBlockingQueue<Runnable>(1),new ThreadPoolExecutor.DiscardOldestPolicy());
@@ -22,7 +23,11 @@ final class LocalWeather implements Closeable {
     private long lastAttempt,generation;
     private boolean loading,closed;
     private String lastError="";
-    LocalWeather(Context context){this(context.getFilesDir(),LocalWeather::get);}
+    LocalWeather(Context context){
+        this(context.getFilesDir(),LocalWeather::get);
+        try{citySearch=new CitySearch(context.getAssets().open("frame/hv/weather/provinces.tsv"));}
+        catch(IOException e){throw new IllegalStateException("City search rules unavailable",e);}
+    }
     LocalWeather(File directory,Fetcher fetcher){
         this.fetcher=fetcher;
         config=new AtomicFile(new File(directory,"weather-location.json"));
@@ -48,9 +53,24 @@ final class LocalWeather implements Closeable {
     JSONObject search(String query) throws Exception {
         query=query==null?"":query.trim();
         if(query.length()<2||query.length()>80||query.matches("(?s).*[\\p{Cntrl}].*"))throw new IllegalArgumentException("请输入2至80个字的城市名");
-        JSONObject raw=fetcher.get("https://geocoding-api.open-meteo.com/v1/search?name="+encode(query)+"&count=10&language=zh&format=json",4500);
-        JSONArray results=raw.optJSONArray("results"),cities=new JSONArray();
-        if(results!=null)for(int i=0;i<Math.min(10,results.length());i++)try{cities.put(normalize(results.getJSONObject(i)));}catch(Exception ignored){}
+        JSONArray cities=new JSONArray();
+        for(CitySearch.Query plan:citySearch.plans(query)){
+            JSONObject raw=fetcher.get("https://geocoding-api.open-meteo.com/v1/search?name="+encode(plan.name)+"&count=20&language=zh&format=json"+(plan.country.isEmpty()?"":"&countryCode="+plan.country),4500);
+            JSONArray results=raw.optJSONArray("results");List<JSONObject> valid=new ArrayList<>();
+            if(results!=null)for(int i=0;i<results.length();i++)try{
+                JSONObject row=results.getJSONObject(i);String code=row.optString("feature_code");
+                if(CitySearch.rank(code)==99||!CitySearch.acceptName(plan.name,row.optString("name")))continue;
+                row.put("admin1",citySearch.admin(row.optString("admin1"),row.optString("country_code")));
+                JSONObject value=normalize(row);value.put("population",row.optLong("population"));valid.add(value);
+            }catch(Exception ignored){}
+            Collections.sort(valid,(a,b)->{
+                int rank=Integer.compare(CitySearch.rank(a.optString("feature_code")),CitySearch.rank(b.optString("feature_code")));
+                return rank!=0?rank:Long.compare(b.optLong("population"),a.optLong("population"));
+            });
+            Set<String> seen=new HashSet<>();
+            for(JSONObject row:valid){row.remove("population");if(seen.add(key(row)))cities.put(row);if(cities.length()>=10)break;}
+            if(cities.length()>0)break;
+        }
         return new JSONObject().put("ok",true).put("results",cities);
     }
     static JSONObject normalize(JSONObject input) throws Exception {
@@ -60,8 +80,15 @@ final class LocalWeather implements Closeable {
         if(!Double.isFinite(lat)||!Double.isFinite(lon)||lat < -90||lat > 90||lon < -180||lon > 180)throw new IllegalArgumentException("城市坐标无效");
         String name=clean(input.optString("name"),80),zone=clean(input.optString("timezone"),80);
         if(name.isEmpty()||!ZONES.contains(zone))throw new IllegalArgumentException("城市名称或时区无效");
-        return new JSONObject().put("name",name).put("latitude",lat).put("longitude",lon).put("timezone",zone)
+        JSONObject value=new JSONObject().put("name",name).put("latitude",lat).put("longitude",lon).put("timezone",zone)
             .put("country",clean(input.optString("country"),80)).put("admin1",clean(input.optString("admin1"),80));
+        if(input.has("admin2"))value.put("admin2",clean(input.optString("admin2"),80));
+        if(input.has("feature_code")){
+            String code=clean(input.optString("feature_code"),8);
+            if(!code.matches("PPL[A-Z0-9]{0,4}"))throw new IllegalArgumentException("地点类型无效");
+            value.put("feature_code",code);
+        }
+        return value;
     }
     private static String clean(String value,int max){value=value.trim();if(value.length()>max||value.matches("(?s).*[\\p{Cntrl}].*"))throw new IllegalArgumentException("城市信息无效");return value;}
     private static String key(JSONObject loc){return loc.optString("name")+"\n"+loc.optDouble("latitude")+"\n"+loc.optDouble("longitude")+"\n"+loc.optString("timezone");}

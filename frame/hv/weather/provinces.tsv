@@ -1,0 +1,32 @@
+# name	aliases	qualifier	capital	city_name
+北京市	北京	Beijing	北京市	1
+天津市	天津	Tianjin	天津市	1
+上海市	上海	Shanghai	上海市	1
+重庆市	重庆	Chongqing	重庆市	1
+河北省	河北	Hebei	石家庄市	0
+山西省	山西	Shanxi	太原市	0
+辽宁省	辽宁	Liaoning	沈阳市	0
+吉林省	吉林	Jilin	长春市	1
+黑龙江省	黑龙江	Heilongjiang	哈尔滨市	0
+江苏省	江苏	Jiangsu	南京市	0
+浙江省	浙江	Zhejiang	杭州市	0
+安徽省	安徽	Anhui	合肥市	0
+福建省	福建	Fujian	福州市	0
+江西省	江西	Jiangxi	南昌市	0
+山东省	山东	Shandong	济南市	0
+河南省	河南	Henan	郑州市	0
+湖北省	湖北	Hubei	武汉市	0
+湖南省	湖南	Hunan	长沙市	0
+广东省	广东	Guangdong	广州市	0
+海南省	海南	Hainan	海口市	0
+四川省	四川	Sichuan	成都市	0
+贵州省	贵州	Guizhou	贵阳市	0
+云南省	云南	Yunnan	昆明市	0
+陕西省	陕西	Shaanxi	西安市	0
+甘肃省	甘肃	Gansu	兰州市	0
+青海省	青海	Qinghai	西宁市	0
+内蒙古自治区	内蒙古	Inner Mongolia	呼和浩特市	0
+广西壮族自治区	广西	Guangxi	南宁市	0
+西藏自治区	西藏	Tibet	拉萨市	0
+宁夏回族自治区	宁夏	Ningxia	银川市	0
+新疆维吾尔自治区	新疆	Xinjiang	乌鲁木齐市	0

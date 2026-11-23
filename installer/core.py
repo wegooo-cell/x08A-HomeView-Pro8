@@ -206,9 +206,6 @@ def deploy(config,serial=None,manifest=None,log=print,adb=None,media_paths=None,
 def search_cities(query):
  q=query.strip()
  if len(q)<2 or len(q)>80 or any(ord(x)<32 for x in q):raise ConfigError('请输入2到80个字的城市名')
- data=request_json('https://geocoding-api.open-meteo.com/v1/search?'+urllib.parse.urlencode({'name':q,'count':10,'language':'zh','format':'json'}));out=[]
- from .config import city
- for row in data.get('results',[]):
-  try:out.append(city({k:row.get(k,'') for k in ['name','latitude','longitude','timezone','country','admin1']}))
-  except ConfigError:pass
- return out
+ from .geocoding import search
+ try:return search(q,request_json)
+ except ValueError as e:raise ConfigError(str(e)) from e

@@ -14,6 +14,6 @@ def main():
   except Exception as e:result={'ok':False,'error':str(e)}
   a.diagnose_adb.write_text(json.dumps(result,ensure_ascii=False));return
  if a.self_test_result:
-  manifest=release_manifest();root=Path(__file__).parent;assert (root/'installer/web/index.html').is_file();assert manifest['schema']==1;assert (root/'keyboard/HomeView iOS Light.json').is_file();a.self_test_result.write_text(json.dumps({'ok':True,'python':sys.version.split()[0],'platform':sys.platform}));return
+  manifest=release_manifest();root=Path(__file__).parent;assert (root/'installer/web/index.html').is_file();assert manifest['schema']==1;assert (root/'keyboard/HomeView iOS Light.json').is_file();assert (root/'frame/hv/weather/provinces.tsv').is_file();a.self_test_result.write_text(json.dumps({'ok':True,'python':sys.version.split()[0],'platform':sys.platform}));return
  serve()
 if __name__=='__main__':main()
