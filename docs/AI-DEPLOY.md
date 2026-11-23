@@ -63,3 +63,7 @@ python deploy.py --config config.json --import "/path/photo.jpg" --wallpaper "/p
 不读取账号文件、不索取音乐/哔哩哔哩/米家/HA/iCloud 密码或令牌，不卸载、不清数据、不降级、不禁用输入法，不修改 root、Device Owner、无线调试或全局安全设置。签名冲突时先说明原因，保留现有数据。
 
 安装器自己的包名、版本、SHA256 和证书来自 `release.json`。从第三方复制 APK 后不得随意修改清单绕过校验。
+
+## 电源键
+
+`power_key` 默认随 `set_home` 开启。部署会检查 Pro8 PMIC、保存原布局恢复文件，再选用仅覆盖扫描码 116 的 HOME 布局。需要锁屏授权时请用户在 Pro8 系统窗口确认，禁止脚本点击授权或强制激活设备管理。未确认时报告单击已配置、双击待授权；不要把这种状态报告为全部完成。设 `power_key: false` 保留现有按键；不选默认桌面时不得启用按键配置。[恢复方法](POWER-KEY.md)。

@@ -30,7 +30,7 @@ def city(value):
   out['adcode']=value['adcode']
  return out
 def normalize(value):
- if not isinstance(value,dict) or set(value)-{'schema','weather','keyboard','family','set_home','idle','media','wallpaper','optimize_apps','limit_background'}:raise ConfigError('配置包含不支持的项目；请勿放入任何账号凭据')
+ if not isinstance(value,dict) or set(value)-{'schema','weather','keyboard','family','set_home','power_key','idle','media','wallpaper','optimize_apps','limit_background'}:raise ConfigError('配置包含不支持的项目；请勿放入任何账号凭据')
  if value.get('schema',SCHEMA)!=SCHEMA:raise ConfigError('配置版本不支持')
  keyboard=value.get('keyboard','preserve');family=value.get('family',{'provider':'preserve'})
  if keyboard not in ('preserve','fcitx'):raise ConfigError('请选择保留系统输入法或小企鹅')
@@ -44,6 +44,10 @@ def normalize(value):
  set_home=value.get('set_home',True)
  if not isinstance(set_home,bool):raise ConfigError('默认桌面选项不正确')
  out={'schema':SCHEMA,'weather':None if value.get('weather') is None else city(value['weather']),'keyboard':keyboard,'family':f,'set_home':set_home}
+ power_key=value.get('power_key',set_home)
+ if type(power_key) is not bool:raise ConfigError('电源键选项不正确')
+ if power_key and not set_home:raise ConfigError('启用按键切换时，请将 HomeView 设为默认桌面')
+ out['power_key']=power_key
  if value.get('idle') is not None:
   idle=value['idle']
   if not isinstance(idle,dict) or not idle or set(idle)-{'mode','minutes'}:raise ConfigError('待机设置不正确')

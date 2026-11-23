@@ -145,7 +145,7 @@ def apply_configuration(device,item,config,log,timeout=180,media=None,wallpaper=
     entries.append({'file':filename,'source':filename})
     if wallpaper is not None and path==wallpaper:config['wallpaper']=filename
    config['media']=entries
-  config={k:v for k,v in normalize(config).items() if k not in ('optimize_apps','limit_background')}
+  config={k:v for k,v in normalize(config).items() if k not in ('optimize_apps','limit_background','power_key')}
   with tempfile.TemporaryDirectory(prefix='homeview-setup-') as folder:
    path=Path(folder)/name;path.write_text(json.dumps(config,ensure_ascii=False),encoding='utf-8');device.call('push',str(path),base+'/'+name)
   device.shell('am','start','-n',item['package']+'/dev.pro8.homeview.direct.SetupActivity','--es','setup_name',name)
@@ -201,8 +201,10 @@ def deploy(config,serial=None,manifest=None,log=print,adb=None,media_paths=None,
   d.shell('cmd','package','set-home-activity','--user','0',item['package']+'/dev.pro8.homeview.direct.HomeActivity')
  from .optimization import apply as apply_optimization
  optimization=apply_optimization(d,config,item['package'],log)
+ from .power_key import apply as apply_power_key
+ power_key=apply_power_key(d,config,item['package'],log)
  log('部署完成。请在设备端登录音乐和家庭账号')
- return {'ok':True,'version':item['version_code'],'action':action,'device':device_info,'keyboard':config['keyboard'],'accounts_copied':False,'optimization':optimization}
+ return {'ok':True,'version':item['version_code'],'action':action,'device':device_info,'keyboard':config['keyboard'],'accounts_copied':False,'optimization':optimization,'power_key':power_key}
 def search_cities(query):
  q=query.strip()
  if len(q)<2 or len(q)>80 or any(ord(x)<32 for x in q):raise ConfigError('请输入2到80个字的城市名')

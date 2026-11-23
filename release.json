@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "v0.1.4",
+  "version": "v0.1.5",
   "homeview": {
     "name": "HomeView",
     "package": "io.github.wegooo_cell.homeview",
-    "version_code": 177,
-    "sha256": "4747be70984ae5b4039fe2b3cf90c175304373e0a42e43939ab145fdf9fe566f",
+    "version_code": 179,
+    "sha256": "84862e4c2e518bd7433dc2df4bf8896aa78a03235b2906e0050833d3e3592848",
     "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
-    "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.4/homeview-pro8.apk"
+    "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.5/homeview-pro8.apk"
   },
   "companions": {
     "fcitx": {
@@ -24,17 +24,17 @@
       "name": "旧客户端兼容入口",
       "package": "dev.pro8.homeview.direct",
       "version_code": 170,
-      "sha256": "ef1520c4037a5f63e19a170359627a0de97c3637b316955fd723fcf5d8ef8164",
+      "sha256": "b2024c3609cc6e2ea708cfac6b20fa0f513575359710c9a75012c3ba2956ac18",
       "certificate_sha256": "63f269706aaecd9e301e53b5a30f929a4344020c33759b4f30366be46a9c9c00",
-      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.4/homeview-compat.apk"
+      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.5/homeview-compat.apk"
     },
     "homeview_widget_bridge": {
       "name": "视频标题与封面只读兼容组件",
       "package": "io.github.wegooo_cell.homeview.bili_bridge",
       "version_code": 1,
-      "sha256": "da73d4655e589fc2b2a442c01b75c616d0fbb594b0047ee051792724e9296628",
+      "sha256": "4b4cb3e9962da68b36f49db05644e3ccb64231d6f62fca2b3973a92abed3b331",
       "certificate_sha256": "47093be42e10de68eef68ac0a6c4621c2b6c9c765fce440f95fcb8cba64b7104",
-      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.4/homeview-widget-bridge.apk"
+      "url": "https://github.com/wegooo-cell/x08A-HomeView-Pro8/releases/download/v0.1.5/homeview-widget-bridge.apk"
     }
   },
   "keyboard_theme": {

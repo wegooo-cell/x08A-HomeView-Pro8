@@ -29,6 +29,7 @@ public final class ReturnOverlayService extends Service {
     private View button;
     private boolean receiverRegistered;
     private HomeKeyController homeKeys;
+    private android.os.HandlerThread keyThread;
     private final Handler screenHandler = new Handler();
     private final BroadcastReceiver screenReceiver = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
@@ -70,7 +71,10 @@ public final class ReturnOverlayService extends Service {
             IntentFilter events = new IntentFilter(Intent.ACTION_SCREEN_ON);
             events.addAction(Intent.ACTION_SCREEN_OFF);
             events.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-            registerReceiver(screenReceiver, events);
+            // A desktop switch can keep the UI thread busy. Receive both presses
+            // on one independent queue so rendering does not stretch their interval.
+            keyThread=new android.os.HandlerThread("HomeViewHomeKeys");keyThread.start();
+            registerReceiver(screenReceiver, events, null, new Handler(keyThread.getLooper()));
             receiverRegistered = true;
         }
         if (intent != null && intent.getBooleanExtra("show_overlay", false)) showButton();
@@ -137,6 +141,7 @@ public final class ReturnOverlayService extends Service {
     @Override public void onDestroy() {
         if (receiverRegistered) unregisterReceiver(screenReceiver);
         receiverRegistered = false;
+        if(keyThread!=null){keyThread.quitSafely();keyThread=null;}
         screenHandler.removeCallbacksAndMessages(null);
         hideButton();
         stopForeground(true);

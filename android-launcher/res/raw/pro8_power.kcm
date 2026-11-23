@@ -1,0 +1,3 @@
+# Applied only to Pro8's PMIC input device by the USB installer.
+type OVERLAY
+map key 116 HOME

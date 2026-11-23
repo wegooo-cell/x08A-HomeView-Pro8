@@ -8,5 +8,6 @@
   "idle": null,
   "set_home": true,
   "optimize_apps": true,
-  "limit_background": true
+  "limit_background": true,
+  "power_key": true
 }
