@@ -79,9 +79,11 @@ class CitySearch(unittest.TestCase):
 import java.io.*;
 public class CitySearchCheck {
  public static void main(String[] args) throws Exception {
+  System.setOut(new PrintStream(System.out,true,"UTF-8"));
   CitySearch search=new CitySearch(new FileInputStream(args[0]));
-  for(int i=1;i<args.length;i++) {
-   try {for(CitySearch.Query p:search.plans(args[i]))System.out.println(p.name+"\\t"+p.country);}
+  BufferedReader input=new BufferedReader(new InputStreamReader(new FileInputStream(args[1]),"UTF-8"));
+  String query;while((query=input.readLine())!=null) {
+   try {for(CitySearch.Query p:search.plans(query))System.out.println(p.name+"\\t"+p.country);}
    catch(IllegalArgumentException e){System.out.println("ERROR");}
    System.out.println("END");
   }
@@ -96,10 +98,13 @@ public class CitySearchCheck {
         queries = ['长春', '长春市', '吉林市', '吉林', '吉林省长春市', '吉林长春', '北京', '北京市', '福建', '福建省福州', '广东深圳', 'Changchun']
         with tempfile.TemporaryDirectory() as tmp:
             test = Path(tmp)/'CitySearchCheck.java'; test.write_text(harness, encoding='utf-8')
+            # Windows Java launchers can convert Unicode command-line arguments
+            # using the system code page. Send the queries through a UTF-8 file.
+            query_file = Path(tmp)/'queries.txt'; query_file.write_text('\n'.join(queries), encoding='utf-8')
             subprocess.run([javac, '-encoding', 'UTF-8', '-d', tmp,
                             str(ROOT/'android-launcher/src/dev/pro8/homeview/direct/CitySearch.java'), str(test)], check=True, capture_output=True)
             run = subprocess.run([java, '-Dfile.encoding=UTF-8', '-cp', tmp,
-                                  'dev.pro8.homeview.direct.CitySearchCheck', str(ROOT/'frame/hv/weather/provinces.tsv'), *queries],
+                                  'dev.pro8.homeview.direct.CitySearchCheck', str(ROOT/'frame/hv/weather/provinces.tsv'), str(query_file)],
                                  check=True, capture_output=True, encoding='utf-8')
         results = run.stdout.split('END\n')[:-1]
         for query, actual in zip(queries, results):
