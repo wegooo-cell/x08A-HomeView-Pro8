@@ -16,7 +16,7 @@ class PowerKey(unittest.TestCase):
   raw='Event Hub State:\n    1: keyboard\n      HaveKeyboardLayoutOverlay: true\n    3: mtk-pmic-keys\n      HaveKeyboardLayoutOverlay: false\nInput Reader State:\n'
   self.assertFalse(p.overlay_active(raw));self.assertTrue(p.overlay_active(raw.replace('Overlay: false','Overlay: true')))
  def test_backup_precedes_mutation_and_missing_authorization_is_reported(self):
-  d=Mock(serial='test');d.package_path.return_value='/base.apk';d.shell.return_value='Event Hub State:\n    3: mtk-pmic-keys\n      HaveKeyboardLayoutOverlay: true\nInput Reader State:'
+  d=Mock(serial='test');d.package_path.return_value='/base.apk';d.shell.side_effect=lambda *args,**kw:'SYSTEM_ALERT_WINDOW: ignore' if args[:3]==('cmd','appops','get') else 'Event Hub State:\n    3: mtk-pmic-keys\n      HaveKeyboardLayoutOverlay: true\nInput Reader State:'
   original={'device':'mtk-pmic-keys','descriptor':'a'*40,'current':None,'enabled_before':[]}
   with tempfile.TemporaryDirectory() as tmp,patch('installer.core.cache_dir',return_value=Path(tmp)),patch.object(p,'authorize',return_value={'status':'declined','authorized':False}),patch.object(p,'shell_entry') as entry:
    def call(device,apk,op):
@@ -41,9 +41,9 @@ class PowerKey(unittest.TestCase):
 
 
 class OverlayGuard(unittest.TestCase):
- def test_no_visible_overlay_has_no_mutation(self):
+ def test_already_ignored_overlay_preserves_existing_mode(self):
   from installer.permission_overlay import PermissionOverlay
-  d=Mock();d.shell.return_value='no visible windows'
+  d=Mock();d.shell.return_value='SYSTEM_ALERT_WINDOW: ignore'
   with PermissionOverlay(d,lambda _:None):pass
   self.assertEqual(d.shell.call_count,1);d.call.assert_not_called()
  def test_watchdog_and_finally_restore_original_mode(self):
@@ -55,7 +55,7 @@ class OverlayGuard(unittest.TestCase):
     raw=Path(args[1]).read_bytes();assert b'\r' not in raw;self.script=raw.decode('utf-8');self.calls.append(args);return ''
    def shell(self,*args,**kw):
     self.calls.append(args)
-    if args[:3]==('dumpsys','window','windows'):return 'Window #1 package=com.android.systemui appop=SYSTEM_ALERT_WINDOW isOnScreen=true'
+    if args[:3]==('dumpsys','window','windows'):return 'no overlays while HomeView is foreground'
     if args[:3]==('cmd','appops','get'):return 'SYSTEM_ALERT_WINDOW: '+self.mode
     if args[:3]==('cmd','appops','set'):self.mode=args[-1];return ''
     if args[0]=='cat':return 'ready'

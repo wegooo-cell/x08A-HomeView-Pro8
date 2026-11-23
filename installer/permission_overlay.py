@@ -7,9 +7,8 @@ class PermissionOverlay:
  def __init__(self,device,log=print):self.device=device;self.log=log;self.original=None;self.marker=None
  def __enter__(self):
   d=self.device
-  windows=d.shell('dumpsys','window','windows')
-  visible=any('package=com.android.systemui appop=SYSTEM_ALERT_WINDOW' in b and 'isOnScreen=true' in b for b in windows.split('Window #'))
-  if not visible:return self
+  # HomeView hides these overlays while it is foreground. They can reappear
+  # as soon as Android's permission page opens, so prepare before launching it.
   mode=op_state(d,'com.android.systemui','SYSTEM_ALERT_WINDOW')
   if mode=='ignore':return self
   if mode not in MODES:raise ValueError('无法确认手势浮层原状态，保留原设置')
